@@ -26,6 +26,12 @@ class AWPoint ;
 class AWPushButton ;
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+// Callback function pointer type
+
+typedef void (*AWNoTouchCallback)();
+typedef bool (*AWCallbackTouchOn)();
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 #include <stdint.h>
 
@@ -43,8 +49,13 @@ void addCenteredView (class AWView * inView) ;
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+typedef enum {kOrientationLandscape, kOrientationPortrait} tOrientation ;
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 class AWContext {
-  public : static void begin (const AWInt inScreenWidth,
+  public : static void begin (const tOrientation inOrientation,
+                              const AWInt inScreenWidth,
                               const AWInt inScreenHeight,
                               const bool inHorizontalFlip,
                               const bool inVerticalFlip) ;
@@ -56,7 +67,7 @@ class AWContext {
   public : static AWColor color (void) ;
   public : static bool colorIsOpaque (void) ;
 
-
+//--- Touch
   public : static void handleTouchAndDisplay (void) ;
   public : static void flashUpdate (const AWColor & inFlashColor) ;
 
@@ -65,6 +76,7 @@ class AWContext {
   public : static void debugTouch (const AWColor & inColor) ;
   public : static void handleTouch (const AWPoint & inScreenPoint) ;
 
+//--- Dialog
   private : static void internalPresentAlert (AWView * inAlert,
                                               AWPushButton * inCancelButton,
                                               AWPushButton * inOkButton,

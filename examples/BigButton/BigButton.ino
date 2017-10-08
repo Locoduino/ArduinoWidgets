@@ -31,21 +31,16 @@ void bigButtonAction (AWView * inSender)
 {
   AWPushButton * sendingButton = (AWPushButton *) inSender ;
   buttonValue ++ ;
-  if (buttonValue > 9) {
-    buttonValue = 0 ;
-  }
   sendingButton->setTitle (String (buttonValue)) ;
 }
 
 void setup() {
-  myGLCD.InitLCD (LANDSCAPE) ; // or PORTRAIT
-  myGLCD.clrScr () ;
-
   // set up the backlight
   analogWrite (BACKLIGHT, 200);
 
   // put your setup code here, to run once:
-  AWContext::begin (800,      // Screen width
+  AWContext::begin (kOrientationLandscape,
+                    800,      // Screen width
                     480,      // Screen height
                     true,     // true : X is flipped
                     false) ;  // false : Y is not flipped
@@ -59,4 +54,3 @@ void setup() {
 void loop() {
   AWContext::handleTouchAndDisplay () ;
 }
-

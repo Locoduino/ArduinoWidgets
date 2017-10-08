@@ -9,7 +9,6 @@
 
 #ifndef __APPLE__
   #include "touch-calibration-values.h"
-  #include "touch-callbacks.h"
 #endif
 
 #ifdef __APPLE__
@@ -35,6 +34,7 @@
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+static tOrientation gOrientation ;
 static AWInt gScreenWidth ;
 static AWInt gScreenHeight ;
 static AWColor gColor ;
@@ -42,6 +42,8 @@ static bool gHorizontalFlip ;
 static bool gVerticalFlip ;
 static AWView * gScreenView ;
 static AWColor gTouchDebugColor ; // By default, transparent color --> no debug
+static AWNoTouchCallback gNoTouchCallback = NULL;
+static AWCallbackTouchOn gCallbackTouchOn = NULL;
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //   TOUCH CALIBRATION PARAMETERS
@@ -50,16 +52,6 @@ static AWColor gTouchDebugColor ; // By default, transparent color --> no debug
 static const AWInt SIZE = 9 ;
 static const AWInt OFFSET = 1 ;
 static const AWInt DELTA = OFFSET + SIZE / 2 ;
-
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-//   weak functions for callback
-//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-extern "C" void callBackNoTouchVoid (void) {}
-extern "C" bool callBackTouchOnVoid (void) { return true ; }
-
-bool callBackTouchOn (void) __attribute__((weak, alias("callBackTouchOnVoid"))) ;
-void callBackNoTouch (void) __attribute__((weak, alias("callBackNoTouchVoid"))) ;
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -72,10 +64,15 @@ void AWContext::debugTouch (const AWColor & inColor) {
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-void AWContext::begin (const AWInt inScreenWidth,
+void AWContext::begin (const tOrientation inOrientation,
+                       const AWInt inScreenWidth,
                        const AWInt inScreenHeight,
                        const bool inHorizontalFlip,
-                       const bool inVerticalFlip) {
+                       const bool inVerticalFlip)
+{
+	myGLCD.InitLCD (inOrientation == kOrientationLandscape ? LANDSCAPE : PORTRAIT) ;
+	myGLCD.clrScr () ;
+  gOrientation = inOrientation;
   gScreenWidth = inScreenWidth ;
   gScreenHeight = inScreenHeight ;
   gHorizontalFlip = inHorizontalFlip ;
@@ -147,7 +144,11 @@ void AWContext::drawHLine (const AWInt inX, const AWInt inY, const AWInt inLengt
       const int X = gHorizontalFlip ? (gScreenWidth - inX - 1) : (inX - 1) ;
       const int Y = gVerticalFlip ? (gScreenHeight - inY - 1) : (inY - 1) ;
       const int length = gHorizontalFlip ? (-inLength) : inLength ;
-      myGLCD.drawHLine (X, Y, length) ;
+      if (gOrientation == kOrientationPortrait) {
+        myGLCD.drawVLine (Y, X, length) ;
+      }else{
+        myGLCD.drawHLine (X, Y, length) ;
+      }
     #endif
   }
 }
@@ -162,7 +163,11 @@ void AWContext::drawVLine (const AWInt inX, const AWInt inY, const AWInt inLengt
       const int X = gHorizontalFlip ? (gScreenWidth - inX - 1) : (inX - 1) ;
       const int Y = gVerticalFlip ? (gScreenHeight - inY - 1) : (inY - 1) ;
       const int length = gVerticalFlip ? (-inLength) : inLength ;
-      myGLCD.drawVLine (X, Y, length) ;
+      if (gOrientation == kOrientationPortrait) {
+        myGLCD.drawHLine (Y, X, length) ;
+      }else{
+        myGLCD.drawVLine (X, Y, length) ;
+      }
     #endif
   }
 }
@@ -274,9 +279,12 @@ AWPoint AWContext::rawTouchPoint (void) {
 
 #ifndef __APPLE__
   static AWPoint convertTouchPointToFlippedScreenPoint (const int inRawTouchX, const int inRawTouchY) {
+  //--- Screen width and height, without orientation
+    const int screenWidth  = (gOrientation == kOrientationPortrait) ? gScreenHeight : gScreenWidth  ;
+    const int screenHeight = (gOrientation == kOrientationPortrait) ? gScreenWidth  : gScreenHeight ;
   //--- Largeur et hauteur de l'écran (en fait, moins un)
-    const float W = (float) (gScreenWidth - 1) ;
-    const float H = (float) (gScreenHeight - 1) ;
+    const float W = (float) (screenWidth - 1) ;
+    const float H = (float) (screenHeight - 1) ;
   //--- La distance des points de contrôle aux bords de l'écran
     const float delta = (float) DELTA ;
   //--- Le point en coordonnées de la dalle tactile que l'on cherche à convertir
@@ -313,21 +321,21 @@ AWPoint AWContext::rawTouchPoint (void) {
     const int ixSCREEN = (int) xSCREEN ;
     const int iySCREEN = (int) ySCREEN ;
   //--- Handle horizontal flip, and maintain X between 0 and screen width - 1
-    int X = gHorizontalFlip ? (gScreenWidth - ixSCREEN - 1) : ixSCREEN ;
+    int X = gHorizontalFlip ? (screenWidth - ixSCREEN - 1) : ixSCREEN ;
     if (X < 0) {
       X = 0 ;
-    }else if (X >= gScreenWidth) {
-      X = gScreenWidth - 1 ;
+    }else if (X >= screenWidth) {
+      X = screenWidth - 1 ;
     }
   //--- Handle vertical flip, and maintain Y between 0 and screen height - 1
-    int Y = gVerticalFlip ? (gScreenHeight - iySCREEN - 1) : iySCREEN ;
+    int Y = gVerticalFlip ? (screenHeight - iySCREEN - 1) : iySCREEN ;
     if (Y < 0) {
       Y = 0 ;
-    }else if (Y >= gScreenHeight) {
-      Y = gScreenHeight - 1 ;
+    }else if (Y >= screenHeight) {
+      Y = screenHeight - 1 ;
     }
   //---
-    return AWPoint (X, Y) ;
+    return (gOrientation == kOrientationPortrait) ? AWPoint (Y, X) : AWPoint (X, Y) ;
   }
 #endif
 
@@ -401,7 +409,7 @@ void AWContext::handleTouchAndDisplay (void) {
           gRawTouchCount = 0 ;
           gScreenTouchPoint = convertTouchPointToFlippedScreenPoint (gRawTouchPoint.x, gRawTouchPoint.y) ;
         //---
-          gHandleTouch = callBackTouchOn () ;
+          gHandleTouch = gCallbackTouchOn == NULL ? true : gCallbackTouchOn () ;
           if (gHandleTouch) {
             if (gTouchDebugColor.isOpaque ()) {
               setColor (gTouchDebugColor) ;
@@ -456,7 +464,7 @@ void AWContext::handleTouchAndDisplay (void) {
         gViewUnderTouch->touchUp (gScreenTouchPoint) ;
       }
       gViewUnderTouch = NULL ;
-      callBackNoTouch () ;
+      if (gNoTouchCallback != NULL) gNoTouchCallback () ;
     }
   //--- Handle screen update
     if (AWView::viewsNeedDisplay ()) {
@@ -523,18 +531,20 @@ class CalibrateTouchView : public AWView {
     if (mPhase > 3) {
       y -= 2 * awkDefaultFont.lineHeight () ;
       const int flip = (gHorizontalFlip ? 2 : 0) | (gVerticalFlip ? 1 : 0) ; // 0: bottom left, 1: top left, 2: bottom right, 3:top right
-      awkDefaultFont.drawStringInRegion (x, y, "Enter theses calibration values into \"touch-calibration-values.cpp\"", inDrawRegion) ;
+      awkDefaultFont.drawStringInRegion (x, y, "Enter theses calibration values", inDrawRegion) ;
+      y -= awkDefaultFont.lineHeight () ;
+      awkDefaultFont.drawStringInRegion (x, y, "into \"touch-calibration-values.cpp\"", inDrawRegion) ;
       y -= awkDefaultFont.lineHeight () ;
       AWPoint p = mRawPoint [flip] ;
       awkDefaultFont.drawStringInRegion (x, y, "xA = " + String (p.x) + ", yA = " + String (p.y), inDrawRegion) ;
       y -= awkDefaultFont.lineHeight () ;
-      p = mRawPoint [flip ^ 1] ;
+      p = (gOrientation == kOrientationPortrait) ? mRawPoint [flip ^ 2] : mRawPoint [flip ^ 1] ;
       awkDefaultFont.drawStringInRegion (x, y, "xB = " + String (p.x) + ", yB = " + String (p.y), inDrawRegion) ;
       y -= awkDefaultFont.lineHeight () ;
       p = mRawPoint [flip ^ 3] ;
       awkDefaultFont.drawStringInRegion (x, y, "xC = " + String (p.x) + ", yC = " + String (p.y), inDrawRegion) ;
       y -= awkDefaultFont.lineHeight () ;
-      p = mRawPoint [flip ^ 2] ;
+      p = (gOrientation == kOrientationPortrait) ? mRawPoint [flip ^ 1] : mRawPoint [flip ^ 2] ;
       awkDefaultFont.drawStringInRegion (x, y, "xD = " + String (p.x) + ", yD = " + String (p.y), inDrawRegion) ;
     }
     float xSCREEN = 0.0 ;
@@ -586,7 +596,7 @@ class CalibrateTouchView : public AWView {
         // printf ("u %f, v %f xSCREEN %f ySCREEN %f\n", u, v, xSCREEN, ySCREEN) ;
       }
       y -= 2 * awkDefaultFont.lineHeight () ;
-      String s = "Raw test point: (" + String (mRawTestPoint.x) + ", " + String (mRawTestPoint.y) + "), screen test point (" ;
+      String s = "Screen test point (" ;
       s += String (xSCREEN) + ", " + String (ySCREEN) + ")" ;
       awkDefaultFont.drawStringInRegion (x, y, s, inDrawRegion) ;
     }
@@ -626,7 +636,7 @@ class CalibrateTouchView : public AWView {
 //··· Draw a calibration rectangle ·····················································································
 
   private : void drawCalibrationRectangle (const AWInt inX, const AWInt inY, const AWRegion & inDrawRegion) const {
-    AWContext::setColor (AWColor::white ()) ;
+    AWContext::setColor (AWColor::red ()) ;
     const AWRect r (inX - SIZE / 2, inY - SIZE / 2, SIZE, SIZE) ;
     r.frameRectInRegion (inDrawRegion) ;
     AWPoint::strokeLineInRegion (inX - SIZE / 2 + 2, inY, inX + SIZE / 2 - 2, inY, inDrawRegion) ;
