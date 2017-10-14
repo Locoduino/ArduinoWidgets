@@ -5,10 +5,18 @@ class CustomView : public AWView
 {
   public : CustomView (const AWRect & inViewFrame);
   public : virtual void drawInRegion (const AWRegion & inRegion) const;
+  public : void rotateColors ();
+
+  private : AWColor centerColor;
+  private : AWColor mediumColor;
+  private : AWColor externalColor;
 };
 
 CustomView::CustomView (const AWRect & inViewFrame) :
-AWView(inViewFrame, AWColor::darkGray ())
+AWView(inViewFrame, AWColor::darkGray ()),
+centerColor (AWColor::red ()),
+mediumColor (AWColor::white ()),
+externalColor (AWColor::blue ())
 {
 }
 
@@ -25,14 +33,14 @@ void CustomView::drawInRegion (const AWRegion & inRegion) const
 {
   digitalWrite (13, ! digitalRead(13));
   AWRect viewFrame = absoluteFrame () ;
-  AWContext::setColor (AWColor::blue ()) ;
+  AWContext::setColor (externalColor) ;
   viewFrame.fillOvalInRegion (inRegion) ;
   AWInt insetX = viewFrame.size.width / 6 ;
   AWInt insetY = viewFrame.size.height / 6 ;
-  AWContext::setColor (AWColor::white ()) ;
+  AWContext::setColor (mediumColor) ;
   viewFrame.inset (insetX, insetY) ;
   viewFrame.fillOvalInRegion (inRegion) ;  
-  AWContext::setColor (AWColor::red ()) ;
+  AWContext::setColor (centerColor) ;
   viewFrame.inset (insetX, insetY) ;
   viewFrame.fillOvalInRegion (inRegion) ; 
 
@@ -51,6 +59,22 @@ void CustomView::drawInRegion (const AWRegion & inRegion) const
     drawLines (inRegion, center) ;
     center.translateBy (4, 2) ;
   }
+}
+
+void CustomView::rotateColors ()
+{
+  AWColor centerSave = centerColor ;
+  centerColor = mediumColor ;
+  mediumColor = externalColor ;
+  externalColor = centerSave ;
+  setNeedsDisplay () ;
+}
+
+CustomView * targetView ;
+
+void rotate (AWView * sender)
+{
+  targetView->rotateColors () ;
 }
 
 static const byte RS    = 23 ;
@@ -88,9 +112,14 @@ void setup() {
                     true,     // true : X is flipped
                     false) ;  // false : Y is not flipped
 
-  // create a big button centered on screen
-  CustomView * myView = new CustomView(AWRect (0, 0, 300, 300)) ;
-  addCenteredView (myView) ;
+  // create the target view centered on screen
+  targetView = new CustomView(AWRect (0, 0, 300, 300)) ;
+  addCenteredView (targetView) ;
+
+  // create the button to rotate colors
+  AWPushButton * pushToRotate = new AWPushButton (AWRect (20, 20, 100, 50), "Rotate", AWFont (Lucida_Grande24)) ;
+  pushToRotate->setAction (rotate) ;
+  addView (pushToRotate) ;
 }
 
 void loop() {
