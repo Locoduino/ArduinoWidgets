@@ -31,7 +31,6 @@ void drawLines (const AWRegion & inRegion, const AWPoint & inOrigin)
 
 void CustomView::drawInRegion (const AWRegion & inRegion) const
 {
-  digitalWrite (13, ! digitalRead(13));
   AWRect viewFrame = absoluteFrame () ;
   AWContext::setColor (externalColor) ;
   viewFrame.fillOvalInRegion (inRegion) ;
@@ -100,8 +99,6 @@ static const byte BACKLIGHT = 9 ;
 AWTouch myTouch (T_CLK, T_CS, T_DIN, T_DOUT, T_IRQ) ;
 
 void setup() {
-  pinMode (13, OUTPUT) ;
-  digitalWrite (13, HIGH) ;
   // set up the backlight
   analogWrite (BACKLIGHT, 200) ;
 
