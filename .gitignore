@@ -1,2 +1,9 @@
+# LaTeX temporary files
+*.aux
+*.lof
+*.log
+*.out
+*.toc
+*.synctex.gz
+# Mac hidden files
 .DS_Store
-*~
