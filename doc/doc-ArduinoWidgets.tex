@@ -645,9 +645,9 @@ void loop() {
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\subsection{How to use the following examples \texttt{ArduinoWidgets}}
+\subsection{How to use the code lines of the following sections of \texttt{ArduinoWidgets}}
 
-~\\In the following sections of this document, there is two pieces of Arduino code that will not be repeated :
+~\\In the following sections of this document, there is three pieces of Arduino code that will not be repeated.\\
 ~\\The first one is :
 \begin{lstlisting}[language=Arduinonl]
 #include <ArduinoWidgets.h>
@@ -680,10 +680,13 @@ static const byte BACKLIGHT = 9 ;
 AWTouch myTouch (T_CLK, T_CS, T_DIN, T_DOUT, T_IRQ) ;
 
 //--- end of hardware dependent part 
+
+//--- add here you constants, classes, functions, variables, ...
 \end{lstlisting}
 
-~\\The second one is in the setup() :
+~\\The second one is  the setup() :
 \begin{lstlisting}[language=Arduinonl]
+void setup() {
 //--- This part is hardware dependent
 //--- set up the backlight
   analogWrite (BACKLIGHT, 150);
@@ -697,7 +700,20 @@ AWTouch myTouch (T_CLK, T_CS, T_DIN, T_DOUT, T_IRQ) ;
                     false) ;  // false : Y is not flipped
 
 //--- end of hardware dependent part
+
+//--- add here your lines of code for setup
+
+} //--- end of setup
 \end{lstlisting}
+
+~\\The third par is the \texttt{loop()} function of the sketch.
+ 
+\begin{lstlisting}[language=Arduinonl]
+void loop() {
+  AWContext::handleTouchAndDisplay () ;
+}  
+\end{lstlisting}
+~\\You can create an Arduino sketch by inserting first the 3 parts above, then the lines of code found in the various examples below.
   
 ~\\If you want to test the examples which are described in this document, the best way is to use the "example" menu of the Arduino's IDE. But you can also assemble the lines of code of each subsection with the above parts to be adapted first to you specific hardware.
   
@@ -1295,22 +1311,6 @@ RoundRectangleView * RoundRectView ;
    \label{fig:7}
 \end{figure}
 
-%%%
-~\\ HELP !!! j'ai essayé de dessiner un rectangle sans passer par la CustomView précédente mais ...
-\begin{lstlisting}[language=Arduinonl]
-//--- ca ne marche pas !
-  AWRect myRect (420,100, 200,200);
-  AWColor myBackColor;
-  myBackColor.gray();
-  AWColor myFrameColor;
-  myFrameColor.red();
-  AWView * myRectView;
-  myRectView = new AWRectView (myRect, myBackColor, myFrameColor);
-  AWRegion * myRegion;
-  myRegion = new AWRegion (myRect);
-  myRectView->drawInRegion(*myRegion);
-  addView (myRectView);
-  \end{lstlisting}
 
 %%%%%%%%%%%%%%
 \newpage
