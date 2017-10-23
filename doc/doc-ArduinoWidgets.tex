@@ -178,7 +178,7 @@
 
 \title{\bf \Huge{ArduinoWidgets library\\Version 1.0}}
 \author{Pierre Molinaro, Jean-Luc Bechennec}
-\date {15 octobre 2017}
+\date {23 octobre 2017}
 
 \maketitle
 
@@ -544,7 +544,8 @@ static const byte BACKLIGHT = 9 ;
 
 AWTouch myTouch (T_CLK, T_CS, T_DIN, T_DOUT, T_IRQ) ;
 
-//--- end of hardware dependent part  \end{lstlisting}
+//--- end of hardware dependent part  
+\end{lstlisting}
 
 ~\\ At this stage, dont forget to add the file "touch-calibration-values.h" which must be present in the same folder as the sketch (see the end of section 3).
   
@@ -639,7 +640,66 @@ void setup() {
 \begin{lstlisting}[language=Arduinonl]
 void loop() {
   AWContext::handleTouchAndDisplay () ;
-}  \end{lstlisting}
+}  
+\end{lstlisting}
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\subsection{How to use the following examples \texttt{ArduinoWidgets}}
+
+~\\In the following sections of this document, there is two pieces of Arduino code that will not be repeated :
+~\\The first one is :
+\begin{lstlisting}[language=Arduinonl]
+#include <ArduinoWidgets.h>
+#include <UTFT.h>
+//--- This part is hardware dependent, such as here :
+//--- Teensy 3.6 + LCD 7" with Touch, 
+//--- SSD1963 controler, resolution 800x480
+
+static const byte RS    = 23 ;
+static const byte WR    = 22 ;
+static const byte CS    = 15 ;
+static const byte RESET = 33 ;
+
+//--- Do not change 'myGLCD' name; 
+//--- it is declared as extern in AWContext.cpp
+
+UTFT myGLCD (SSD1963_800ALT, RS, WR, CS, RESET) ;
+
+static const byte T_CLK  = 11 ;
+static const byte T_CS   = 12 ;
+static const byte T_DIN  = 25 ;
+static const byte T_DOUT = 24 ;
+static const byte T_IRQ  = 28 ;
+
+static const byte BACKLIGHT = 9 ;
+
+//--- Do not change 'myTouch' name; 
+//--- it is declared as extern in AWContext.cpp
+
+AWTouch myTouch (T_CLK, T_CS, T_DIN, T_DOUT, T_IRQ) ;
+
+//--- end of hardware dependent part 
+\end{lstlisting}
+
+~\\The second one is in the setup() :
+\begin{lstlisting}[language=Arduinonl]
+//--- This part is hardware dependent
+//--- set up the backlight
+  analogWrite (BACKLIGHT, 150);
+  pinMode (LED_BUILTIN, OUTPUT);
+  digitalWrite (LED_BUILTIN, HIGH);
+
+  AWContext::begin (kOrientationLandscape,
+                    800,      // Screen width
+                    480,      // Screen height
+                    true,     // true : X is flipped
+                    false) ;  // false : Y is not flipped
+
+//--- end of hardware dependent part
+\end{lstlisting}
+  
+~\\If you want to test the examples which are described in this document, the best way is to use the "example" menu of the Arduino's IDE. But you can also assemble the lines of code of each subsection with the above parts to be adapted first to you specific hardware.
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage

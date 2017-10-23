@@ -1,0 +1,27 @@
+\BOOKMARK [1][-]{section.1}{Versions}{}% 1
+\BOOKMARK [1][-]{section.2}{Introduction}{}% 2
+\BOOKMARK [1][-]{section.3}{An example}{}% 3
+\BOOKMARK [1][-]{section.4}{A quick overview of the AW\137doc\137example}{}% 4
+\BOOKMARK [2][-]{subsection.4.1}{How to use the following examples ArduinoWidgets}{section.4}% 5
+\BOOKMARK [1][-]{section.5}{The fondation of ArduinoWidgets}{}% 6
+\BOOKMARK [2][-]{subsection.5.1}{Context}{section.5}% 7
+\BOOKMARK [2][-]{subsection.5.2}{The Views}{section.5}% 8
+\BOOKMARK [2][-]{subsection.5.3}{The coordinate plane}{section.5}% 9
+\BOOKMARK [2][-]{subsection.5.4}{Points and Pixels}{section.5}% 10
+\BOOKMARK [1][-]{section.6}{Colors}{}% 11
+\BOOKMARK [1][-]{section.7}{The Views of ArduinoWidgets}{}% 12
+\BOOKMARK [2][-]{subsection.7.1}{Lines}{section.7}% 13
+\BOOKMARK [2][-]{subsection.7.2}{Rectangles}{section.7}% 14
+\BOOKMARK [2][-]{subsection.7.3}{Regions}{section.7}% 15
+\BOOKMARK [2][-]{subsection.7.4}{Label and AutoLabel}{section.7}% 16
+\BOOKMARK [2][-]{subsection.7.5}{PushButton}{section.7}% 17
+\BOOKMARK [2][-]{subsection.7.6}{SegmentedControl}{section.7}% 18
+\BOOKMARK [2][-]{subsection.7.7}{Slider}{section.7}% 19
+\BOOKMARK [2][-]{subsection.7.8}{DynamicSlider}{section.7}% 20
+\BOOKMARK [2][-]{subsection.7.9}{TabView}{section.7}% 21
+\BOOKMARK [2][-]{subsection.7.10}{Switch}{section.7}% 22
+\BOOKMARK [2][-]{subsection.7.11}{ArrowPushButton}{section.7}% 23
+\BOOKMARK [2][-]{subsection.7.12}{KeyButton}{section.7}% 24
+\BOOKMARK [2][-]{subsection.7.13}{Keyboard}{section.7}% 25
+\BOOKMARK [1][-]{section.8}{The next steps of ArduinoWidgets}{}% 26
+\BOOKMARK [1][-]{section.9}{The calibration of the Touch screen}{}% 27

@@ -1,0 +1,27 @@
+\contentsline {section}{\numberline {1}Versions}{2}{section.1}
+\contentsline {section}{\numberline {2}Introduction}{3}{section.2}
+\contentsline {section}{\numberline {3}An example}{4}{section.3}
+\contentsline {section}{\numberline {4}A quick overview of the AW\_doc\_example}{11}{section.4}
+\contentsline {subsection}{\numberline {4.1}How to use the following examples \texttt {ArduinoWidgets}}{15}{subsection.4.1}
+\contentsline {section}{\numberline {5}The fondation of \texttt {ArduinoWidgets}}{17}{section.5}
+\contentsline {subsection}{\numberline {5.1}Context}{17}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}The Views}{18}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}The coordinate plane}{19}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Points and Pixels}{20}{subsection.5.4}
+\contentsline {section}{\numberline {6}Colors}{23}{section.6}
+\contentsline {section}{\numberline {7}The Views of \texttt {ArduinoWidgets}}{25}{section.7}
+\contentsline {subsection}{\numberline {7.1}Lines}{25}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}Rectangles}{27}{subsection.7.2}
+\contentsline {subsection}{\numberline {7.3}Regions}{33}{subsection.7.3}
+\contentsline {subsection}{\numberline {7.4}Label and AutoLabel}{36}{subsection.7.4}
+\contentsline {subsection}{\numberline {7.5}PushButton}{40}{subsection.7.5}
+\contentsline {subsection}{\numberline {7.6}SegmentedControl}{43}{subsection.7.6}
+\contentsline {subsection}{\numberline {7.7}Slider}{45}{subsection.7.7}
+\contentsline {subsection}{\numberline {7.8}DynamicSlider}{49}{subsection.7.8}
+\contentsline {subsection}{\numberline {7.9}TabView}{50}{subsection.7.9}
+\contentsline {subsection}{\numberline {7.10}Switch}{52}{subsection.7.10}
+\contentsline {subsection}{\numberline {7.11}ArrowPushButton}{54}{subsection.7.11}
+\contentsline {subsection}{\numberline {7.12}KeyButton}{56}{subsection.7.12}
+\contentsline {subsection}{\numberline {7.13}Keyboard}{59}{subsection.7.13}
+\contentsline {section}{\numberline {8}The next steps of \texttt {ArduinoWidgets}}{60}{section.8}
+\contentsline {section}{\numberline {9}The calibration of the Touch screen}{61}{section.9}
