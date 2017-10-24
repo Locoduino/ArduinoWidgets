@@ -814,6 +814,18 @@ static void calibrateTouch (void) ;
 \subsection{The Views}
 
 ~\\ Every pieces of drawing on the screen are "Views".
+~\\ A view is a rectangular section of the screen. It is responsible for handling all drawing and user-initiated events within its frame.
+
+~\\ \texttt{ArduinoWidgets} provides the View class as an abstract view implementation that subclasses use as the basis for implementing custom display and user interaction.
+
+~\\ In addition to drawing content and responding to user events, View instances act as containers for other views. By nesting views within other views, an application creates a hierarchy of views. This view hierarchy provides a clearly defined structure for how views draw relative to each other and pass messages from one view to another, up to the enclosing window, and on to the application for processing.
+
+~\\ \texttt{ArduinoWidgets} provides several type of views for containing graphics, texts and controls which can send messages to its own view or to other views.
+
+~\\ The root View is the screen.
+~\\ Each View is placed in a parent View, the superview, in which it is a frame. This frame can be moved, resized, and rotated in the superview and the view's content moves with it.
+
+~\\ The view is specified when a view instance is created programmatically using :
 
 \begin{lstlisting}[language=Arduinonl]
 //--- Constructor
@@ -821,22 +833,107 @@ static void calibrateTouch (void) ;
                    const AWColor & inBackColor) ;
  \end{lstlisting}
 
-~\\ The root View is the screen.
-~\\ Each View is placed in a parent View.
-~\\ To add a new View on the screen, just call addView or addCenteredView :
+~\\ When it is necessary to know the frame rectangle of a view, the \texttt{absoluteFrame} method can return this absolute frame.
+
+~\\ To translate a frame you can use the method \texttt{translateBy}. To change the frame size you can use \texttt{setSize}.
+~\\ To specify or to get the backcolor of a view, you can use the methods \texttt{backColor} or \texttt{setBackColor}.
+
+\begin{lstlisting}[language=Arduinonl]
+//---------------- Frame
+  inline AWRect absoluteFrame (void) const { return mAbsoluteFrame ; }
+
+//---------------- Frame change
+  void translateBy (const AWInt inDx, const AWInt inDy) ;
+  void setSize (const AWSize & inNewSize) ;
+
+//---------------- Background color
+  inline AWColor backColor (void) const { return mBackColor ; }
+  void setBackColor (const AWColor & inBackColor) ;
+\end{lstlisting}
+
+~\\ To add a new View on the screen, just call \texttt{addView} or \texttt{addCenteredView} :
 \begin{lstlisting}[language=Arduinonl]
 void addView (class AWView * inView) ;
 void addCenteredView (class AWView * inView) ;
 \end{lstlisting}
 
-~\\ A view is added to a parent view via the method addSubView or addCenteredSubView, in a hierarchical order :
+~\\\emph{What Is a View Hierarchy?}
+
+~\\In addition to being responsible for drawing and handling user events, a view instance can act as a container, enclosing other view instances. Those views are linked together creating a view hierarchy. Unlike a class hierarchy, which defines the lineage of a class, the view hierarchy defines the layout of views relative to other views.
+
+~\\The window instance maintains a reference to a single top-level view instance, call the content view. The content view acts as the root of the visible view hierarchy in a window. The view instances enclosed within a view are called subViews. The parent view that encloses a view is referred to as its superView. While a view instance can have multiple subViews, it can have only one superView. In order for a view and its subviews to be visible to the user, the view must be inserted into a window's view hierarchy.
+
+~\\ A view is added to a parent view via the method \texttt{addSubView} or \texttt{addCenteredSubView}, in a hierarchical order :
 \begin{lstlisting}[language=Arduinonl]
 //---------------- Managing view hierarchy
   void addSubView (AWView * inView) ;         // if inView is non NULL, view is added in front of other subviews
   void addCenteredSubView (AWView * inView) ; // if inView is non NULL, view is added in front of other subviews
 \end{lstlisting}
 
+~\\To locate the superView use the method \texttt{superViev}. You can also remove a subView from a superView with \texttt{removeFromSuperView}.
+
+\begin{lstlisting}[language=Arduinonl]
+//---------------- Managing view hierarchy
+  void addSubView (AWView * inView) ;         // if inView is non NULL, view is added in front of other subviews
+  void addCenteredSubView (AWView * inView) ; // if inView is non NULL, view is added in front of other subviews
+  void removeFromSuperView (void) ; // Does nothing if has no super view
+  inline AWView * superView (void) { return mSuperView ; } // Returns NULL if has no super view
+\end{lstlisting}
+
+~\\\emph{View Tags}
+
+~\\The View class defines methods that allow you to tag individual view objects with integer tags and to search the view hierarchy based on those tags. The receiver's subviews are searched depth-first, starting at the first subview returned by the receiver's subviews method.
+
+The View method \texttt{tag} always returns –1. Subclasses can override this method to return a different value. It is common for a subclass to implement a \texttt{setTag} method that stores the tag value in an instance variable, allowing the tag to be set on an individual view basis. 
+
+\begin{lstlisting}[language=Arduinonl]
+//---------------- Tag
+  inline void setTag (const int inTag) { mTag = inTag ; }
+  inline int tag (void) const { return mTag ; }
+\end{lstlisting}
+
+~\\ \emph{User interactivity : sending and receiving Actions}
+
+~\\A view or subview can be sensitive to touch actions of the user
+
+\begin{lstlisting}[language=Arduinonl]
+//---------------- Action
+  void sendAction (void) ;
+  inline AWAction action (void) const { return mAction ; }
+  inline void setAction (AWAction inAction) { mAction = inAction ; }
+
+//---------------- Touch
+  virtual void touchDown (const AWPoint & inPoint) ;
+  virtual void touchMove (const AWPoint & inPoint) ;
+  virtual void touchUp (const AWPoint & inPoint) ;
+\end{lstlisting}
+
+~\\ \emph{Drawing and display views}
+
+\begin{lstlisting}[language=Arduinonl]
+//---------------- Display view
+  void setNeedsDisplay (void) ;
+  void setNeedsDisplayInRect (const AWRect & inRect) ;
+
+//--- Draw method (to be overridden)
+  virtual void drawInRegion (const AWRegion & inDrawRegion) const ;
+\end{lstlisting}
+
 ~\\ A view can be opaque (drawable) or transparent (invalid or invisible).
+
+\begin{lstlisting}[language=Arduinonl]
+//--- Tell the view is opaque
+  virtual bool isOpaque (void) const ;
+
+//---------------- Visibility
+  inline bool isVisible (void) const { return mIsVisible ; }
+  void setVisibility (const bool inIsVisible) ;
+
+//---------------- Handle "on screen" state
+  public : inline bool isOnScreen (void) const { return mIsOnScreen ; }
+\end{lstlisting}
+
+
 ~\\ More characteristics for managing Views, such as background color, opacity/transparency, resizing, translation, deletion, actions, touch, will be given in the corresponding detailed section.
 
 ~\\ There is an existing collection of ready to use Views which are :
@@ -857,9 +954,20 @@ void addCenteredView (class AWView * inView) ;
 
 ~\\ You will be able to create and add your custom Views !
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\subsection{Actions}
+
+~\\ Some of the above Views can include one orseveral Actions
+~\\ 
+~\\ 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 \subsection{The coordinate plane}
+
+~\\ A view is responsible for the drawing and event handling in a rectangular area of a window. In order to specify that rectangle of responsibility, you define its location as an origin point and size using a coordinate system.
+~\\This section describes the coordinate system used by views, how a view's location and size is specified, and how the size of a view interacts with its content.
 
 ~\\ All information about location is given to \texttt{ArduinoWidgets} in terms of coordinates on a plane. The coordinate plane is a two-dimensional grid, as illustrated in Figure 2.
 
@@ -969,7 +1077,7 @@ myPoint.y = Y;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\section{Colors}
+\subsection{Colors}
 
 ~\\ A color is defined by 3 bytes (uint\_8) and a boolean. The 3 bytes define respectively the red, green and blue component and the boolean "IsOpaque" define if the color is opaque or transparent.
 ~\\ A set of 17 colors is predefined to simplify your programming.
@@ -1057,6 +1165,14 @@ class AWColor {
 } ;
 \end{lstlisting}
 
+
+~\\ 
+~\\ 
+~\\ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\subsection{Fonts}
 
 ~\\ 
 ~\\ 
