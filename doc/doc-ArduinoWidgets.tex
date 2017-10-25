@@ -234,11 +234,12 @@
 \newpage
 \section{An example}
 
-The example is fully contained in the following Arduino sketch "AW\_doc\_example":
+The example is fully contained in the following Arduino sketch "\textbf{AW\_doc\_example}":
 
-~\\This sketch is contained in the "Examples" folder of the ArduinoWidgets library. It can be easily found in the Arduino IDE : clic on the "Examples" item of the File menu and scroll to the "ArduinoWidgets" line. A submenu show some examples. Choose "AW\_doc\_example".
+~\\This sketch is contained in the "\textbf{Examples}" folder of the \texttt{ArduinoWidgets} library. It can be easily found in the Arduino IDE : clic on the "Examples" item of the File menu and scroll to the "ArduinoWidgets" line. A submenu show some examples. Choose "\textbf{AW\_doc\_example}".
 
-~\\It displays a collection of graphic objects, some of them are "ready to use" in the library, and some others are new objects which are created from the library. A label is displayed to name each object.
+~\\It displays a collection of graphic objects, some of them are "ready to use" in the library, and some others are custom objects which are created from the library. In addition, a label is displayed with the name each object :
+
 \begin{itemize}
   \item The line is a 5 pixel width black line.
   \item The roundRect is a green rectangle with round corners.
@@ -247,7 +248,7 @@ The example is fully contained in the following Arduino sketch "AW\_doc\_example
   \item The slider control the backlight of the screen (via a PWM pin of the micro-controler).
 \end{itemize}
 
-  ~\\ The last 2 objects are interactive objects : they allow actions from the user, which can control either output pins of the controler (backlight, led) or specific properties of another object (a label value for instance).
+  ~\\ The last 2 objects are interactive objects : they allow actions from the user, which can control either output pins of the micro-controller (backlight, led) or specific properties of another object (a label value for instance).
   
 \begin{figure}[htbp] %  figure placement: here, top, bottom, or page
    \centering
@@ -452,7 +453,7 @@ void loop() {
 }
 \end{lstlisting}
 
-~\\ To run this programme, it is recommended to open de sketch in the example folder of the ArduinoWidgets library, because a small file must be present in the same folder as the sketch. Its name must be "touch-calibration-values.h" and it must contain :
+~\\ To run this program, it is recommended to open the sketch in the example folder of the \texttt{ArduinoWidgets} library, because a small file must be present in the same folder as the sketch. Its name must be "touch-calibration-values.h" and it must contain :
 
 \begin{lstlisting}[language=Arduinonl]
 #include "touch-calibration-values.h"
@@ -490,14 +491,14 @@ If this file is not present in the sketch folder, a compilation error will occur
 \newpage
 \section{A quick overview of the AW\_doc\_example}
 
-~\\This section is not an in depth description on how to use each object of the library but just a global introduction to how to build a program which use the ArduinoWidgets library. A detailed description of the library is given farther in this document.
+~\\This section is not an in depth description on how to use each object of the library but just a global introduction to how to build a program which use the \texttt{ArduinoWidgets} library. A detailed description of the library is given in the next sections of this document.
 
 ~\\ The program is divided in five parts :
 \begin{itemize}
   \item The first part is to include the necessary libraries.
   \item The second part is the necessary adaptation to your hardware.
-  \item The third part is the declaration of new graphic objets, the specific behaviors of existing objects of the library and the declarations of variables.
-  \item The fourth part is the setup() function
+  \item The third part is the declaration of new graphic objets, the specific behaviors of existing objects of the library and the declarations of constants and variables.
+  \item The fourth part is the setup() function in which there also a part for your specific hardware
   \item The fifth part is the loop() function.
 \end{itemize}
 
@@ -560,6 +561,7 @@ AWTouch myTouch (T_CLK, T_CS, T_DIN, T_DOUT, T_IRQ) ;
 
 ~\\Then the \texttt{setup()} function initialize the backlight of the LCD to the value 150 (the maximum is 255). 
 ~\\Then it initialize the LCD with the proper parameters (orientation, size, X and Y directions). Please note that the origine (0,0) of the screen is in the lower-left corner, exactly as in a Cartesian coordinate system.
+
 ~\\The objects are then created :
 
 \begin{itemize}
@@ -647,7 +649,8 @@ void loop() {
 \newpage
 \subsection{How to use the code lines of the following sections of \texttt{ArduinoWidgets}}
 
-~\\In the following sections of this document, there is three pieces of Arduino code that will not be repeated.\\
+~\\In the following sections of this document, there is three pieces of Arduino code that will not be repeated.
+
 ~\\The first one is :
 \begin{lstlisting}[language=Arduinonl]
 #include <ArduinoWidgets.h>
@@ -684,7 +687,7 @@ AWTouch myTouch (T_CLK, T_CS, T_DIN, T_DOUT, T_IRQ) ;
 //--- add here you constants, classes, functions, variables, ...
 \end{lstlisting}
 
-~\\The second one is  the setup() :
+~\\The second one is  the \texttt{setup()} :
 \begin{lstlisting}[language=Arduinonl]
 void setup() {
 //--- This part is hardware dependent
@@ -726,7 +729,7 @@ void loop() {
 ~\\The consequence is the naming and the syntax to use in your Arduino program : 
 \begin{itemize}
 \item Objetcts are named "classes".
-\item Each class embedd its own variables which are hidden to your sketch.
+\item Each class embed its own variables which are hidden to your sketch.
 \item Functions are named "methods".
 \end{itemize}
 
@@ -737,15 +740,15 @@ AWClass * myObject;	// myObject is a pointer in memory
 myObject = new AWClass(parameters of the constructor);
 \end{lstlisting}
 
-~\\To call a method of myObject :
+~\\To call a method of \texttt{myObject} :
 
-~\\ If MyObject is a pointer :
+~\\ If \texttt{myObject} is a pointer :
 
 \begin{lstlisting}[language=Arduinonl]
 myObject->method(parameters);
 \end{lstlisting}
 
-~\\ If MyObject is a not a pointer :
+~\\ If \texttt{myObject} is a not a pointer or if it is simply a structure :
 
 \begin{lstlisting}[language=Arduinonl]
 myObject.method(parameters);
@@ -755,9 +758,9 @@ myObject.method(parameters);
 %%%%%%%%%%%%%%%%%%%%
 \subsection{Context}
 
-~\\ The Context is the entire Screen you are using. You must know about Context before seeing something on your screen and touch it. 
-~\\ To create a context, just call the "begin" function of AWContext.
-~\\ The class AWContext is defined by :
+~\\ The \emph{Context} is the entire Screen you are using. You must know about \emph{Context} before seeing something on your screen and touch it. 
+~\\ To create a context, just call the \texttt{begin} function of class \texttt{AWContext}.
+~\\ The class \texttt{AWContext} is defined by :
 
 \begin{lstlisting}[language=Arduinonl]
 typedef enum {kOrientationLandscape, kOrientationPortrait} tOrientation ;
@@ -770,7 +773,7 @@ class AWContext {
 				const bool inVerticalFlip) ;
 \end{lstlisting}
 
-~\\ This is what is written in the example sketch :
+~\\ In the example sketch, it is written :
 
 \begin{lstlisting}[language=Arduinonl]
  AWContext::begin (kOrientationLandscape,
@@ -780,10 +783,20 @@ class AWContext {
                     false) ;  // false : Y is not flipped
 \end{lstlisting}
 
-~\\ The Context have a variety of properties and methods, such as :
+~\\ This describe the specific display  which is in use : landscape orientation, dimensions : 800x600, horizontal axis is flipped, not the vertical axis.
+
+~\\ There is a method in the \texttt{loop} for dealing with all events and actions of the touch screen and the draw and redraw on the screen according to the events. This is the unique instruction in the \texttt{loop} which work as a background task in the examples.
+
+\begin{lstlisting}[language=Arduinonl]
+  static void handleTouchAndDisplay (void) ;
+\end{lstlisting}
+
+~\\ \texttt{handleTouchAndDisplay} handle the touch events, especially the press detection (touchDown), press move (touchMove), press release (touchUp), and the drawing of all views (see View section) on the screen. Generally, a touch event generate an action which is sent to a specific object in a view.
+
+~\\ The \emph{Context} have also a variety of properties and methods, such as :
 
 \begin{itemize}
-\item A screen rectangle : you can get ths size on the screen rectangle
+\item A screen rectangle : you can get the size on the screen rectangle
 \begin{lstlisting}[language=Arduinonl]
 //--- Screen rect
   static AWRect screenRect (void) ;
@@ -797,13 +810,7 @@ class AWContext {
   static bool colorIsOpaque (void) ;
 \end{lstlisting}
 
-\item A method for dealing with all events and actions of the touch screen and the display. This is the unique instruction in the loop() which work as a backgroud task in the examples.
-
-\begin{lstlisting}[language=Arduinonl]
-  static void handleTouchAndDisplay (void) ;
-\end{lstlisting}
-
-\item A calibrate method : 
+\item A calibration method  with the drawing of a calibration rectangle and specific points to touch: 
 \begin{lstlisting}[language=Arduinonl]
 static void calibrateTouch (void) ;
 \end{lstlisting}
@@ -816,14 +823,15 @@ static void calibrateTouch (void) ;
 ~\\ Every pieces of drawing on the screen are "Views".
 ~\\ A view is a rectangular section of the screen. It is responsible for handling all drawing and user-initiated events within its frame.
 
-~\\ \texttt{ArduinoWidgets} provides the View class as an abstract view implementation that subclasses use as the basis for implementing custom display and user interaction.
+~\\ \texttt{ArduinoWidgets} provides the \texttt{View} class as an abstract view implementation that subclasses use as the basis for implementing custom display and user interaction. They are the most pervasive type of object in the \texttt{ArduinoWidgets} library; nearly every object you see on the screen is a view. Views are in the front line of both drawing and event handling, and hence are one of the more important types of objects to understand.
+~\\ In a very real sense, a view draws itself. It also provides a surface that can be responsive to input from a touch event.
 
-~\\ In addition to drawing content and responding to user events, View instances act as containers for other views. By nesting views within other views, an application creates a hierarchy of views. This view hierarchy provides a clearly defined structure for how views draw relative to each other and pass messages from one view to another, up to the enclosing window, and on to the application for processing.
+~\\ In addition to drawing content and responding to user events, \texttt{View} instances act as containers for other views. By nesting views within other views, an application creates a hierarchy of views. This view hierarchy provides a clearly defined structure for how views draw relative to each other and pass messages from one view to another, up to the enclosing window, and on to the application for processing.
 
-~\\ \texttt{ArduinoWidgets} provides several type of views for containing graphics, texts and controls which can send messages to its own view or to other views.
+~\\ \texttt{ArduinoWidgets} provides several type of views for containing graphics, texts and controls, with color attributes, which can send messages to its own view or to other views. A view can be opaque or transparent. In this last case, if the view is not validated, the drawing of views behind it is allowed.
 
-~\\ The root View is the screen.
-~\\ Each View is placed in a parent View, the superview, in which it is a frame. This frame can be moved, resized, and rotated in the superview and the view's content moves with it.
+~\\ The root \texttt{View} is the screen.
+~\\ Each \texttt{View} is placed in a parent View, the \texttt{superView}, in which it is a frame. This frame can be moved and resized in the \texttt{superView} and the view's content moves with it.
 
 ~\\ The view is specified when a view instance is created programmatically using :
 
@@ -833,7 +841,7 @@ static void calibrateTouch (void) ;
                    const AWColor & inBackColor) ;
  \end{lstlisting}
 
-~\\ When it is necessary to know the frame rectangle of a view, the \texttt{absoluteFrame} method can return this absolute frame.
+~\\ When it is necessary to know the frame rectangle of a view, the \texttt{absoluteFrame} method can return this frame rectangle.
 
 ~\\ To translate a frame you can use the method \texttt{translateBy}. To change the frame size you can use \texttt{setSize}.
 ~\\ To specify or to get the backcolor of a view, you can use the methods \texttt{backColor} or \texttt{setBackColor}.
@@ -857,11 +865,13 @@ void addView (class AWView * inView) ;
 void addCenteredView (class AWView * inView) ;
 \end{lstlisting}
 
-~\\\emph{What Is a View Hierarchy?}
+~\\\emph{What is a View Hierarchy?}
 
 ~\\In addition to being responsible for drawing and handling user events, a view instance can act as a container, enclosing other view instances. Those views are linked together creating a view hierarchy. Unlike a class hierarchy, which defines the lineage of a class, the view hierarchy defines the layout of views relative to other views.
 
-~\\The window instance maintains a reference to a single top-level view instance, call the content view. The content view acts as the root of the visible view hierarchy in a window. The view instances enclosed within a view are called subViews. The parent view that encloses a view is referred to as its superView. While a view instance can have multiple subViews, it can have only one superView. In order for a view and its subviews to be visible to the user, the view must be inserted into a window's view hierarchy.
+~\\ It permits a complex view to be constructed out of other views. For example, a graphical keypad might be a container view with a separate subview for each key.
+
+~\\The \texttt{context} instance maintains a reference to a single top-level view instance. The \texttt{context} view acts as the root of the visible view hierarchy in a window. The view instances enclosed within a view are called subViews. The parent view that encloses a view is referred to as its \texttt{superView}. Each view has another view as its superView and may be the superView for any number of subViews. While a view instance can have multiple subViews, it can have only one superView. In order for a view and its subviews to be visible to the user, the view must be inserted into a view hierarchy.
 
 ~\\ A view is added to a parent view via the method \texttt{addSubView} or \texttt{addCenteredSubView}, in a hierarchical order :
 \begin{lstlisting}[language=Arduinonl]
@@ -894,7 +904,7 @@ The View method \texttt{tag} always returns –1. Subclasses can override this m
 
 ~\\ \emph{User interactivity : sending and receiving Actions}
 
-~\\A view or subview can be sensitive to touch actions of the user
+~\\A view or subview can be sensitive to touch actions of the user. In order to be responsive to a touch event, each view must redefine \texttt{touchDown}, \texttt{touchMove} and \texttt{touchUp}. The method \texttt{sendAction} call the function which is attached to the view by using \texttt{setAction} :
 
 \begin{lstlisting}[language=Arduinonl]
 //---------------- Action
@@ -909,17 +919,24 @@ The View method \texttt{tag} always returns –1. Subclasses can override this m
 \end{lstlisting}
 
 ~\\ \emph{Drawing and display views}
+~\\ These methods force an immediate display of the screen, although the latter method iterates only through the list of invalidated views. The display method causes each view in the screen's view hierarchy to redraw itself, starting with the context view. This method is invoked on a one-shot window (that is, a window whose backing store is released when the window is offscreen) before the window is shown onscreen.
 
+~\\ These methods mark views or regions of views for redrawing 
+:
 \begin{lstlisting}[language=Arduinonl]
 //---------------- Display view
   void setNeedsDisplay (void) ;
   void setNeedsDisplayInRect (const AWRect & inRect) ;
+\end{lstlisting}
 
+~\\ The method \texttt{drawInRegion} must be redefined in each view : It is responsible of the drawing of the view.
+
+\begin{lstlisting}[language=Arduinonl]
 //--- Draw method (to be overridden)
   virtual void drawInRegion (const AWRegion & inDrawRegion) const ;
 \end{lstlisting}
 
-~\\ A view can be opaque (drawable) or transparent (invalid or invisible).
+~\\ A view can be opaque (visible) or transparent (invalid or invisible). An important aspect of the drawing of views is view opacity. A view does not have to draw every bit of its surface, but if it does it should declare itself to be opaque (by implementing isOpaque to return YES).
 
 \begin{lstlisting}[language=Arduinonl]
 //--- Tell the view is opaque
@@ -930,13 +947,13 @@ The View method \texttt{tag} always returns –1. Subclasses can override this m
   void setVisibility (const bool inIsVisible) ;
 
 //---------------- Handle "on screen" state
-  public : inline bool isOnScreen (void) const { return mIsOnScreen ; }
+  inline bool isOnScreen (void) const { return mIsOnScreen ; }
 \end{lstlisting}
 
 
-~\\ More characteristics for managing Views, such as background color, opacity/transparency, resizing, translation, deletion, actions, touch, will be given in the corresponding detailed section.
+~\\ AWView is a class that defines the basic drawing and event-handling. AWView itself does not draw content or respond to user events, so you typically don’t interact with a direct instance of AWView. Instead you use an instance of a custom AWView subclass. A custom view class inherits from AWView and overrides many of its methods, which are invoked automatically by the \texttt{ArduinoWidgets} library.
 
-~\\ There is an existing collection of ready to use Views which are :
+~\\ There is an existing collection of ready to use subclass Views which are :
 \begin{itemize}
 \item AWLine : display a line
 \item AWLabel : display of text on a line.
@@ -953,14 +970,6 @@ The View method \texttt{tag} always returns –1. Subclasses can override this m
 \end{itemize}
 
 ~\\ You will be able to create and add your custom Views !
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-\subsection{Actions}
-
-~\\ Some of the above Views can include one orseveral Actions
-~\\ 
-~\\ 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
@@ -1174,7 +1183,79 @@ class AWColor {
 \newpage
 \subsection{Fonts}
 
-~\\ 
+~\\ The class AWFont contain font description and fonctions
+
+\begin{lstlisting}[language=Arduinonl]
+class AWFont {
+//--- Default constructor: empty font
+   AWFont (void) : mFont () {}
+
+//--- Constructor from a font description
+  AWFont (const AWFontInternalDefinition & definition) ;
+
+  void drawStringInRegion (const AWInt inX,
+                                    const AWInt inY,
+                                    const char * inCString,
+                                    const AWRegion & inDrawRegion) const ;
+
+  void drawStringInRegion (const AWInt inX,
+                                    const AWInt inY,
+                                    const String & inString,
+                                    const AWRegion & inDrawRegion) const ;
+
+  AWInt ascent (void) const ;
+  AWInt descent (void) const ;
+  AWInt lineHeight (void) const ;
+
+  AWInt advancement (const uint32_t inCodePoint) const ;
+
+  AWRect stringRect (const AWInt inX,
+                              const AWInt inY,
+                              const char * inCString) const ;
+
+  AWInt stringLength (const char * inCString) const ;
+  AWInt stringLength (const String & inString) const ;
+
+
+//--- Equatable
+  inline bool operator == (const AWFont & inFont) const { return mFont == inFont.mFont ; }
+  inline bool operator != (const AWFont & inFont) const { return !(*this == inFont) ; }
+} ;
+
+~\\ These fonts are already usable in the \texttt{ArduinoWidget} library :
+//////////////////////////////////////
+AWFont-ChicagoDigit-36.h
+extern const AWFontInternalDefinition ChicagoDigit36 ;
+
+//////////////////////////////////////
+AWFont-ChicagoFLF12.h
+extern const AWFontInternalDefinition ChicagoFLF12 ;
+
+//////////////////////////////////////
+AWFont-ChicagoFLF24.h
+extern const AWFontInternalDefinition ChicagoFLF24 ;
+
+//////////////////////////////////////
+AWFont-Geneva10.h
+extern const AWFontInternalDefinition Geneva10 ;
+
+//////////////////////////////////////
+AWFont-Geneva12.h
+extern const AWFontInternalDefinition Geneva12 ;
+
+//////////////////////////////////////
+AWFont-Geneva9.h
+extern const AWFontInternalDefinition Geneva9 ;
+
+//////////////////////////////////////
+AWFont-Lucida_Grande18.h
+extern const AWFontInternalDefinition Lucida_Grande18 ;
+
+//////////////////////////////////////
+AWFont-Lucida_Grande24.h
+extern const AWFontInternalDefinition Lucida_Grande24 ;
+\end{lstlisting}
+
 ~\\ 
 ~\\ 
 
@@ -1183,7 +1264,7 @@ class AWColor {
 \newpage
 \section{The Views of \texttt{ArduinoWidgets}}
 
-~\\ This section describe the View classes which are already present in the \texttt{ArduinoWidgets} library, that you can use very simply.
+~\\ This section describe the View subclasses which are already present in the \texttt{ArduinoWidgets} library, that you can use very simply.
 \subsection{Lines}
 
 ~\\ A line is defined by 2 AWPoints. 
