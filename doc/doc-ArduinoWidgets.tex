@@ -178,7 +178,7 @@
 
 \title{\bf \Huge{ArduinoWidgets library\\Version 1.0}}
 \author{Pierre Molinaro, Jean-Luc Bechennec}
-\date {23 octobre 2017}
+\date {October 26th, 2017}
 
 \maketitle
 
@@ -202,7 +202,8 @@
     \textbf{Version} & \textbf{Date} & \textbf{Comment}\\
     0.1 & October 15, 2017 & Initial version \\
     0.2 & October 18, 2017 & Description of an example of Arduino sketch \\
-    0.3 & October 21, 2017 & Description of the first half of the Views
+    0.3 & October 21, 2017 & Description of the first half of the Views\\
+    0.4 & October 26, 2017 & Section 5 completed
 
 
   \end{tabular}
@@ -756,6 +757,7 @@ myObject.method(parameters);
 
 
 %%%%%%%%%%%%%%%%%%%%
+\newpage
 \subsection{Context}
 
 ~\\ The \emph{Context} is the entire Screen you are using. You must know about \emph{Context} before seeing something on your screen and touch it. 
@@ -818,6 +820,7 @@ static void calibrateTouch (void) ;
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%
+\newpage
 \subsection{The Views}
 
 ~\\ Every pieces of drawing on the screen are "Views".
@@ -972,6 +975,7 @@ The View method \texttt{tag} always returns –1. Subclasses can override this m
 ~\\ You will be able to create and add your custom Views !
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 \subsection{The action}
 
 ~\\ The action is the interactive part of the \texttt{ArduinoWidgets} library, which rely on the touch capabilities of the screen. An action is the message a control sends to the target or, from the perspective of the target, the method it implements to respond to the action. 
@@ -987,7 +991,11 @@ myControl->setAction (myControlAction) ;
 ~\\ myControlAction is a routine which is declared before the setup. We suppose here that this control is a PushButton :
 
 \begin{lstlisting}[language=Arduinonl]
-//--- myControl actionvoid myControlAction (AWView * inSender){  AWPushButton * sendingButton = (AWPushButton *) inSender ;  // Your Action code here
+//--- myControl action
+void myControlAction (AWView * inSender)
+{
+  AWPushButton * sendingButton = (AWPushButton *) inSender ;
+  // Your Action code here
 }
 \end{lstlisting}
 
@@ -1181,6 +1189,130 @@ class AWRect {
 } ;
 \end{lstlisting}
 
+~\\ A rectangle is the fondation of each AWView.
+
+~\\ A Rectangle is defined by an origine AWPoint and an AWsize. The origine Point is the bottom-left corner :
+
+\begin{lstlisting}[language=Arduinonl]
+//--- Properties
+  AWPoint origin ;
+  AWSize size ;
+  
+// AWsize :
+AWInt width ;
+AWInt height ;
+
+// AWRect :
+myRect = new AWRect (AWPoint, AWSize);
+myRect = new AWRect (X, Y, width, height);
+\end{lstlisting}
+
+~\\The coordinates of the bottom left corner are X = left, Y = bottom.
+~\\ For example, you can create a new rectangle myRect of left-bottom corner X=350, Y=50, width W=200 and height H=200 like this :
+\begin{lstlisting}[language=Arduinonl]
+myRect = new AWRect (350, 50, 200, 200);
+\end{lstlisting}
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[scale=0.6]{AWFig6.png} 
+   \caption{A Rectangle}
+   \label{fig:6 }
+\end{figure}
+
+~\\ This rect have a bottom left corner origin of coordinates (350, 50).
+~\\ The width (200) and height (200) are the number in pixels in the horizontal and vertical directions.
+~\\ Consequently, the coordinate of the top right corner of this rectangle is (14, 6) :
+\begin{itemize}
+\item left = X = 350
+\item bottom = Y = 50
+\item right = X + W -1 = 350 + 200 -1 = 549
+\item top = Y + H -1 = 50 + 200 -1 = 249
+\end{itemize}
+
+
+~\\ You can create rectangle from various combinations of AWInt, AWPoint and AWSize, according to the 3 constructors. 
+
+~\\ You will see farther all the operations and transformations that you can do on AWRect such as :
+\begin{itemize}
+\item to be visible or invisible or empty (if W <=0 or H <=0)
+\item a pixel is a rectangle with W = H =1
+\item a horizontal line is a rectangle with W =1
+\item a vertical line is a rectangle with H = 1
+\item a 800x600 screen is a rectangle (0, 0, 800, 600)
+\item find corners points
+\item make intersection, inclusion or union of rectangles
+\item find differences (the opposite of intersection) of rectangles
+\item inset en translate rectangles
+\item draw and fill rectangles, round-rectangles, and ovales
+\end{itemize}
+
+~\\The following example show how to display two rectangles : one without round corners and one with round corners :
+
+~\\ First declare the new classes  RectangleView and RoundRectangleView, and create an instance of each class :
+
+\begin{lstlisting}[language=Arduinonl]
+/////////////// RECTANGLE ///////////////
+class RectangleView : public AWView
+{
+  RectangleView (const AWRect & inViewFrame);
+  virtual void drawInRegion (const AWRegion & inRegion) const;
+};
+RectangleView::RectangleView (const AWRect & inViewFrame) : // constructor
+AWView(inViewFrame, 
+  AWColor ()),             
+  RectColor (AWColor::orange ()) 
+  { }
+void RectangleView::drawInRegion (const AWRegion & inRegion) const
+{
+  AWRect viewFrame = absoluteFrame () ;
+  AWContext::setColor (RectColor) ;
+  viewFrame.fillRectInRegion (inRegion) ;
+}
+//--- Global variable RectView
+RectangleView * RectView ;
+
+/////////////// ROUND CORNERS RECTANGLE ///////////////
+class RoundRectangleView : public AWView
+{
+  RoundRectangleView (const AWRect & inViewFrame);
+  virtual void drawInRegion (const AWRegion & inRegion) const;
+};
+RoundRectangleView::RoundRectangleView (const AWRect & inViewFrame) : // constructor
+AWView(inViewFrame, 
+  AWColor ()),             
+  RectColor (AWColor::green ()) 
+  { }
+void RoundRectangleView::drawInRegion (const AWRegion & inRegion) const
+{
+  AWRect viewFrame = absoluteFrame () ;
+  AWContext::setColor (RectColor) ;
+  viewFrame.fillRoundRectInRegion (AWInt (50), inRegion) ;
+}
+//--- Global variable RoundRectView
+RoundRectangleView * RoundRectView ;
+\end{lstlisting}
+
+~\\ Then draw the rectangles in the setup() :
+
+\begin{lstlisting}[language=Arduinonl]
+  //--- draw the Rectangle
+  RectView = new RectangleView (AWRect (350, 50, 200, 300)) ;
+  addView (RectView) ;   
+  
+  //--- draw the RoundRectangle
+  RoundRectView = new RoundRectangleView (AWRect (80, 200, 250, 200)) ;
+  addView (RoundRectView) ;   
+\end{lstlisting}
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[scale=0.55]{AWFig7.png} 
+   \caption{Two Rectangles}
+   \label{fig:7}
+\end{figure}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \subsection{Region}
@@ -1232,7 +1364,83 @@ class AWRegion {
 } ;
 \end{lstlisting}
 
-~\\ 
+~\\ The minimum Region is a Rectangle or can be empty.
+~\\ A Region is made of a combination of one or more separate and non-empty rectangles.
+~\\ The role of a Region is to manage more or less complex geometric entities which are not limited to a Rectangle.
+
+~\\ A Region is not a View and do not allow any drawing by itself, but it allow several operations.
+
+\begin{lstlisting}[language=Arduinonl]
+//--- Region from a rectangle (empty if rectangle is empty)
+ AWRegion (const AWRect & inRect) ; 
+ AWRegion(); // build an empty region
+\end{lstlisting}
+  
+~\\ The purpose of regions is to limit drawing within the region. For example, if you want to draw a half circle on the screen, you can set the region to half the square that would enclose the whole circle, and then draw the whole circle. Only the half within the region will actually be drawn.
+
+~\\ First declare the new classes  ClippingView :
+
+\begin{lstlisting}[language=Arduinonl]
+///////////// CLIPPING VIEW : A HALF CIRCLE /////////////
+class ClippingView : public AWView
+{
+  ClippingView (const AWRect & inViewFrame);
+  virtual void drawInRegion (const AWRegion & inRegion) const;
+};
+ClippingView::ClippingView (const AWRect & inViewFrame) :
+  AWView(inViewFrame, 
+  AWColor ())           // outside the drawing region is opaque 
+  { }
+void ClippingView::drawInRegion (const AWRegion & inRegion) const
+{
+  AWRegion drawingRegion = inRegion ;
+  AWRect viewFrame = absoluteFrame () ;
+  AWRect clipRectangle = viewFrame ;
+  clipRectangle.size.width /= 1 ;
+  clipRectangle.size.height /= 2 ;    // the clip rectangle hide the low half of the circle
+  drawingRegion -= clipRectangle ;
+  AWContext::setColor (AWColor::red ());
+  viewFrame.fillOvalInRegion (drawingRegion) ;
+}
+//--- Global variable CLIPPING VIEW
+ClippingView * crossView ;
+\end{lstlisting}
+
+~\\ Then draw the View in the setup() :
+\begin{lstlisting}[language=Arduinonl]
+//--- create the clipping view (half-circle
+  crossView = new ClippingView(AWRect (300, 100, 250, 250)) ;
+  addView (crossView) ;
+\end{lstlisting}
+
+~\\ A Region is defined by a rectangle which extends from the bottom left corner (300, 100) with size (250, 250). The circle is centered in this rectangle.
+~\\ Then a clipRectangle is defined as a the bottom half of the Region's rectangle.
+~\\ Then this bottom half is removed from the region.
+~\\ Then the circle is drawn but only the top half is visible !
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[scale=0.55]{AWFig8.png} 
+   \caption{Region with clipping rectangle}
+   \label{fig:8 }
+\end{figure}
+
+\begin{itemize}
+\item 
+\end{itemize}
+
+~\\ There is various operations on regions, which are defined in the methods of the class AWRegion, for example :
+
+\begin{itemize}
+\item Release a region, becomes empty.
+\item Do operations such as addition or subtraction of a rectangle to/from the region.
+\item Intersection with a rectangle.
+\item Intersection of regions.
+\item Enclosing rectangle.
+\item Testing if a point is inside a region.
+\item Handle a copy.
+\end{itemize}
+
 ~\\ 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1328,8 +1536,6 @@ class AWColor {
 
 
 ~\\ 
-~\\ 
-~\\ 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
@@ -1404,7 +1610,14 @@ AWFont-Lucida_Grande24.h
 extern const AWFontInternalDefinition Lucida_Grande24 ;
 \end{lstlisting}
 
-~\\ You can see examples of these fonts in section 6.4 and Figure 9.
+~\\ These are examples of all fonts :
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[scale=0.55]{AWFig91.png} 
+   \caption{Fonts}
+   \label{fig:91 }
+\end{figure}
+
 ~\\ 
 
 
@@ -1491,301 +1704,6 @@ AWLine * myLine;
 
 %%%%%%%%%%%%%%
 \newpage
-\subsection{Rectangles}
-
-~\\ A Rectangle is defined by an origine AWPoint and an AWsize. The origine Point is the bottom-left corner :
-\begin{lstlisting}[language=Arduinonl]
-//--- Properties
-  AWPoint origin ;
-  AWSize size ;
-  
-// AWsize :
-AWInt width ;
-AWInt height ;
-
-// AWRect :
-myRect = new AWRect (AWPoint, AWSize);
-myRect = new AWRect (X, Y, width, height);
-\end{lstlisting}
-
-~\\The coordinates of the bottom left corner are X = left, Y = bottom.
-~\\ For example, you can create a new rectangle myRect of left-bottom corner X=350, Y=50, width W=200 and height H=200 like this :
-
-\begin{lstlisting}[language=Arduinonl]
-myRect = new AWRect (350, 50, 200, 200);
-\end{lstlisting}
-
-\begin{figure}[htbp]
-   \centering
-   \includegraphics[scale=0.6]{AWFig6.png} 
-   \caption{A Rectangle}
-   \label{fig:6 }
-\end{figure}
-
-~\\ This rect have a bottom left corner origin of coordinates (350, 50).
-~\\ The width (200) and height (200) are the number in pixels in the horizontal and vertical directions.
-~\\ Consequently, the coordinate of the top right corner of this rectangle is (14, 6) :
-\begin{itemize}
-\item left = X = 350
-\item bottom = Y = 50
-\item right = X + W -1 = 350 + 200 -1 = 549
-\item top = Y + H -1 = 50 + 200 -1 = 249
-\end{itemize}
-
-
-~\\ You also can create rectangle from various combinations of AWInt, AWPoint and AWSize. The constructors are :
-\begin{lstlisting}[language=Arduinonl]
-  //--- Constructors
-  inline AWRect (const AWPoint inOrigin, const AWSize inSize) : 
-  	origin (inOrigin), size (inSize) {}
-  inline AWRect (const AWPoint inOrigin) : 
-  	origin (inOrigin), size (AWSize (1, 1)) {} 
-	// this is a single Point !
-  inline AWRect (const AWInt inX, const AWInt inY, const AWInt inWidth, const AWInt inHeight) :
-  	origin (AWPoint (inX, inY)), size (AWSize (inWidth, inHeight)) {}
-  AWRect (const AWPoint & inP1, const AWPoint & inP2) ;
-  static AWRect horizontalLine (const AWInt inX, const AWInt inY, const AWInt inWidth) ;
-  static AWRect verticalLine (const AWInt inX, const AWInt inY, const AWInt inHeight) ;
-\end{lstlisting}
-
-
-~\\ You will see farther all the operations and transformations that you can do on AWRect such as :
-\begin{itemize}
-\item to be visible or invisible or empty (if W <=0 or H <=0)
-\item a pixel is a rectangle with W = H =1
-\item a horizontal line is a rectangle with W =1
-\item a vertical line is a rectangle with H = 1
-\item a 800x600 screen is a rectangle (0, 0, 800, 600)
-\item find corners points
-\item make intersection, inclusion or union of rectangles
-\item find differences (the opposite of intersection) of rectangles
-\item inset en translate rectangles
-\item draw and fill rectangles, round-rectangles, and ovales
-\end{itemize}
-
-The AWRect methodes are :
-\begin{lstlisting}[language=Arduinonl]
-//--- Accessors
-  inline bool isEmpty (void) const { return (size.width <= 0) || (size.height <= 0) ; }
-  bool containsPoint (const AWPoint & inPoint) const ;
-  AWPoint topRight (void) const ;
-  AWPoint bottomRight (void) const ;
-  AWPoint topLeft (void) const ;
-  inline AWPoint bottomLeft (void) const { return origin ; }
-  inline AWInt minX (void) const { return origin.x ; }
-  inline AWInt maxX (void) const { return origin.x + size.width - 1 ; }
-  inline AWInt minY (void) const { return origin.y ; }
-  inline AWInt maxY (void) const { return origin.y + size.height - 1 ; }
-
-//--- Intersection
-  AWRect operator & (const AWRect & inOtherRect) const ;
-  bool intersects (const AWRect & inOtherRect) const ;
-
-//--- Inclusion
-  bool includesRect (const AWRect & inOtherRect) const ;
-
-//--- Union (Returns the smallest rectangle that completely encloses both receiver rect and inOtherRect)
-  AWRect operator + (const AWRect & inOtherRect) const ;
-  void operator += (const AWRect inOtherRect) ;
-
-//--- Difference (Returns 4 rects, possibly empty)
-  void differenceFrom (const AWRect & inRect,
-                                AWRect & outR1,
-                                AWRect & outR2,
-                                AWRect & outR3,
-                                AWRect & outR4) const ;
-
-//--- Transforming rectangle
-  void inset (const AWInt inDx, const AWInt inDy) ;
-  void translateBy (const AWInt inDx, const AWInt inDy) ;
-
-//--- Equatable
-  bool operator == (const AWRect & inRect) const { return (origin == inRect.origin) && (size == inRect.size) ; }
-  inline bool operator != (const AWRect & inRect) const { return ! (*this == inRect) ; }
-
-//--- Drawing
-  void fillRectInRegion (const AWRegion & inDrawRegion) const ;
-  void frameRectInRegion (const AWRegion & inDrawRegion) const ;
-  void fillRoundRectInRegion (const AWInt inRadius, const AWRegion & inDrawRegion) const ;
-  void frameRoundRectInRegion (const AWInt inRadius, const AWRegion & inDrawRegion) const ;
-  void fillOvalInRegion (const AWRegion & inDrawRegion) const ;
-  void frameOvalInRegion (const AWRegion & inDrawRegion) const ;
-\end{lstlisting}
-
-~\\This example show how to display two rectangles : one without round corners and one with round corners :
-
-~\\ First declare the new classes  RectangleView and RoundRectangleView, and create an instance of each class :
-
-\begin{lstlisting}[language=Arduinonl]
-/////////////// RECTANGLE ///////////////
-class RectangleView : public AWView
-{
-  RectangleView (const AWRect & inViewFrame);
-  virtual void drawInRegion (const AWRegion & inRegion) const;
-};
-RectangleView::RectangleView (const AWRect & inViewFrame) : // constructor
-AWView(inViewFrame, 
-  AWColor ()),             
-  RectColor (AWColor::orange ()) 
-  { }
-void RectangleView::drawInRegion (const AWRegion & inRegion) const
-{
-  AWRect viewFrame = absoluteFrame () ;
-  AWContext::setColor (RectColor) ;
-  viewFrame.fillRectInRegion (inRegion) ;
-}
-//--- Global variable RectView
-RectangleView * RectView ;
-
-/////////////// ROUND CORNERS RECTANGLE ///////////////
-class RoundRectangleView : public AWView
-{
-  RoundRectangleView (const AWRect & inViewFrame);
-  virtual void drawInRegion (const AWRegion & inRegion) const;
-};
-RoundRectangleView::RoundRectangleView (const AWRect & inViewFrame) : // constructor
-AWView(inViewFrame, 
-  AWColor ()),             
-  RectColor (AWColor::green ()) 
-  { }
-void RoundRectangleView::drawInRegion (const AWRegion & inRegion) const
-{
-  AWRect viewFrame = absoluteFrame () ;
-  AWContext::setColor (RectColor) ;
-  viewFrame.fillRoundRectInRegion (AWInt (50), inRegion) ;
-}
-//--- Global variable RoundRectView
-RoundRectangleView * RoundRectView ;
-\end{lstlisting}
-
-~\\ Then draw the rectangles in the setup() :
-
-\begin{lstlisting}[language=Arduinonl]
-  //--- draw the Rectangle
-  RectView = new RectangleView (AWRect (350, 50, 200, 300)) ;
-  addView (RectView) ;   
-  
-  //--- draw the RoundRectangle
-  RoundRectView = new RoundRectangleView (AWRect (80, 200, 250, 200)) ;
-  addView (RoundRectView) ;   
-\end{lstlisting}
-
-\begin{figure}[htbp]
-   \centering
-   \includegraphics[scale=0.55]{AWFig7.png} 
-   \caption{Two Rectangles}
-   \label{fig:7}
-\end{figure}
-
-
-%%%%%%%%%%%%%%
-\newpage
-\subsection{Regions}
-
-~\\ The minimum Region is a Rectangle or can be empty.
-~\\ A Region is made of a combination of one or more separate and non-empty rectangles.
-~\\ The role of a Region is to manage more or less complex geometric entities which are not limited to a Rectangle.
-
-~\\ A Region is not a View and do not allow any drawing by itself, but it allow several operations.
-
-\begin{lstlisting}[language=Arduinonl]
-//--- Region from a rectangle (empty if rectangle is empty)
- AWRegion (const AWRect & inRect) ; 
- AWRegion(); // build an empty region
-\end{lstlisting}
-  
-~\\ The purpose of regions is to limit drawing within the region. For example, if you want to draw a half circle on the screen, you can set the region to half the square that would enclose the whole circle, and then draw the whole circle. Only the half within the region will actually be drawn.
-
-~\\ First declare the new classes  ClippingView :
-
-\begin{lstlisting}[language=Arduinonl]
-///////////// CLIPPING VIEW : A HALF CIRCLE /////////////
-class ClippingView : public AWView
-{
-  ClippingView (const AWRect & inViewFrame);
-  virtual void drawInRegion (const AWRegion & inRegion) const;
-};
-ClippingView::ClippingView (const AWRect & inViewFrame) :
-  AWView(inViewFrame, 
-  AWColor ())           // outside the drawing region is opaque 
-  { }
-void ClippingView::drawInRegion (const AWRegion & inRegion) const
-{
-  AWRegion drawingRegion = inRegion ;
-  AWRect viewFrame = absoluteFrame () ;
-  AWRect clipRectangle = viewFrame ;
-  clipRectangle.size.width /= 1 ;
-  clipRectangle.size.height /= 2 ;    // the clip rectangle hide the low half of the circle
-  drawingRegion -= clipRectangle ;
-  AWContext::setColor (AWColor::red ());
-  viewFrame.fillOvalInRegion (drawingRegion) ;
-}
-//--- Global variable CLIPPING VIEW
-ClippingView * crossView ;
-\end{lstlisting}
-
-~\\ Then draw the View in the setup() :
-\begin{lstlisting}[language=Arduinonl]
-//--- create the clipping view (half-circle
-  crossView = new ClippingView(AWRect (300, 100, 250, 250)) ;
-  addView (crossView) ;
-\end{lstlisting}
-
-~\\ A Region is defined by a rectangle which extends from the bottom left corner (300, 100) with size (250, 250). The circle is centered in this rectangle.
-~\\ Then a clipRectangle is defined as a the bottom half of the Region's rectangle.
-~\\ Then this bottom half is removed from the region.
-~\\ Then the circle is drawn but only the top half is visible !
-
-\begin{figure}[htbp]
-   \centering
-   \includegraphics[scale=0.55]{AWFig8.png} 
-   \caption{Region with clipping rectangle}
-   \label{fig:8 }
-\end{figure}
-
-
-~\\ There is various operations on regions, wiich are defined in the methods of the class AWRegion:
-\begin{lstlisting}[language=Arduinonl]
-//--- release region, becomes empty
-  void release (void) ;
-
-//--- Accessors
-  inline bool isEmpty (void) const 
-     { return NULL == mPtr ; }
-  AWInt rectCount (void) const ;
-  AWRect rectAtIndex (const AWInt inIndex) const ;
-
-//--- Difference from a rectangle
-  void operator -= (const AWRect & inRect) ;
-
-//--- Adding a rectangle
-  void operator += (const AWRect & inRect) ;
-
-//--- Intersection with a rectangle
-  AWRegion operator & (const AWRect & inRect) const ;
-  bool intersects (const AWRect & inOtherRect) const ;
-
-//--- Intersection of regions
-  AWRegion operator & (const AWRegion & inRect) const ;
-
-//--- Enclosing rectangle
-  AWRect enclosingRect (void) const ;
-
-//--- Testing a point
-  bool containsPoint (const AWPoint & inPoint) const ;
-  bool containsPoint (
-             const AWInt inX, 
-             const AWInt inY
-             ) const ;
-
-//--- Handle copy
-  AWRegion (const AWRegion & inRegion) ;
-  AWRegion & operator = (const AWRegion & inRegion) ;
-\end{lstlisting}
-
-
-%%%%%%%%%%%%%%
-\newpage
 \subsection{Label and AutoLabel}
 
 ~\\ A Label is a string of text, "Title", that can be displayed anywhere on the screen (Context) or on a View or subView, or Region
@@ -1813,6 +1731,7 @@ typedef enum {
 \end{itemize}
 
 ~\\ You can choose the color from this list :
+
 \begin{itemize}
 \item black
 \item gray
@@ -2011,6 +1930,7 @@ class AWPushButton : public AWView {
 } ;
 \end{lstlisting}
 
+~\\There will be further examples of PushButton together with examples of other views.
 
 %%%%%%%%%%%%%%
 \newpage
@@ -2539,8 +2459,8 @@ class AWRightArrowKeyButton : public AWKeyButton
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[scale=0.55]{AWFig.png} 
-   \caption{Aie !! missing figure !}
+   \includegraphics[scale=0.55]{AWFig18.png} 
+   \caption{The keyboard view}
    \label{fig:18 }
 \end{figure}
 
@@ -2556,6 +2476,51 @@ void launchKeyboard (const String &inText,
                      AWKeyboardCallback inCallback,
                      const int inTag = -1) ;
 \end{lstlisting}
+
+
+%%%%%%%%%%%%%%
+\newpage
+\section{Custom View Examples}
+
+~\\
+
+%%%%%%%%%%%%%%
+\newpage
+\subsection{The Target custom view}
+
+~\\ This custom view is composed of :
+~\\
+~\\
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[scale=0.55]{AWFig19.png} 
+   \caption{"Target" custom view}
+   \label{fig:19 }
+\end{figure}
+
+
+%%%%%%%%%%%%%%
+\newpage
+\subsection{The Keyboard and List}
+
+~\\ This custom view is composed of :
+~\\
+~\\
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[scale=0.55]{AWFig21.png} 
+   \caption{Keyboard and List}
+   \label{fig:21 }
+\end{figure}
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[scale=0.55]{AWFig22.png} 
+   \caption{The List}
+   \label{fig:22 }
+\end{figure}
 
 
 %%%%%%%%%%%%%%
