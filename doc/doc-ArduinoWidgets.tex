@@ -953,7 +953,7 @@ The View method \texttt{tag} always returns –1. Subclasses can override this m
 
 ~\\ AWView is a class that defines the basic drawing and event-handling. AWView itself does not draw content or respond to user events, so you typically don’t interact with a direct instance of AWView. Instead you use an instance of a custom AWView subclass. A custom view class inherits from AWView and overrides many of its methods, which are invoked automatically by the \texttt{ArduinoWidgets} library.
 
-~\\ There is an existing collection of ready to use subclass Views which are :
+~\\ There is a collection of ready to use subclass Views in the \texttt{ArduinoWidgets} library, which are :
 \begin{itemize}
 \item AWLine : display a line
 \item AWLabel : display of text on a line.
@@ -972,6 +972,29 @@ The View method \texttt{tag} always returns –1. Subclasses can override this m
 ~\\ You will be able to create and add your custom Views !
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The action}
+
+~\\ The action is the interactive part of the \texttt{ArduinoWidgets} library, which rely on the touch capabilities of the screen. An action is the message a control sends to the target or, from the perspective of the target, the method it implements to respond to the action. 
+
+~\\The standard way to pass information between objects is message passing—one object invokes the method of another object. However, message passing requires that the object sending the message know who the receiver is and what messages it responds to. This is the reason why the action routines are located in the declaration part of the Arduino sketch, before the \texttt{setup}.
+
+~\\ A control is a view object which implement touch capabilities. For exemple, myControl (a PushButton or a Key or a Tab, for example) is a control. In the setup, inside the initialization code of myControl, we add the following line :
+
+\begin{lstlisting}[language=Arduinonl]
+myControl->setAction (myControlAction) ;
+\end{lstlisting}
+
+~\\ myControlAction is a routine which is declared before the setup. We suppose here that this control is a PushButton :
+
+\begin{lstlisting}[language=Arduinonl]
+//--- myControl actionvoid myControlAction (AWView * inSender){  AWPushButton * sendingButton = (AWPushButton *) inSender ;  // Your Action code here
+}
+\end{lstlisting}
+
+~\\ Your action code can be the display of a abel's title, the control of an Arduino's output pin (a led, a PWM signal, the backlight of the screen, etc..).
+~\\ You will find several example of how an action is implemented in the description of the \texttt{ArduinoWidgets} views.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \subsection{The coordinate plane}
 
@@ -1086,11 +1109,140 @@ myPoint.y = Y;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
+\subsection{Rectangle}
+
+~\\ A rectangle is not a View. The class AWRect is :
+
+\begin{lstlisting}[language=Arduinonl]
+class AWRect {
+//--- Default constructor (invisible rectangle)
+  inline AWRect (void) : origin (), size () {}
+
+//--- Constructors
+  inline AWRect (const AWPoint inOrigin, const AWSize inSize) : origin (inOrigin), size (inSize) {}
+  inline AWRect (const AWPoint inOrigin) : origin (inOrigin), size (AWSize (1, 1)) {}
+  inline AWRect (const AWInt inX, const AWInt inY, const AWInt inWidth, const AWInt inHeight) :
+  origin (AWPoint (inX, inY)),
+  size (AWSize (inWidth, inHeight)) {
+  }
+  AWRect (const AWPoint & inP1, const AWPoint & inP2) ;
+  static AWRect horizontalLine (const AWInt inX, const AWInt inY, const AWInt inWidth) ;
+  static AWRect verticalLine (const AWInt inX, const AWInt inY, const AWInt inHeight) ;
+
+//--- Accessors
+  inline bool isEmpty (void) const { return (size.width <= 0) || (size.height <= 0) ; }
+  bool containsPoint (const AWPoint & inPoint) const ;
+  AWPoint topRight (void) const ;
+  AWPoint bottomRight (void) const ;
+  AWPoint topLeft (void) const ;
+  inline AWPoint bottomLeft (void) const { return origin ; }
+  inline AWInt minX (void) const { return origin.x ; }
+  inline AWInt maxX (void) const { return origin.x + size.width - 1 ; }
+  inline AWInt minY (void) const { return origin.y ; }
+  inline AWInt maxY (void) const { return origin.y + size.height - 1 ; }
+
+//--- Intersection
+  AWRect operator & (const AWRect & inOtherRect) const ;
+  bool intersects (const AWRect & inOtherRect) const ;
+
+//--- Inclusion
+  bool includesRect (const AWRect & inOtherRect) const ;
+
+//--- Union (Returns the smallest rectangle that completely encloses both receiver rect and inOtherRect)
+  AWRect operator + (const AWRect & inOtherRect) const ;
+  void operator += (const AWRect inOtherRect) ;
+
+//--- Difference (Returns 4 rects, possibly empty)
+  void differenceFrom (const AWRect & inRect,
+                                AWRect & outR1,
+                                AWRect & outR2,
+                                AWRect & outR3,
+                                AWRect & outR4) const ;
+
+//--- Transforming rectangle
+  void inset (const AWInt inDx, const AWInt inDy) ;
+  void translateBy (const AWInt inDx, const AWInt inDy) ;
+
+//--- Equatable
+  bool operator == (const AWRect & inRect) const { return (origin == inRect.origin) && (size == inRect.size) ; }
+  inline bool operator != (const AWRect & inRect) const { return ! (*this == inRect) ; }
+
+//--- Drawing
+  void fillRectInRegion (const AWRegion & inDrawRegion) const ;
+  void frameRectInRegion (const AWRegion & inDrawRegion) const ;
+  void fillRoundRectInRegion (const AWInt inRadius, const AWRegion & inDrawRegion) const ;
+  void frameRoundRectInRegion (const AWInt inRadius, const AWRegion & inDrawRegion) const ;
+  void fillOvalInRegion (const AWRegion & inDrawRegion) const ;
+  void frameOvalInRegion (const AWRegion & inDrawRegion) const ;
+
+//--- Properties
+  AWPoint origin ;
+  AWSize size ;
+} ;
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\subsection{Region}
+
+~\\ A region is not a View. The class AWRegion is :
+
+\begin{lstlisting}[language=Arduinonl]
+class AWRegion {
+//--- Default constructor (build an empty region)
+  AWRegion (void) ;
+
+//--- Region from a rectangle (empty if rectangle is empty)
+  AWRegion (const AWRect & inRect) ;
+
+//--- Destructor
+  ~ AWRegion (void) ;
+
+//--- release region, becomes empty
+  void release (void) ;
+
+//--- Accessors
+  inline bool isEmpty (void) const { return NULL == mPtr ; }
+  AWInt rectCount (void) const ;
+  AWRect rectAtIndex (const AWInt inIndex) const ;
+
+//--- Difference from a rectangle
+  void operator -= (const AWRect & inRect) ;
+
+//--- Adding a rectangle
+  void operator += (const AWRect & inRect) ;
+
+//--- Intersection with a rectangle
+  AWRegion operator & (const AWRect & inRect) const ;
+  bool intersects (const AWRect & inOtherRect) const ;
+
+//--- Intersection of regions
+  AWRegion operator & (const AWRegion & inRect) const ;
+
+//--- Enclosing rectangle
+  AWRect enclosingRect (void) const ;
+
+//--- Testing a point
+  bool containsPoint (const AWPoint & inPoint) const ;
+  bool containsPoint (const AWInt inX, const AWInt inY) const ;
+
+//--- Handle copy
+  AWRegion (const AWRegion & inRegion) ;
+  AWRegion & operator = (const AWRegion & inRegion) ;
+} ;
+\end{lstlisting}
+
+~\\ 
+~\\ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 \subsection{Colors}
 
 ~\\ A color is defined by 3 bytes (uint\_8) and a boolean. The 3 bytes define respectively the red, green and blue component and the boolean "IsOpaque" define if the color is opaque or transparent.
 ~\\ A set of 17 colors is predefined to simplify your programming.
 ~\\ You can set colors, test colors or get colors.
+~\\ A color is not a View. The class AWColor is :
 
 \begin{lstlisting}[language=Arduinonl]
 class AWColor {
@@ -1183,7 +1335,8 @@ class AWColor {
 \newpage
 \subsection{Fonts}
 
-~\\ The class AWFont contain font description and fonctions
+~\\ The class AWFont contain font description and fonctions.
+~\\ A font is not a View. The class AWFont is :
 
 \begin{lstlisting}[language=Arduinonl]
 class AWFont {
@@ -1221,42 +1374,37 @@ class AWFont {
   inline bool operator == (const AWFont & inFont) const { return mFont == inFont.mFont ; }
   inline bool operator != (const AWFont & inFont) const { return !(*this == inFont) ; }
 } ;
+\end{lstlisting}
 
-~\\ These fonts are already usable in the \texttt{ArduinoWidget} library :
-//////////////////////////////////////
+~\\ The definition of type AWFontInternalDefinition refer to one of these fonts which are already implemented in the \texttt{ArduinoWidget} library :
+
+\begin{lstlisting}[language=Arduinonl]
 AWFont-ChicagoDigit-36.h
 extern const AWFontInternalDefinition ChicagoDigit36 ;
 
-//////////////////////////////////////
 AWFont-ChicagoFLF12.h
 extern const AWFontInternalDefinition ChicagoFLF12 ;
 
-//////////////////////////////////////
 AWFont-ChicagoFLF24.h
 extern const AWFontInternalDefinition ChicagoFLF24 ;
 
-//////////////////////////////////////
 AWFont-Geneva10.h
 extern const AWFontInternalDefinition Geneva10 ;
 
-//////////////////////////////////////
 AWFont-Geneva12.h
 extern const AWFontInternalDefinition Geneva12 ;
 
-//////////////////////////////////////
 AWFont-Geneva9.h
 extern const AWFontInternalDefinition Geneva9 ;
 
-//////////////////////////////////////
 AWFont-Lucida_Grande18.h
 extern const AWFontInternalDefinition Lucida_Grande18 ;
 
-//////////////////////////////////////
 AWFont-Lucida_Grande24.h
 extern const AWFontInternalDefinition Lucida_Grande24 ;
 \end{lstlisting}
 
-~\\ 
+~\\ You can see examples of these fonts in section 6.4 and Figure 9.
 ~\\ 
 
 
@@ -1265,7 +1413,27 @@ extern const AWFontInternalDefinition Lucida_Grande24 ;
 \section{The Views of \texttt{ArduinoWidgets}}
 
 ~\\ This section describe the View subclasses which are already present in the \texttt{ArduinoWidgets} library, that you can use very simply.
+~\\ For each View, the class declaration, which is in the .h file of the library, is reproduced without the private properties and methode.
+~\\ As explained before, the \texttt{drawInRegion} method is "virtual" and must be defined in the instance of the view in your program.
+
+%%%%%%%%%%%%%%%%
 \subsection{Lines}
+
+~\\ The class AWLine is :
+
+\begin{lstlisting}[language=Arduinonl]
+class AWLine : public AWView {
+//--- Constructor
+  AWLine (const AWPoint & inRelativePoint1,
+                   const AWPoint & inRelativePoint2) ;
+
+//--- Draw
+  virtual void drawInRegion (const AWRegion & inDrawRegion) const ;
+
+//--- Tell the view is opaque
+  virtual bool isOpaque (void) const { return false ; }
+  };
+ \end{lstlisting}
 
 ~\\ A line is defined by 2 AWPoints. 
 ~\\ To create and draw a new line "myLine" from Point1 (50,50) and Point2 (400,400):
@@ -1283,7 +1451,7 @@ AWLine * myLine;
   myLine = new AWLine (AWPoint(100,100), AWPoint(300,300)); 
   addView (myLine) ;
  \end{lstlisting}
-~\\ Note that in this case you cannot use the origin and destination points for further operations because they are only arguments of the constructor of myLine.
+~\\ Note that, in this case, you cannot use the origin and destination points for further operations because they are only arguments of the constructor of myLine.
 
 \begin{figure}[htbp]
    \centering
@@ -1307,6 +1475,7 @@ AWLine * myLine;
   addView (myLine1) ;
  \end{lstlisting}
 ~\\ Note that in this case you can use the lineOrigin and lineEnd points for further operations because they are declared outside the constructor of myLine1.
+
 ~\\ Note also that AWLine arguments are references (pointers) to AWPoints.
 
 ~\\ Note also that pixels are centered on points and, consequently, lines are centered on a grid line.
@@ -1318,7 +1487,7 @@ AWLine * myLine;
    \label{fig:5 }
 \end{figure}
 
-~\\ This figure explain why the dimensions of a line is one pixel more than the width or height used in the drawing method.
+~\\ Figure 5 explain why the dimensions of a line is one pixel more than the width or height used in the drawing method.
 
 %%%%%%%%%%%%%%
 \newpage
