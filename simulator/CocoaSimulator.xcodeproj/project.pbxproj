@@ -1,0 +1,598 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6C38131C1F5548D300C86342 /* AWFont-Geneva12.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C38131A1F5548D300C86342 /* AWFont-Geneva12.cpp */; };
+		6C38131F1F55495200C86342 /* AWFont-Geneva10.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C38131D1F55495200C86342 /* AWFont-Geneva10.cpp */; };
+		6C3813221F5549B100C86342 /* AWFont-Geneva9.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C3813201F5549B100C86342 /* AWFont-Geneva9.cpp */; };
+		6C46BD801F1D23D3005C7044 /* AWSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C46BD7F1F1D23D3005C7044 /* AWSlider.cpp */; };
+		6C58BB931F34D2F6000AEE7F /* AWArrowPushButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C58BB911F34D2F6000AEE7F /* AWArrowPushButton.cpp */; };
+		6C58BB961F3B9795000AEE7F /* AWKeyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C58BB941F3B9795000AEE7F /* AWKeyboard.cpp */; };
+		6C58BB991F42CA38000AEE7F /* AWKeyButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C58BB971F42CA38000AEE7F /* AWKeyButton.cpp */; };
+		6C58BB9C1F42D719000AEE7F /* AWKeyboardBackView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C58BB9A1F42D719000AEE7F /* AWKeyboardBackView.cpp */; };
+		6C58BB9F1F442330000AEE7F /* AWKeyboardInputField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C58BB9D1F442330000AEE7F /* AWKeyboardInputField.cpp */; };
+		6C58BBA21F4480A1000AEE7F /* AWFont-ChicagoFLF24.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C58BBA01F4480A1000AEE7F /* AWFont-ChicagoFLF24.cpp */; };
+		6C58BBA51F4484B9000AEE7F /* AWFont-Lucida_Grande18.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C58BBA31F4484B9000AEE7F /* AWFont-Lucida_Grande18.cpp */; };
+		6C58BBA81F448541000AEE7F /* AWFont-Lucida_Grande24.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C58BBA61F448541000AEE7F /* AWFont-Lucida_Grande24.cpp */; };
+		6C58BBAB1F458039000AEE7F /* AWKeyboardSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C58BBAA1F458039000AEE7F /* AWKeyboardSettings.cpp */; };
+		6C58BBAE1F45A428000AEE7F /* AWKeyboardCursorView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C58BBAC1F45A428000AEE7F /* AWKeyboardCursorView.cpp */; };
+		6CB896AC1F1FDB0C002DF7C3 /* AWDynamicSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CB896AA1F1FDB0C002DF7C3 /* AWDynamicSlider.cpp */; };
+		6CB896B31F3328BA002DF7C3 /* AWRectView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CB896B11F3328BA002DF7C3 /* AWRectView.cpp */; };
+		CF16C4D41EEC599600764508 /* AWSegmentedControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF16C4D21EEC599600764508 /* AWSegmentedControl.cpp */; };
+		CF1F63801EDEFBCD00551D25 /* AW-assertion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF1F63511EDEFBCD00551D25 /* AW-assertion.cpp */; };
+		CF1F63811EDEFBCD00551D25 /* AW-settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF1F63541EDEFBCD00551D25 /* AW-settings.cpp */; };
+		CF1F63821EDEFBCD00551D25 /* AWAlert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF1F63571EDEFBCD00551D25 /* AWAlert.cpp */; };
+		CF1F63831EDEFBCD00551D25 /* AWAutoLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF1F63591EDEFBCD00551D25 /* AWAutoLabel.cpp */; };
+		CF1F63841EDEFBCD00551D25 /* AWColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF1F635B1EDEFBCD00551D25 /* AWColor.cpp */; };
+		CF1F63851EDEFBCD00551D25 /* AWContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF1F635D1EDEFBCD00551D25 /* AWContext.cpp */; };
+		CF1F63861EDEFBCD00551D25 /* AWFont-ChicagoFLF12.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF1F635F1EDEFBCD00551D25 /* AWFont-ChicagoFLF12.cpp */; };
+		CF1F63881EDEFBCD00551D25 /* AWFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF1F63631EDEFBCD00551D25 /* AWFont.cpp */; };
+		CF1F63891EDEFBCD00551D25 /* AWLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF1F63651EDEFBCD00551D25 /* AWLabel.cpp */; };
+		CF1F638A1EDEFBCD00551D25 /* AWLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF1F63671EDEFBCD00551D25 /* AWLine.cpp */; };
+		CF1F638B1EDEFBCD00551D25 /* AWListView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF1F63691EDEFBCD00551D25 /* AWListView.cpp */; };
+		CF1F638C1EDEFBCD00551D25 /* AWPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF1F636B1EDEFBCD00551D25 /* AWPoint.cpp */; };
+		CF1F638D1EDEFBCD00551D25 /* AWPushButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF1F636D1EDEFBCD00551D25 /* AWPushButton.cpp */; };
+		CF1F638E1EDEFBCD00551D25 /* AWRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF1F636F1EDEFBCD00551D25 /* AWRect.cpp */; };
+		CF1F638F1EDEFBCD00551D25 /* AWRegion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF1F63711EDEFBCD00551D25 /* AWRegion.cpp */; };
+		CF1F63901EDEFBCD00551D25 /* AWSize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF1F63731EDEFBCD00551D25 /* AWSize.cpp */; };
+		CF1F63911EDEFBCD00551D25 /* AWSwitch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF1F63751EDEFBCD00551D25 /* AWSwitch.cpp */; };
+		CF1F63921EDEFBCD00551D25 /* AWTabView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF1F63771EDEFBCD00551D25 /* AWTabView.cpp */; };
+		CF1F63931EDEFBCD00551D25 /* AWInvisiblePushButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF1F63791EDEFBCD00551D25 /* AWInvisiblePushButton.cpp */; };
+		CF1F63941EDEFBCD00551D25 /* AWView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF1F637C1EDEFBCD00551D25 /* AWView.cpp */; };
+		CF1F63951EDEFBCD00551D25 /* graphic-setup-loop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF1F637E1EDEFBCD00551D25 /* graphic-setup-loop.cpp */; };
+		CF51955F1ED72C3F00BF0C45 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = CF5195291ED72C3F00BF0C45 /* AppDelegate.mm */; };
+		CF5195661ED72C3F00BF0C45 /* CocoaSimulatorView.mm in Sources */ = {isa = PBXBuildFile; fileRef = CF51953A1ED72C3F00BF0C45 /* CocoaSimulatorView.mm */; };
+		CF5195761ED72C3F00BF0C45 /* WString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CF51955D1ED72C3F00BF0C45 /* WString.cpp */; };
+		CFFDB4A81ED7279500CA338A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CFFDB4A71ED7279500CA338A /* main.m */; };
+		CFFDB4AA1ED7279500CA338A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFDB4A91ED7279500CA338A /* Assets.xcassets */; };
+		CFFDB4AD1ED7279500CA338A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFFDB4AB1ED7279500CA338A /* MainMenu.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6C38131A1F5548D300C86342 /* AWFont-Geneva12.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "AWFont-Geneva12.cpp"; sourceTree = "<group>"; };
+		6C38131B1F5548D300C86342 /* AWFont-Geneva12.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AWFont-Geneva12.h"; sourceTree = "<group>"; };
+		6C38131D1F55495200C86342 /* AWFont-Geneva10.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "AWFont-Geneva10.cpp"; sourceTree = "<group>"; };
+		6C38131E1F55495200C86342 /* AWFont-Geneva10.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AWFont-Geneva10.h"; sourceTree = "<group>"; };
+		6C3813201F5549B100C86342 /* AWFont-Geneva9.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "AWFont-Geneva9.cpp"; sourceTree = "<group>"; };
+		6C3813211F5549B100C86342 /* AWFont-Geneva9.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AWFont-Geneva9.h"; sourceTree = "<group>"; };
+		6C46BD7E1F1D208B005C7044 /* AWSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSlider.h; sourceTree = "<group>"; };
+		6C46BD7F1F1D23D3005C7044 /* AWSlider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWSlider.cpp; sourceTree = "<group>"; };
+		6C58BB911F34D2F6000AEE7F /* AWArrowPushButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWArrowPushButton.cpp; sourceTree = "<group>"; };
+		6C58BB921F34D2F6000AEE7F /* AWArrowPushButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWArrowPushButton.h; sourceTree = "<group>"; };
+		6C58BB941F3B9795000AEE7F /* AWKeyboard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWKeyboard.cpp; sourceTree = "<group>"; };
+		6C58BB951F3B9795000AEE7F /* AWKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWKeyboard.h; sourceTree = "<group>"; };
+		6C58BB971F42CA38000AEE7F /* AWKeyButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWKeyButton.cpp; sourceTree = "<group>"; };
+		6C58BB981F42CA38000AEE7F /* AWKeyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWKeyButton.h; sourceTree = "<group>"; };
+		6C58BB9A1F42D719000AEE7F /* AWKeyboardBackView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWKeyboardBackView.cpp; sourceTree = "<group>"; };
+		6C58BB9B1F42D719000AEE7F /* AWKeyboardBackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWKeyboardBackView.h; sourceTree = "<group>"; };
+		6C58BB9D1F442330000AEE7F /* AWKeyboardInputField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWKeyboardInputField.cpp; sourceTree = "<group>"; };
+		6C58BB9E1F442330000AEE7F /* AWKeyboardInputField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWKeyboardInputField.h; sourceTree = "<group>"; };
+		6C58BBA01F4480A1000AEE7F /* AWFont-ChicagoFLF24.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "AWFont-ChicagoFLF24.cpp"; sourceTree = "<group>"; };
+		6C58BBA11F4480A1000AEE7F /* AWFont-ChicagoFLF24.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AWFont-ChicagoFLF24.h"; sourceTree = "<group>"; };
+		6C58BBA31F4484B9000AEE7F /* AWFont-Lucida_Grande18.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "AWFont-Lucida_Grande18.cpp"; sourceTree = "<group>"; };
+		6C58BBA41F4484B9000AEE7F /* AWFont-Lucida_Grande18.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AWFont-Lucida_Grande18.h"; sourceTree = "<group>"; };
+		6C58BBA61F448541000AEE7F /* AWFont-Lucida_Grande24.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "AWFont-Lucida_Grande24.cpp"; sourceTree = "<group>"; };
+		6C58BBA71F448541000AEE7F /* AWFont-Lucida_Grande24.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AWFont-Lucida_Grande24.h"; sourceTree = "<group>"; };
+		6C58BBA91F456D9B000AEE7F /* AWKeyboardSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWKeyboardSettings.h; sourceTree = "<group>"; };
+		6C58BBAA1F458039000AEE7F /* AWKeyboardSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWKeyboardSettings.cpp; sourceTree = "<group>"; };
+		6C58BBAC1F45A428000AEE7F /* AWKeyboardCursorView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWKeyboardCursorView.cpp; sourceTree = "<group>"; };
+		6C58BBAD1F45A428000AEE7F /* AWKeyboardCursorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWKeyboardCursorView.h; sourceTree = "<group>"; };
+		6CB896AA1F1FDB0C002DF7C3 /* AWDynamicSlider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWDynamicSlider.cpp; sourceTree = "<group>"; };
+		6CB896AB1F1FDB0C002DF7C3 /* AWDynamicSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWDynamicSlider.h; sourceTree = "<group>"; };
+		6CB896B11F3328BA002DF7C3 /* AWRectView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWRectView.cpp; sourceTree = "<group>"; };
+		6CB896B21F3328BA002DF7C3 /* AWRectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWRectView.h; sourceTree = "<group>"; };
+		CF080ED81F4D881D0053A594 /* AWInt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWInt.h; sourceTree = "<group>"; };
+		CF16C4D21EEC599600764508 /* AWSegmentedControl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWSegmentedControl.cpp; sourceTree = "<group>"; };
+		CF16C4D31EEC599600764508 /* AWSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWSegmentedControl.h; sourceTree = "<group>"; };
+		CF1F63511EDEFBCD00551D25 /* AW-assertion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "AW-assertion.cpp"; sourceTree = "<group>"; };
+		CF1F63521EDEFBCD00551D25 /* AW-assertion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AW-assertion.h"; sourceTree = "<group>"; };
+		CF1F63531EDEFBCD00551D25 /* AW-min-max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AW-min-max.h"; sourceTree = "<group>"; };
+		CF1F63541EDEFBCD00551D25 /* AW-settings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "AW-settings.cpp"; sourceTree = "<group>"; };
+		CF1F63551EDEFBCD00551D25 /* AW-settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AW-settings.h"; sourceTree = "<group>"; };
+		CF1F63561EDEFBCD00551D25 /* AW-swap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AW-swap.h"; sourceTree = "<group>"; };
+		CF1F63571EDEFBCD00551D25 /* AWAlert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWAlert.cpp; sourceTree = "<group>"; };
+		CF1F63581EDEFBCD00551D25 /* AWAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWAlert.h; sourceTree = "<group>"; };
+		CF1F63591EDEFBCD00551D25 /* AWAutoLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWAutoLabel.cpp; sourceTree = "<group>"; };
+		CF1F635A1EDEFBCD00551D25 /* AWAutoLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWAutoLabel.h; sourceTree = "<group>"; };
+		CF1F635B1EDEFBCD00551D25 /* AWColor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWColor.cpp; sourceTree = "<group>"; };
+		CF1F635C1EDEFBCD00551D25 /* AWColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWColor.h; sourceTree = "<group>"; };
+		CF1F635D1EDEFBCD00551D25 /* AWContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWContext.cpp; sourceTree = "<group>"; };
+		CF1F635E1EDEFBCD00551D25 /* AWContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWContext.h; sourceTree = "<group>"; };
+		CF1F635F1EDEFBCD00551D25 /* AWFont-ChicagoFLF12.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "AWFont-ChicagoFLF12.cpp"; sourceTree = "<group>"; };
+		CF1F63601EDEFBCD00551D25 /* AWFont-ChicagoFLF12.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AWFont-ChicagoFLF12.h"; sourceTree = "<group>"; };
+		CF1F63631EDEFBCD00551D25 /* AWFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWFont.cpp; sourceTree = "<group>"; };
+		CF1F63641EDEFBCD00551D25 /* AWFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWFont.h; sourceTree = "<group>"; };
+		CF1F63651EDEFBCD00551D25 /* AWLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWLabel.cpp; sourceTree = "<group>"; };
+		CF1F63661EDEFBCD00551D25 /* AWLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWLabel.h; sourceTree = "<group>"; };
+		CF1F63671EDEFBCD00551D25 /* AWLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWLine.cpp; sourceTree = "<group>"; };
+		CF1F63681EDEFBCD00551D25 /* AWLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWLine.h; sourceTree = "<group>"; };
+		CF1F63691EDEFBCD00551D25 /* AWListView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWListView.cpp; sourceTree = "<group>"; };
+		CF1F636A1EDEFBCD00551D25 /* AWListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWListView.h; sourceTree = "<group>"; };
+		CF1F636B1EDEFBCD00551D25 /* AWPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWPoint.cpp; sourceTree = "<group>"; };
+		CF1F636C1EDEFBCD00551D25 /* AWPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWPoint.h; sourceTree = "<group>"; };
+		CF1F636D1EDEFBCD00551D25 /* AWPushButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWPushButton.cpp; sourceTree = "<group>"; };
+		CF1F636E1EDEFBCD00551D25 /* AWPushButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWPushButton.h; sourceTree = "<group>"; };
+		CF1F636F1EDEFBCD00551D25 /* AWRect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWRect.cpp; sourceTree = "<group>"; };
+		CF1F63701EDEFBCD00551D25 /* AWRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWRect.h; sourceTree = "<group>"; };
+		CF1F63711EDEFBCD00551D25 /* AWRegion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWRegion.cpp; sourceTree = "<group>"; };
+		CF1F63721EDEFBCD00551D25 /* AWRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWRegion.h; sourceTree = "<group>"; };
+		CF1F63731EDEFBCD00551D25 /* AWSize.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWSize.cpp; sourceTree = "<group>"; };
+		CF1F63741EDEFBCD00551D25 /* AWSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWSize.h; sourceTree = "<group>"; };
+		CF1F63751EDEFBCD00551D25 /* AWSwitch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWSwitch.cpp; sourceTree = "<group>"; };
+		CF1F63761EDEFBCD00551D25 /* AWSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWSwitch.h; sourceTree = "<group>"; };
+		CF1F63771EDEFBCD00551D25 /* AWTabView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWTabView.cpp; sourceTree = "<group>"; };
+		CF1F63781EDEFBCD00551D25 /* AWTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWTabView.h; sourceTree = "<group>"; };
+		CF1F63791EDEFBCD00551D25 /* AWInvisiblePushButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWInvisiblePushButton.cpp; sourceTree = "<group>"; };
+		CF1F637A1EDEFBCD00551D25 /* AWInvisiblePushButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWInvisiblePushButton.h; sourceTree = "<group>"; };
+		CF1F637B1EDEFBCD00551D25 /* AWUniqueArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWUniqueArray.h; sourceTree = "<group>"; };
+		CF1F637C1EDEFBCD00551D25 /* AWView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AWView.cpp; sourceTree = "<group>"; };
+		CF1F637D1EDEFBCD00551D25 /* AWView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWView.h; sourceTree = "<group>"; };
+		CF1F637E1EDEFBCD00551D25 /* graphic-setup-loop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "graphic-setup-loop.cpp"; sourceTree = "<group>"; };
+		CF1F637F1EDEFBCD00551D25 /* graphic-setup-loop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "graphic-setup-loop.h"; sourceTree = "<group>"; };
+		CF5195291ED72C3F00BF0C45 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		CF51952A1ED72C3F00BF0C45 /* Arduino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Arduino.h; sourceTree = "<group>"; };
+		CF5195391ED72C3F00BF0C45 /* CocoaSimulatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoaSimulatorView.h; sourceTree = "<group>"; };
+		CF51953A1ED72C3F00BF0C45 /* CocoaSimulatorView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CocoaSimulatorView.mm; sourceTree = "<group>"; };
+		CF51955D1ED72C3F00BF0C45 /* WString.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WString.cpp; sourceTree = "<group>"; };
+		CF51955E1ED72C3F00BF0C45 /* WString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WString.h; sourceTree = "<group>"; };
+		CFBF1F301EDDEEBD00F0934C /* Simulator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Simulator.h; sourceTree = "<group>"; };
+		CFFDB4A01ED7279500CA338A /* CocoaSimulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CocoaSimulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFFDB4A31ED7279500CA338A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = CocoaSimulator/AppDelegate.h; sourceTree = SOURCE_ROOT; };
+		CFFDB4A71ED7279500CA338A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CFFDB4A91ED7279500CA338A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CFFDB4AC1ED7279500CA338A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		CFFDB4AE1ED7279500CA338A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CFFDB49D1ED7279500CA338A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6CB896B01F31BC04002DF7C3 /* ArduinoWidgets */ = {
+			isa = PBXGroup;
+			children = (
+				6C3813201F5549B100C86342 /* AWFont-Geneva9.cpp */,
+				6C3813211F5549B100C86342 /* AWFont-Geneva9.h */,
+				6C38131D1F55495200C86342 /* AWFont-Geneva10.cpp */,
+				6C38131E1F55495200C86342 /* AWFont-Geneva10.h */,
+				6C38131A1F5548D300C86342 /* AWFont-Geneva12.cpp */,
+				6C38131B1F5548D300C86342 /* AWFont-Geneva12.h */,
+				CF1F63511EDEFBCD00551D25 /* AW-assertion.cpp */,
+				CF1F63521EDEFBCD00551D25 /* AW-assertion.h */,
+				CF1F63531EDEFBCD00551D25 /* AW-min-max.h */,
+				CF1F63541EDEFBCD00551D25 /* AW-settings.cpp */,
+				CF1F63551EDEFBCD00551D25 /* AW-settings.h */,
+				CF1F63561EDEFBCD00551D25 /* AW-swap.h */,
+				CF1F63571EDEFBCD00551D25 /* AWAlert.cpp */,
+				CF1F63581EDEFBCD00551D25 /* AWAlert.h */,
+				6C58BB911F34D2F6000AEE7F /* AWArrowPushButton.cpp */,
+				6C58BB921F34D2F6000AEE7F /* AWArrowPushButton.h */,
+				CF1F63591EDEFBCD00551D25 /* AWAutoLabel.cpp */,
+				CF1F635A1EDEFBCD00551D25 /* AWAutoLabel.h */,
+				CF1F635B1EDEFBCD00551D25 /* AWColor.cpp */,
+				CF1F635C1EDEFBCD00551D25 /* AWColor.h */,
+				CF1F635D1EDEFBCD00551D25 /* AWContext.cpp */,
+				CF1F635E1EDEFBCD00551D25 /* AWContext.h */,
+				6CB896AA1F1FDB0C002DF7C3 /* AWDynamicSlider.cpp */,
+				6CB896AB1F1FDB0C002DF7C3 /* AWDynamicSlider.h */,
+				CF1F635F1EDEFBCD00551D25 /* AWFont-ChicagoFLF12.cpp */,
+				CF1F63601EDEFBCD00551D25 /* AWFont-ChicagoFLF12.h */,
+				6C58BBA01F4480A1000AEE7F /* AWFont-ChicagoFLF24.cpp */,
+				6C58BBA11F4480A1000AEE7F /* AWFont-ChicagoFLF24.h */,
+				6C58BBA31F4484B9000AEE7F /* AWFont-Lucida_Grande18.cpp */,
+				6C58BBA41F4484B9000AEE7F /* AWFont-Lucida_Grande18.h */,
+				6C58BBA61F448541000AEE7F /* AWFont-Lucida_Grande24.cpp */,
+				6C58BBA71F448541000AEE7F /* AWFont-Lucida_Grande24.h */,
+				CF1F63631EDEFBCD00551D25 /* AWFont.cpp */,
+				CF1F63641EDEFBCD00551D25 /* AWFont.h */,
+				CF080ED81F4D881D0053A594 /* AWInt.h */,
+				CF1F63791EDEFBCD00551D25 /* AWInvisiblePushButton.cpp */,
+				CF1F637A1EDEFBCD00551D25 /* AWInvisiblePushButton.h */,
+				6C58BB941F3B9795000AEE7F /* AWKeyboard.cpp */,
+				6C58BB951F3B9795000AEE7F /* AWKeyboard.h */,
+				6C58BB9A1F42D719000AEE7F /* AWKeyboardBackView.cpp */,
+				6C58BB9B1F42D719000AEE7F /* AWKeyboardBackView.h */,
+				6C58BBAC1F45A428000AEE7F /* AWKeyboardCursorView.cpp */,
+				6C58BBAD1F45A428000AEE7F /* AWKeyboardCursorView.h */,
+				6C58BB9D1F442330000AEE7F /* AWKeyboardInputField.cpp */,
+				6C58BB9E1F442330000AEE7F /* AWKeyboardInputField.h */,
+				6C58BBAA1F458039000AEE7F /* AWKeyboardSettings.cpp */,
+				6C58BBA91F456D9B000AEE7F /* AWKeyboardSettings.h */,
+				6C58BB971F42CA38000AEE7F /* AWKeyButton.cpp */,
+				6C58BB981F42CA38000AEE7F /* AWKeyButton.h */,
+				CF1F63651EDEFBCD00551D25 /* AWLabel.cpp */,
+				CF1F63661EDEFBCD00551D25 /* AWLabel.h */,
+				CF1F63671EDEFBCD00551D25 /* AWLine.cpp */,
+				CF1F63681EDEFBCD00551D25 /* AWLine.h */,
+				CF1F63691EDEFBCD00551D25 /* AWListView.cpp */,
+				CF1F636A1EDEFBCD00551D25 /* AWListView.h */,
+				CF1F636B1EDEFBCD00551D25 /* AWPoint.cpp */,
+				CF1F636C1EDEFBCD00551D25 /* AWPoint.h */,
+				CF1F636D1EDEFBCD00551D25 /* AWPushButton.cpp */,
+				CF1F636E1EDEFBCD00551D25 /* AWPushButton.h */,
+				CF1F636F1EDEFBCD00551D25 /* AWRect.cpp */,
+				CF1F63701EDEFBCD00551D25 /* AWRect.h */,
+				6CB896B11F3328BA002DF7C3 /* AWRectView.cpp */,
+				6CB896B21F3328BA002DF7C3 /* AWRectView.h */,
+				CF1F63711EDEFBCD00551D25 /* AWRegion.cpp */,
+				CF1F63721EDEFBCD00551D25 /* AWRegion.h */,
+				CF16C4D21EEC599600764508 /* AWSegmentedControl.cpp */,
+				CF16C4D31EEC599600764508 /* AWSegmentedControl.h */,
+				CF1F63731EDEFBCD00551D25 /* AWSize.cpp */,
+				CF1F63741EDEFBCD00551D25 /* AWSize.h */,
+				6C46BD7F1F1D23D3005C7044 /* AWSlider.cpp */,
+				6C46BD7E1F1D208B005C7044 /* AWSlider.h */,
+				CF1F63751EDEFBCD00551D25 /* AWSwitch.cpp */,
+				CF1F63761EDEFBCD00551D25 /* AWSwitch.h */,
+				CF1F63771EDEFBCD00551D25 /* AWTabView.cpp */,
+				CF1F63781EDEFBCD00551D25 /* AWTabView.h */,
+				CF1F637B1EDEFBCD00551D25 /* AWUniqueArray.h */,
+				CF1F637C1EDEFBCD00551D25 /* AWView.cpp */,
+				CF1F637D1EDEFBCD00551D25 /* AWView.h */,
+			);
+			name = ArduinoWidgets;
+			path = ../src;
+			sourceTree = "<group>";
+		};
+		CF1F63501EDEFB8A00551D25 /* Teensy Project */ = {
+			isa = PBXGroup;
+			children = (
+				CF1F637E1EDEFBCD00551D25 /* graphic-setup-loop.cpp */,
+				CF1F637F1EDEFBCD00551D25 /* graphic-setup-loop.h */,
+			);
+			name = "Teensy Project";
+			path = "graphic-demo-teensy";
+			sourceTree = "<group>";
+		};
+		CFFDB4971ED7279500CA338A = {
+			isa = PBXGroup;
+			children = (
+				6CB896B01F31BC04002DF7C3 /* ArduinoWidgets */,
+				CF1F63501EDEFB8A00551D25 /* Teensy Project */,
+				CFFDB4A21ED7279500CA338A /* CocoaSimulator */,
+				CFFDB4A11ED7279500CA338A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CFFDB4A11ED7279500CA338A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CFFDB4A01ED7279500CA338A /* CocoaSimulator.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CFFDB4A21ED7279500CA338A /* CocoaSimulator */ = {
+			isa = PBXGroup;
+			children = (
+				CFFDB4A31ED7279500CA338A /* AppDelegate.h */,
+				CF5195291ED72C3F00BF0C45 /* AppDelegate.mm */,
+				CF51952A1ED72C3F00BF0C45 /* Arduino.h */,
+				CFFDB4A91ED7279500CA338A /* Assets.xcassets */,
+				CF5195391ED72C3F00BF0C45 /* CocoaSimulatorView.h */,
+				CF51953A1ED72C3F00BF0C45 /* CocoaSimulatorView.mm */,
+				CFFDB4AE1ED7279500CA338A /* Info.plist */,
+				CFFDB4AB1ED7279500CA338A /* MainMenu.xib */,
+				CFBF1F301EDDEEBD00F0934C /* Simulator.h */,
+				CFFDB4A61ED7279500CA338A /* Supporting Files */,
+				CF51955D1ED72C3F00BF0C45 /* WString.cpp */,
+				CF51955E1ED72C3F00BF0C45 /* WString.h */,
+			);
+			path = CocoaSimulator;
+			sourceTree = "<group>";
+		};
+		CFFDB4A61ED7279500CA338A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CFFDB4A71ED7279500CA338A /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CFFDB49F1ED7279500CA338A /* CocoaSimulator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFFDB4B11ED7279500CA338A /* Build configuration list for PBXNativeTarget "CocoaSimulator" */;
+			buildPhases = (
+				CFFDB49C1ED7279500CA338A /* Sources */,
+				CFFDB49D1ED7279500CA338A /* Frameworks */,
+				CFFDB49E1ED7279500CA338A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CocoaSimulator;
+			productName = CocoaSimulator;
+			productReference = CFFDB4A01ED7279500CA338A /* CocoaSimulator.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CFFDB4981ED7279500CA338A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Pierre Molinaro";
+				TargetAttributes = {
+					CFFDB49F1ED7279500CA338A = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = CFFDB49B1ED7279500CA338A /* Build configuration list for PBXProject "CocoaSimulator" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CFFDB4971ED7279500CA338A;
+			productRefGroup = CFFDB4A11ED7279500CA338A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CFFDB49F1ED7279500CA338A /* CocoaSimulator */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CFFDB49E1ED7279500CA338A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFFDB4AA1ED7279500CA338A /* Assets.xcassets in Resources */,
+				CFFDB4AD1ED7279500CA338A /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CFFDB49C1ED7279500CA338A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CB896AC1F1FDB0C002DF7C3 /* AWDynamicSlider.cpp in Sources */,
+				CF1F63891EDEFBCD00551D25 /* AWLabel.cpp in Sources */,
+				CF1F63911EDEFBCD00551D25 /* AWSwitch.cpp in Sources */,
+				CF1F63881EDEFBCD00551D25 /* AWFont.cpp in Sources */,
+				CF1F63861EDEFBCD00551D25 /* AWFont-ChicagoFLF12.cpp in Sources */,
+				6C58BBA81F448541000AEE7F /* AWFont-Lucida_Grande24.cpp in Sources */,
+				CF1F63811EDEFBCD00551D25 /* AW-settings.cpp in Sources */,
+				CF1F63901EDEFBCD00551D25 /* AWSize.cpp in Sources */,
+				CF1F63851EDEFBCD00551D25 /* AWContext.cpp in Sources */,
+				6C58BBA21F4480A1000AEE7F /* AWFont-ChicagoFLF24.cpp in Sources */,
+				6C58BB961F3B9795000AEE7F /* AWKeyboard.cpp in Sources */,
+				CF1F63831EDEFBCD00551D25 /* AWAutoLabel.cpp in Sources */,
+				CF1F638E1EDEFBCD00551D25 /* AWRect.cpp in Sources */,
+				CF1F638C1EDEFBCD00551D25 /* AWPoint.cpp in Sources */,
+				6C38131F1F55495200C86342 /* AWFont-Geneva10.cpp in Sources */,
+				6C3813221F5549B100C86342 /* AWFont-Geneva9.cpp in Sources */,
+				CF51955F1ED72C3F00BF0C45 /* AppDelegate.mm in Sources */,
+				CF5195661ED72C3F00BF0C45 /* CocoaSimulatorView.mm in Sources */,
+				6C58BB9C1F42D719000AEE7F /* AWKeyboardBackView.cpp in Sources */,
+				CFFDB4A81ED7279500CA338A /* main.m in Sources */,
+				CF1F63951EDEFBCD00551D25 /* graphic-setup-loop.cpp in Sources */,
+				6C58BBAE1F45A428000AEE7F /* AWKeyboardCursorView.cpp in Sources */,
+				6C58BB931F34D2F6000AEE7F /* AWArrowPushButton.cpp in Sources */,
+				6C46BD801F1D23D3005C7044 /* AWSlider.cpp in Sources */,
+				CF5195761ED72C3F00BF0C45 /* WString.cpp in Sources */,
+				6C58BBA51F4484B9000AEE7F /* AWFont-Lucida_Grande18.cpp in Sources */,
+				CF1F63841EDEFBCD00551D25 /* AWColor.cpp in Sources */,
+				CF1F63801EDEFBCD00551D25 /* AW-assertion.cpp in Sources */,
+				CF1F638A1EDEFBCD00551D25 /* AWLine.cpp in Sources */,
+				CF1F63941EDEFBCD00551D25 /* AWView.cpp in Sources */,
+				6C58BBAB1F458039000AEE7F /* AWKeyboardSettings.cpp in Sources */,
+				CF1F63931EDEFBCD00551D25 /* AWInvisiblePushButton.cpp in Sources */,
+				6C58BB991F42CA38000AEE7F /* AWKeyButton.cpp in Sources */,
+				CF1F638B1EDEFBCD00551D25 /* AWListView.cpp in Sources */,
+				CF1F638F1EDEFBCD00551D25 /* AWRegion.cpp in Sources */,
+				CF1F63921EDEFBCD00551D25 /* AWTabView.cpp in Sources */,
+				CF1F63821EDEFBCD00551D25 /* AWAlert.cpp in Sources */,
+				6C38131C1F5548D300C86342 /* AWFont-Geneva12.cpp in Sources */,
+				6C58BB9F1F442330000AEE7F /* AWKeyboardInputField.cpp in Sources */,
+				CF16C4D41EEC599600764508 /* AWSegmentedControl.cpp in Sources */,
+				6CB896B31F3328BA002DF7C3 /* AWRectView.cpp in Sources */,
+				CF1F638D1EDEFBCD00551D25 /* AWPushButton.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		CFFDB4AB1ED7279500CA338A /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CFFDB4AC1ED7279500CA338A /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CFFDB4AF1ED7279500CA338A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_ASSIGN_ENUM = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		CFFDB4B01ED7279500CA338A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_ASSIGN_ENUM = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		CFFDB4B21ED7279500CA338A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = CocoaSimulator/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = name.pcmolinaro.pierre.CocoaSimulator;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CFFDB4B31ED7279500CA338A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = CocoaSimulator/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = name.pcmolinaro.pierre.CocoaSimulator;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CFFDB49B1ED7279500CA338A /* Build configuration list for PBXProject "CocoaSimulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFFDB4AF1ED7279500CA338A /* Debug */,
+				CFFDB4B01ED7279500CA338A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFFDB4B11ED7279500CA338A /* Build configuration list for PBXNativeTarget "CocoaSimulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFFDB4B21ED7279500CA338A /* Debug */,
+				CFFDB4B31ED7279500CA338A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CFFDB4981ED7279500CA338A /* Project object */;
+}

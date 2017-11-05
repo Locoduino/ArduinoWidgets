@@ -1,0 +1,25 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "70e8429e-5f6f-0410-a9e6-e40ff3b7166b",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "70e8429e-5f6f-0410-a9e6-e40ff3b7166b" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "70e8429e-5f6f-0410-a9e6-e40ff3b7166b" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "CE129F6B-57B9-4977-B5A6-CD0C21465720",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "70e8429e-5f6f-0410-a9e6-e40ff3b7166b" : "train-p2m2\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "CocoaSimulator",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "tablette\/CocoaSimulator\/CocoaSimulator.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/train-p2m2.rts-software.org\/svn",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "70e8429e-5f6f-0410-a9e6-e40ff3b7166b"
+    }
+  ]
+}
