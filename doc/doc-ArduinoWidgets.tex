@@ -212,7 +212,7 @@
 \newpage
 \section{Introduction}
 
-~\\This document describes the \texttt{ArduinoWidgets} library, an Arduino library that allow Arduino programmers to perform highly complex graphic operations on a wide variety of  touchscreens, such as building graphical interfaces and allowing interactivity. It handles a collection of widgets of user interfaces (UI) such as:
+~\\This document describes the \emph{ArduinoWidgets} library, an Arduino library that allow Arduino programmers to perform highly complex graphic operations on a wide variety of  touchscreens, such as building graphical interfaces and allowing interactivity. It handles a collection of widgets of user interfaces (UI) such as:
 
 \begin{itemize}
   \item Views and regions;
@@ -225,11 +225,11 @@
   \item More to come later. 
 \end{itemize}
 
-~\\The \texttt{ArduinoWidgets} library is built above the \texttt{UTFT} library which take care of the physical interface between various Arduino hardware (ARM, AVR, Teensy, etc..) and a variety of  LCD displays. In addition to \texttt{UTFT}, \texttt{ArduinoWidgets} include a physical interface with the Touch technology of the screen.
+~\\The \emph{ArduinoWidgets} library is built above the \texttt{UTFT} library which take care of the physical interface between various Arduino hardware (ARM, AVR, Teensy, etc..) and a variety of  LCD displays. In addition to \texttt{UTFT}, \emph{ArduinoWidgets} include a physical interface with the Touch technology of the screen.
 
-~\\No other library is necessary to work with \texttt{ArduinoWidgets}.
+~\\No other library is necessary to work with \emph{ArduinoWidgets}.
 
-~\\In the next section, an example of usage of the \texttt{ArduinoWidgets} library is described.
+~\\In the next section, an example of usage of the \emph{ArduinoWidgets} library is described.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
@@ -237,7 +237,7 @@
 
 The example is fully contained in the following Arduino sketch "\textbf{AW\_doc\_example}":
 
-~\\This sketch is contained in the "\textbf{Examples}" folder of the \texttt{ArduinoWidgets} library. It can be easily found in the Arduino IDE : clic on the "Examples" item of the File menu and scroll to the "ArduinoWidgets" line. A submenu show some examples. Choose "\textbf{AW\_doc\_example}".
+~\\This sketch is contained in the "\textbf{Examples}" folder of the \emph{ArduinoWidgets} library. It can be easily found in the Arduino IDE : clic on the "Examples" item of the File menu and scroll to the "ArduinoWidgets" line. A submenu show some examples. Choose "\textbf{AW\_doc\_example}".
 
 ~\\It displays a collection of graphic objects, some of them are "ready to use" in the library, and some others are custom objects which are created from the library. In addition, a label is displayed with the name each object :
 
@@ -454,7 +454,7 @@ void loop() {
 }
 \end{lstlisting}
 
-~\\ To run this program, it is recommended to open the sketch in the example folder of the \texttt{ArduinoWidgets} library, because a small file must be present in the same folder as the sketch. Its name must be "touch-calibration-values.h" and it must contain :
+~\\ To run this program, it is recommended to open the sketch in the example folder of the \emph{ArduinoWidgets} library, because a small file must be present in the same folder as the sketch. Its name must be "touch-calibration-values.h" and it must contain :
 
 \begin{lstlisting}[language=Arduinonl]
 #include "touch-calibration-values.h"
@@ -492,7 +492,7 @@ If this file is not present in the sketch folder, a compilation error will occur
 \newpage
 \section{A quick overview of the AW\_doc\_example}
 
-~\\This section is not an in depth description on how to use each object of the library but just a global introduction to how to build a program which use the \texttt{ArduinoWidgets} library. A detailed description of the library is given in the next sections of this document.
+~\\This section is not an in depth description on how to use each object of the library but just a global introduction to how to build a program which use the \emph{ArduinoWidgets} library. A detailed description of the library is given in the next sections of this document.
 
 ~\\ The program is divided in five parts :
 \begin{itemize}
@@ -503,7 +503,7 @@ If this file is not present in the sketch folder, a compilation error will occur
   \item The fifth part is the loop() function.
 \end{itemize}
 
-~\\The first step is to import the two necessary libraries \texttt{ArduinoWidgets} and \texttt{UTFT} .
+~\\The first step is to import the two necessary libraries \emph{ArduinoWidgets} and \texttt{UTFT} .
 \begin{lstlisting}[language=Arduinonl]
 #include <ArduinoWidgets.h>
 #include <UTFT.h>
@@ -648,7 +648,7 @@ void loop() {
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\subsection{How to use the code lines of the following sections of \texttt{ArduinoWidgets}}
+\subsection{How to use the code lines of the following sections of \emph{ArduinoWidgets}}
 
 ~\\In the following sections of this document, there is three pieces of Arduino code that will not be repeated.
 
@@ -723,37 +723,37 @@ void loop() {
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\section{The fondation of \texttt{ArduinoWidgets}}
+\section{The fondation of \emph{ArduinoWidgets}}
 
-~\\The \texttt{ArduinoWidgets} library is objet oriented (C++). It is made of a collection of objets which can be expanded later in future versions.
+~\\The \emph{ArduinoWidgets} library is objet oriented (C++). It is made of a collection of classes the instances of which are objects. The collection of classes can be expanded later in future versions and you can create your own classes with inheritance.
 
 ~\\The consequence is the naming and the syntax to use in your Arduino program : 
 \begin{itemize}
-\item Objetcts are named "classes".
-\item Each class embed its own variables which are hidden to your sketch.
-\item Functions are named "methods".
+\item Objects are instances of class.
+\item Each class embed its own variables which are hidden to your sketch and class variables which are independent of objects
+\item Each class also embed functions which concern one objects and are public for use by your code, and also class functions which are independent of objects.
 \end{itemize}
 
-~\\To create an instance of a class AWClass :
+~\\For example, drawing a line consists to create an instance of a AWLine class  :
 
 \begin{lstlisting}[language=Arduinonl]
-AWClass * myObject;	// myObject is a pointer in memory
-myObject = new AWClass(parameters of the constructor);
-\end{lstlisting}
+AWLine * myLine;
+  myLine = new AWLine (AWPoint(100,100), AWPoint(300,300)); 
+  addView (myLine) ;
+ \end{lstlisting}
 
-~\\To call a method of \texttt{myObject} :
 
-~\\ If \texttt{myObject} is a pointer :
+~\\ The object myLine (a pointer) is an instance of the AWLine class, which is a line to draw between 2 points of coordinate (100,100) and (300, 300) with the constructor \texttt{new AWLine}.
+~\\ The class function \texttt{addView} just add the drawing of the line to the list of drawings. The effective drawing will be made by the class function \texttt{handleTouchAndDisplay} which is called once for all drawings, in the loop.
 
-\begin{lstlisting}[language=Arduinonl]
-myObject->method(parameters);
-\end{lstlisting}
-
-~\\ If \texttt{myObject} is a not a pointer or if it is simply a structure :
+~\\ Another example is the display of a text label :
 
 \begin{lstlisting}[language=Arduinonl]
-myObject.method(parameters);
+  label = new AWLabel(AWPoint ( 300, 340), AWInt (150), AWAlignment (kAWAlignmentCenter), String ("My Label : "), AWFont (Lucida_Grande24)) ;
+  addView (label) ;
 \end{lstlisting}
+
+~\\ The object \texttt{label} is created with the constructor of the class \texttt{AWLabel}, with the parameters which define the coordinate and size of the text field, the default string in it and the font. The class function addView just add the drawing of the line to the list of drawings as explained above.
 
 
 %%%%%%%%%%%%%%%%%%%%
@@ -761,21 +761,9 @@ myObject.method(parameters);
 \subsection{Context}
 
 ~\\ The \emph{Context} is the entire Screen you are using. You must know about \emph{Context} before seeing something on your screen and touch it. 
-~\\ To create a context, just call the \texttt{begin} function of class \texttt{AWContext}.
-~\\ The class \texttt{AWContext} is defined by :
+~\\ To create a context, just call the \texttt{begin} function of class \texttt{AWContext}. This must be done only once in your sketch.
 
-\begin{lstlisting}[language=Arduinonl]
-typedef enum {kOrientationLandscape, kOrientationPortrait} tOrientation ;
-
-class AWContext {
-  static void begin (const tOrientation inOrientation,
-  			const AWInt inScreenWidth,
-				const AWInt inScreenHeight,
-				const bool inHorizontalFlip,
-				const bool inVerticalFlip) ;
-\end{lstlisting}
-
-~\\ In the example sketch, it is written :
+~\\ For example :
 
 \begin{lstlisting}[language=Arduinonl]
  AWContext::begin (kOrientationLandscape,
@@ -785,7 +773,9 @@ class AWContext {
                     false) ;  // false : Y is not flipped
 \end{lstlisting}
 
-~\\ This describe the specific display  which is in use : landscape orientation, dimensions : 800x600, horizontal axis is flipped, not the vertical axis.
+~\\ This describe the specific display which is in use : landscape orientation, dimensions : 800x600, horizontal axis is flipped, not the vertical axis.
+
+~\\ The orientation can be either \texttt{kOrientationLandscape}, \texttt{kOrientationPortrait}.
 
 ~\\ There is a method in the \texttt{loop} for dealing with all events and actions of the touch screen and the draw and redraw on the screen according to the events. This is the unique instruction in the \texttt{loop} which work as a background task in the examples.
 
@@ -826,12 +816,12 @@ static void calibrateTouch (void) ;
 ~\\ Every pieces of drawing on the screen are "Views".
 ~\\ A view is a rectangular section of the screen. It is responsible for handling all drawing and user-initiated events within its frame.
 
-~\\ \texttt{ArduinoWidgets} provides the \texttt{View} class as an abstract view implementation that subclasses use as the basis for implementing custom display and user interaction. They are the most pervasive type of object in the \texttt{ArduinoWidgets} library; nearly every object you see on the screen is a view. Views are in the front line of both drawing and event handling, and hence are one of the more important types of objects to understand.
+~\\ \emph{ArduinoWidgets} provides the \texttt{View} class as an abstract view implementation that subclasses use as the basis for implementing custom display and user interaction. They are the most pervasive type of object in the \emph{ArduinoWidgets} library; nearly every object you see on the screen is a view. Views are in the front line of both drawing and event handling, and hence are one of the more important types of objects to understand.
 ~\\ In a very real sense, a view draws itself. It also provides a surface that can be responsive to input from a touch event.
 
 ~\\ In addition to drawing content and responding to user events, \texttt{View} instances act as containers for other views. By nesting views within other views, an application creates a hierarchy of views. This view hierarchy provides a clearly defined structure for how views draw relative to each other and pass messages from one view to another, up to the enclosing window, and on to the application for processing.
 
-~\\ \texttt{ArduinoWidgets} provides several type of views for containing graphics, texts and controls, with color attributes, which can send messages to its own view or to other views. A view can be opaque or transparent. In this last case, if the view is not validated, the drawing of views behind it is allowed.
+~\\ \emph{ArduinoWidgets} provides several type of views for containing graphics, texts and controls, with color attributes, which can send messages to its own view or to other views. A view can be opaque or transparent. In this last case, if the view is not validated, the drawing of views behind it is allowed.
 
 ~\\ The root \texttt{View} is the screen.
 ~\\ Each \texttt{View} is placed in a parent View, the \texttt{superView}, in which it is a frame. This frame can be moved and resized in the \texttt{superView} and the view's content moves with it.
@@ -874,7 +864,9 @@ void addCenteredView (class AWView * inView) ;
 
 ~\\ It permits a complex view to be constructed out of other views. For example, a graphical keypad might be a container view with a separate subview for each key.
 
-~\\The \texttt{context} instance maintains a reference to a single top-level view instance. The \texttt{context} view acts as the root of the visible view hierarchy in a window. The view instances enclosed within a view are called subViews. The parent view that encloses a view is referred to as its \texttt{superView}. Each view has another view as its superView and may be the superView for any number of subViews. While a view instance can have multiple subViews, it can have only one superView. In order for a view and its subviews to be visible to the user, the view must be inserted into a view hierarchy.
+~\\The \texttt{context} instance maintains a reference to a single top-level view instance. \texttt{addView} and addCenteredView without argument just add a subview to the root view.
+
+~\\The view instances enclosed within a view are called subViews. The parent view that encloses a view is referred to as its \texttt{superView}. Each view has another view as its superView and may be the superView for any number of subViews. While a view instance can have multiple subViews, it can have only one superView. In order for a view and its subviews to be visible to the user, the view must be inserted into a view hierarchy.
 
 ~\\ A view is added to a parent view via the method \texttt{addSubView} or \texttt{addCenteredSubView}, in a hierarchical order :
 \begin{lstlisting}[language=Arduinonl]
@@ -882,6 +874,7 @@ void addCenteredView (class AWView * inView) ;
   void addSubView (AWView * inView) ;         // if inView is non NULL, view is added in front of other subviews
   void addCenteredSubView (AWView * inView) ; // if inView is non NULL, view is added in front of other subviews
 \end{lstlisting}
+
 
 ~\\To locate the superView use the method \texttt{superViev}. You can also remove a subView from a superView with \texttt{removeFromSuperView}.
 
@@ -895,9 +888,9 @@ void addCenteredView (class AWView * inView) ;
 
 ~\\\emph{View Tags}
 
-~\\The View class defines methods that allow you to tag individual view objects with integer tags and to search the view hierarchy based on those tags. The receiver's subviews are searched depth-first, starting at the first subview returned by the receiver's subviews method.
+~\\The View class defines methods that allow you to tag individual view objects with integer tags.
 
-The View method \texttt{tag} always returns –1. Subclasses can override this method to return a different value. It is common for a subclass to implement a \texttt{setTag} method that stores the tag value in an instance variable, allowing the tag to be set on an individual view basis. 
+~\\The View method \texttt{tag} always returns –1. Subclasses can override this method to return a different value. It is common for a subclass to implement a \texttt{setTag} method that stores the tag value in an instance variable, allowing the tag to be set on an individual view basis. 
 
 \begin{lstlisting}[language=Arduinonl]
 //---------------- Tag
@@ -922,7 +915,7 @@ The View method \texttt{tag} always returns –1. Subclasses can override this m
 \end{lstlisting}
 
 ~\\ \emph{Drawing and display views}
-~\\ These methods force an immediate display of the screen, although the latter method iterates only through the list of invalidated views. The display method causes each view in the screen's view hierarchy to redraw itself, starting with the context view. This method is invoked on a one-shot window (that is, a window whose backing store is released when the window is offscreen) before the window is shown onscreen.
+~\\ These methods force a display of the screen by the function \texttt{handleTouchAndDisplay}, although the later method iterates only through the list of invalidated views. The display method causes each view in the screen's view hierarchy to redraw itself. 
 
 ~\\ These methods mark views or regions of views for redrawing 
 :
@@ -932,7 +925,7 @@ The View method \texttt{tag} always returns –1. Subclasses can override this m
   void setNeedsDisplayInRect (const AWRect & inRect) ;
 \end{lstlisting}
 
-~\\ The method \texttt{drawInRegion} must be redefined in each view : It is responsible of the drawing of the view.
+~\\ The method \texttt{drawInRegion} may be redefined in each view : It is responsible of the drawing of the view.
 
 \begin{lstlisting}[language=Arduinonl]
 //--- Draw method (to be overridden)
@@ -954,41 +947,41 @@ The View method \texttt{tag} always returns –1. Subclasses can override this m
 \end{lstlisting}
 
 
-~\\ AWView is a class that defines the basic drawing and event-handling. AWView itself does not draw content or respond to user events, so you typically don’t interact with a direct instance of AWView. Instead you use an instance of a custom AWView subclass. A custom view class inherits from AWView and overrides many of its methods, which are invoked automatically by the \texttt{ArduinoWidgets} library.
+~\\ \texttt{AWView} is a class that defines the basic drawing and event-handling. \texttt{AWView} itself does not draw content or respond to user events, so you typically don’t interact with a direct instance of \texttt{AWView}. Instead you use an instance of a custom \texttt{AWView} subclass. A custom view class inherits from \texttt{AWView} and overrides many of its methods, which are invoked automatically by the \emph{ArduinoWidgets} library.
 
-~\\ There is a collection of ready to use subclass Views in the \texttt{ArduinoWidgets} library, which are :
+~\\ There is a collection of ready to use subclass Views in the \emph{ArduinoWidgets} library, which are :
 \begin{itemize}
-\item AWLine : display a line
-\item AWLabel : display of text on a line.
-\item AWPushButton : display a button
-\item AWRectView : display a rectangle with or without round corners
-\item AWSegmentedControl : display a radio button in a tab form
-\item AWSlider : display a linear potentiometer with one cursor
-\item AWDynamicSlider : display a linear potentiometer with one cursor
-\item AWTabview : display tabs which are usefull for switching from one View to another. 
-\item AWSwitch : display a check box. 
-\item AWArrowPushButton : display a button with an arrow shape. 
-\item AWKeyButton : display a key of keyboard 
-\item AWKeyboardBackView : display an entire keyboard. 
+\item \texttt{AWLine} : display a line
+\item \texttt{AWLabel} : display of text on a line.
+\item \texttt{AWPushButton} : display a button
+\item \texttt{AWRectView} : display a rectangle with or without round corners
+\item \texttt{AWSegmentedControl} : display a radio button in a tab form
+\item \texttt{AWSlider} : display a linear potentiometer with one cursor
+\item \texttt{AWDynamicSlider} : display a linear potentiometer with one cursor
+\item \texttt{AWTabview} : display tabs which are usefull for switching from one View to another. 
+\item \texttt{AWSwitch} : display a check box. 
+\item \texttt{AWArrowPushButton} : display a button with an arrow shape. 
+\item \texttt{AWKeyButton} : display a key of keyboard 
+\item \texttt{AWKeyboardBackView} : display an entire keyboard. 
 \end{itemize}
 
-~\\ You will be able to create and add your custom Views !
+~\\ You also will be able to create and add your custom View !
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \subsection{The action}
 
-~\\ The action is the interactive part of the \texttt{ArduinoWidgets} library, which rely on the touch capabilities of the screen. An action is the message a control sends to the target or, from the perspective of the target, the method it implements to respond to the action. 
+~\\ The action is the interactive part of the \emph{ArduinoWidgets} library, which rely on the touch capabilities of the screen. An action is the message a control sends to the target or, from the perspective of the target, the method it implements to respond to the action. 
 
 ~\\The standard way to pass information between objects is message passing—one object invokes the method of another object. However, message passing requires that the object sending the message know who the receiver is and what messages it responds to. This is the reason why the action routines are located in the declaration part of the Arduino sketch, before the \texttt{setup}.
 
-~\\ A control is a view object which implement touch capabilities. For exemple, myControl (a PushButton or a Key or a Tab, for example) is a control. In the setup, inside the initialization code of myControl, we add the following line :
+~\\ A control is a view object which implement touch capabilities. For exemple, \texttt{myControl} (a PushButton or a Key or a Tab, for example) is a control. In the \texttt{setup}, inside the initialization code of \texttt{myControl}, we add the following line :
 
 \begin{lstlisting}[language=Arduinonl]
 myControl->setAction (myControlAction) ;
 \end{lstlisting}
 
-~\\ myControlAction is a routine which is declared before the setup. We suppose here that this control is a PushButton :
+~\\ \texttt{myControlAction} is a routine which is declared before the setup. We suppose here that this control is, for example, a PushButton :
 
 \begin{lstlisting}[language=Arduinonl]
 //--- myControl action
@@ -999,8 +992,8 @@ void myControlAction (AWView * inSender)
 }
 \end{lstlisting}
 
-~\\ Your action code can be the display of a abel's title, the control of an Arduino's output pin (a led, a PWM signal, the backlight of the screen, etc..).
-~\\ You will find several example of how an action is implemented in the description of the \texttt{ArduinoWidgets} views.
+~\\ Your action code can display  a label's title, control any Arduino's output pin (a led, a PWM signal, the backlight of the screen, etc..).
+~\\ You will find several example of how an action is implemented in the description of the following \emph{ArduinoWidgets} views.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
@@ -1009,7 +1002,7 @@ void myControlAction (AWView * inSender)
 ~\\ A view is responsible for the drawing and event handling in a rectangular area of a window. In order to specify that rectangle of responsibility, you define its location as an origin point and size using a coordinate system.
 ~\\This section describes the coordinate system used by views, how a view's location and size is specified, and how the size of a view interacts with its content.
 
-~\\ All information about location is given to \texttt{ArduinoWidgets} in terms of coordinates on a plane. The coordinate plane is a two-dimensional grid, as illustrated in Figure 2.
+~\\ All information about location is given to \emph{ArduinoWidgets} in terms of coordinates on a plane. The coordinate plane is a two-dimensional grid, as illustrated in Figure 2.
 
 \begin{figure}[htbp]
    \centering
@@ -1025,9 +1018,11 @@ typedef int16_t AWInt ;
 \end{lstlisting}
 
 ~\\The origine of all coordinates is (0,0) and is located at the bottom left corner of the screen.
+~\\ Note that  the \texttt{begin} function of class \texttt{AWContext} have 2 boolean parameters to flip or not the X and Y coordinates if necessary.
 ~\\Horizontal coordinates increase as you move from left to right, and vertical coordinates increase as you move from bottom to top. 
 
 ~\\ Each view use the same coordinate system as its mother view. 
+
 
 
 %%%%%%%%%%%%%%%%%%%%
@@ -1037,7 +1032,7 @@ typedef int16_t AWInt ;
 ~\\Each point is at the intersection of a horizontal grid line and a vertical grid line. 
 ~\\The coordinate origin (0,0) is in the lower-left corner of the screen. 
 
-~\\You can store the coordinates of a point into an object AWPoint which contain 2 variables of type AWInt :
+~\\You can store the coordinates of a point into an object \texttt{AWPoint} which contain 2 variables of type AWInt :
 
 \begin{lstlisting}[language=Arduinonl]
 // AWPoint :
@@ -1056,14 +1051,14 @@ A pixel is centered around a point. In other words, a point is at the center of 
 \end{figure}
 
 
-~\\To create a AWPoint at coodinates X and Y, you call :
+~\\To create a \texttt{AWPoint} at coodinates X and Y, you call :
 \begin{lstlisting}[language=Arduinonl]
 AWPoint myPoint  ;
 myPoint.x = X;
 myPoint.y = Y;
 \end{lstlisting}
 
-~\\ The Point is not a View. The above myPoint is not drawed at this stage.
+~\\ The Point is not a View. The above \texttt{myPoint} is not drawed at this stage.
 
 ~\\ To compare two Points there is two special operators :
 \begin{lstlisting}[language=Arduinonl]
@@ -1072,7 +1067,7 @@ myPoint.y = Y;
   inline bool operator != (const AWPoint & inP) const { return !(*this == inP) ; }
 \end{lstlisting}
 
-~\\ The Point class has the following methods :
+~\\ The Point class has the following methods : (?? Why and how to use it ??)
 
 \begin{lstlisting}[language=Arduinonl]
 //--- Translation
@@ -1093,7 +1088,7 @@ myPoint.y = Y;
   static void drawPointInRegion (const AWInt inX, const AWInt inY, const AWRegion & inDrawRegion) ;
 \end{lstlisting}
 
-~\\ And a special drawing of circle (?? how to use it ??)
+~\\ And a special drawing of circle (?? Why and how to use it ??)
 
 \begin{lstlisting}[language=Arduinonl]
 //--- Frame circle
@@ -1119,79 +1114,9 @@ myPoint.y = Y;
 \newpage
 \subsection{Rectangle}
 
-~\\ A rectangle is not a View. The class AWRect is :
+~\\ A rectangle is not a View but a rectangle is the fondation of each \texttt{AWView}.
 
-\begin{lstlisting}[language=Arduinonl]
-class AWRect {
-//--- Default constructor (invisible rectangle)
-  inline AWRect (void) : origin (), size () {}
-
-//--- Constructors
-  inline AWRect (const AWPoint inOrigin, const AWSize inSize) : origin (inOrigin), size (inSize) {}
-  inline AWRect (const AWPoint inOrigin) : origin (inOrigin), size (AWSize (1, 1)) {}
-  inline AWRect (const AWInt inX, const AWInt inY, const AWInt inWidth, const AWInt inHeight) :
-  origin (AWPoint (inX, inY)),
-  size (AWSize (inWidth, inHeight)) {
-  }
-  AWRect (const AWPoint & inP1, const AWPoint & inP2) ;
-  static AWRect horizontalLine (const AWInt inX, const AWInt inY, const AWInt inWidth) ;
-  static AWRect verticalLine (const AWInt inX, const AWInt inY, const AWInt inHeight) ;
-
-//--- Accessors
-  inline bool isEmpty (void) const { return (size.width <= 0) || (size.height <= 0) ; }
-  bool containsPoint (const AWPoint & inPoint) const ;
-  AWPoint topRight (void) const ;
-  AWPoint bottomRight (void) const ;
-  AWPoint topLeft (void) const ;
-  inline AWPoint bottomLeft (void) const { return origin ; }
-  inline AWInt minX (void) const { return origin.x ; }
-  inline AWInt maxX (void) const { return origin.x + size.width - 1 ; }
-  inline AWInt minY (void) const { return origin.y ; }
-  inline AWInt maxY (void) const { return origin.y + size.height - 1 ; }
-
-//--- Intersection
-  AWRect operator & (const AWRect & inOtherRect) const ;
-  bool intersects (const AWRect & inOtherRect) const ;
-
-//--- Inclusion
-  bool includesRect (const AWRect & inOtherRect) const ;
-
-//--- Union (Returns the smallest rectangle that completely encloses both receiver rect and inOtherRect)
-  AWRect operator + (const AWRect & inOtherRect) const ;
-  void operator += (const AWRect inOtherRect) ;
-
-//--- Difference (Returns 4 rects, possibly empty)
-  void differenceFrom (const AWRect & inRect,
-                                AWRect & outR1,
-                                AWRect & outR2,
-                                AWRect & outR3,
-                                AWRect & outR4) const ;
-
-//--- Transforming rectangle
-  void inset (const AWInt inDx, const AWInt inDy) ;
-  void translateBy (const AWInt inDx, const AWInt inDy) ;
-
-//--- Equatable
-  bool operator == (const AWRect & inRect) const { return (origin == inRect.origin) && (size == inRect.size) ; }
-  inline bool operator != (const AWRect & inRect) const { return ! (*this == inRect) ; }
-
-//--- Drawing
-  void fillRectInRegion (const AWRegion & inDrawRegion) const ;
-  void frameRectInRegion (const AWRegion & inDrawRegion) const ;
-  void fillRoundRectInRegion (const AWInt inRadius, const AWRegion & inDrawRegion) const ;
-  void frameRoundRectInRegion (const AWInt inRadius, const AWRegion & inDrawRegion) const ;
-  void fillOvalInRegion (const AWRegion & inDrawRegion) const ;
-  void frameOvalInRegion (const AWRegion & inDrawRegion) const ;
-
-//--- Properties
-  AWPoint origin ;
-  AWSize size ;
-} ;
-\end{lstlisting}
-
-~\\ A rectangle is the fondation of each AWView.
-
-~\\ A Rectangle is defined by an origine AWPoint and an AWsize. The origine Point is the bottom-left corner :
+~\\ A Rectangle is defined by an origine \texttt{AWPoint} and an \texttt{AWsize}. The origine Point is the bottom-left corner :
 
 \begin{lstlisting}[language=Arduinonl]
 //--- Properties
@@ -1208,7 +1133,7 @@ myRect = new AWRect (X, Y, width, height);
 \end{lstlisting}
 
 ~\\The coordinates of the bottom left corner are X = left, Y = bottom.
-~\\ For example, you can create a new rectangle myRect of left-bottom corner X=350, Y=50, width W=200 and height H=200 like this :
+~\\ For example, you can create a new rectangle \texttt{myRect} of left-bottom corner X=350, Y=50, width W=200 and height H=200 like this :
 \begin{lstlisting}[language=Arduinonl]
 myRect = new AWRect (350, 50, 200, 200);
 \end{lstlisting}
@@ -1220,9 +1145,10 @@ myRect = new AWRect (350, 50, 200, 200);
    \label{fig:6 }
 \end{figure}
 
-~\\ This rect have a bottom left corner origin of coordinates (350, 50).
+~\\ This rectangle have a bottom left corner origin of coordinates (350, 50).
 ~\\ The width (200) and height (200) are the number in pixels in the horizontal and vertical directions.
-~\\ Consequently, the coordinate of the top right corner of this rectangle is (14, 6) :
+
+~\\ Consequently, the coordinate of the top right corner of this rectangle is (549, 249) :
 \begin{itemize}
 \item left = X = 350
 \item bottom = Y = 50
@@ -1249,7 +1175,7 @@ myRect = new AWRect (350, 50, 200, 200);
 
 ~\\The following example show how to display two rectangles : one without round corners and one with round corners :
 
-~\\ First declare the new classes  RectangleView and RoundRectangleView, and create an instance of each class :
+~\\ First declare custom Views based on respective rectangles. The new classes are RectangleView and RoundRectangleView. Then create an instance of each class :
 
 \begin{lstlisting}[language=Arduinonl]
 /////////////// RECTANGLE ///////////////
@@ -1312,57 +1238,106 @@ RoundRectangleView * RoundRectView ;
    \label{fig:7}
 \end{figure}
 
+~\\ Figure 5 show these 2 rectangles.
+
+~\\ 
+
+~\\ There is a collection of operations on rectangles that are useful to know for drawing :
+
+\begin{enumerate}
+\item First, the class AWRect have a variety of constructors :
+
+\begin{lstlisting}[language=Arduinonl]
+  inline AWRect (const AWPoint inOrigin, const AWSize inSize) : origin (inOrigin), size (inSize) {}
+  
+  inline AWRect (const AWPoint inOrigin) : origin (inOrigin), size (AWSize (1, 1)) {}
+  
+  inline AWRect (const AWInt inX, const AWInt inY, const AWInt inWidth, const AWInt inHeight) :
+  	origin (AWPoint (inX, inY)),
+  	size (AWSize (inWidth, inHeight)) {}
+	
+  AWRect (const AWPoint & inP1, const AWPoint & inP2) ;
+  
+  static AWRect horizontalLine (const AWInt inX, const AWInt inY, const AWInt inWidth) ;
+  
+  static AWRect verticalLine (const AWInt inX, const AWInt inY, const AWInt inHeight) ;
+\end{lstlisting}
+
+\item Second, you can access the Point and Size values of a rectangle :
+
+\begin{lstlisting}[language=Arduinonl]
+  inline bool isEmpty (void) const { return (size.width <= 0) || (size.height <= 0) ; }
+  bool containsPoint (const AWPoint & inPoint) const ;
+  AWPoint topRight (void) const ;
+  AWPoint bottomRight (void) const ;
+  AWPoint topLeft (void) const ;
+  inline AWPoint bottomLeft (void) const { return origin ; }
+  inline AWInt minX (void) const { return origin.x ; }
+  inline AWInt maxX (void) const { return origin.x + size.width - 1 ; }
+  inline AWInt minY (void) const { return origin.y ; }
+  inline AWInt maxY (void) const { return origin.y + size.height - 1 ; }
+\end{lstlisting}
+
+\item You can determine the intersection between 2 rectangles, which is a rectangle :
+
+\begin{lstlisting}[language=Arduinonl]
+  AWRect operator & (const AWRect & inOtherRect) const ;
+  bool intersects (const AWRect & inOtherRect) const ;
+\end{lstlisting}
+
+\item You can determine the inclusion of 2 rectangles, which is a rectangle drawned around the included rectangles :
+
+\begin{lstlisting}[language=Arduinonl]
+  bool includesRect (const AWRect & inOtherRect) const ;
+\end{lstlisting}
+
+\item You can determine the union of 2 rectangles, which returns the smallest rectangle that completely encloses both receiver rect and inOtherRect :
+
+\begin{lstlisting}[language=Arduinonl]
+  AWRect operator + (const AWRect & inOtherRect) const ;
+  void operator += (const AWRect inOtherRect) ;
+\end{lstlisting}
+
+\item You can determine the difference between 2 rectangles, which returns 4 rectangles, possibly empty :
+
+\begin{lstlisting}[language=Arduinonl]
+  void differenceFrom (const AWRect & inRect,
+                                AWRect & outR1,
+                                AWRect & outR2,
+                                AWRect & outR3,
+                                AWRect & outR4) const ;
+\end{lstlisting}
+
+\item You can transform a rectangle, by reducing its size or translating its coordinates :
+
+\begin{lstlisting}[language=Arduinonl]
+  void inset (const AWInt inDx, const AWInt inDy) ;
+  void translateBy (const AWInt inDx, const AWInt inDy) ;
+\end{lstlisting}
+
+\item You can test the equality of 2 rectangles :
+
+\begin{lstlisting}[language=Arduinonl]
+//--- Equatable
+  bool operator == (const AWRect & inRect) const { return (origin == inRect.origin) && (size == inRect.size) ; }
+  inline bool operator != (const AWRect & inRect) const { return ! (*this == inRect) ; }
+\end{lstlisting}
+
+\item You have a series of  drawing a rectangle in regions which are explained below :
+\end{enumerate}
+
+\begin{lstlisting}[language=Arduinonl]
+  void fillRectInRegion (const AWRegion & inDrawRegion) const ;
+  void frameRectInRegion (const AWRegion & inDrawRegion) const ;
+  void fillRoundRectInRegion (const AWInt inRadius, const AWRegion & inDrawRegion) const ;
+  void frameRoundRectInRegion (const AWInt inRadius, const AWRegion & inDrawRegion) const ;
+  void fillOvalInRegion (const AWRegion & inDrawRegion) const ;
+  void frameOvalInRegion (const AWRegion & inDrawRegion) const ;
+\end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \subsection{Region}
-
-~\\ A region is not a View. The class AWRegion is :
-
-\begin{lstlisting}[language=Arduinonl]
-class AWRegion {
-//--- Default constructor (build an empty region)
-  AWRegion (void) ;
-
-//--- Region from a rectangle (empty if rectangle is empty)
-  AWRegion (const AWRect & inRect) ;
-
-//--- Destructor
-  ~ AWRegion (void) ;
-
-//--- release region, becomes empty
-  void release (void) ;
-
-//--- Accessors
-  inline bool isEmpty (void) const { return NULL == mPtr ; }
-  AWInt rectCount (void) const ;
-  AWRect rectAtIndex (const AWInt inIndex) const ;
-
-//--- Difference from a rectangle
-  void operator -= (const AWRect & inRect) ;
-
-//--- Adding a rectangle
-  void operator += (const AWRect & inRect) ;
-
-//--- Intersection with a rectangle
-  AWRegion operator & (const AWRect & inRect) const ;
-  bool intersects (const AWRect & inOtherRect) const ;
-
-//--- Intersection of regions
-  AWRegion operator & (const AWRegion & inRect) const ;
-
-//--- Enclosing rectangle
-  AWRect enclosingRect (void) const ;
-
-//--- Testing a point
-  bool containsPoint (const AWPoint & inPoint) const ;
-  bool containsPoint (const AWInt inX, const AWInt inY) const ;
-
-//--- Handle copy
-  AWRegion (const AWRegion & inRegion) ;
-  AWRegion & operator = (const AWRegion & inRegion) ;
-} ;
-\end{lstlisting}
 
 ~\\ The minimum Region is a Rectangle or can be empty.
 ~\\ A Region is made of a combination of one or more separate and non-empty rectangles.
@@ -1376,9 +1351,12 @@ class AWRegion {
  AWRegion(); // build an empty region
 \end{lstlisting}
   
-~\\ The purpose of regions is to limit drawing within the region. For example, if you want to draw a half circle on the screen, you can set the region to half the square that would enclose the whole circle, and then draw the whole circle. Only the half within the region will actually be drawn.
+~\\ The purpose of regions is to limit drawing within the region. 
+~\\ For example, if you want to draw a half circle on the screen, you can set the region to half the square that enclose the whole circle, and then draw the whole circle. Only the half within the region will actually be drawn.
 
-~\\ First declare the new classes  ClippingView :
+~\\ This is how is implemented this example :
+
+~\\ First declare a custom View with a new class named \texttt{ClippingView} which derive from the class \texttt{AWViev}:
 
 \begin{lstlisting}[language=Arduinonl]
 ///////////// CLIPPING VIEW : A HALF CIRCLE /////////////
@@ -1406,17 +1384,18 @@ void ClippingView::drawInRegion (const AWRegion & inRegion) const
 ClippingView * crossView ;
 \end{lstlisting}
 
-~\\ Then draw the View in the setup() :
+~\\ This \texttt{ClippingView} class inherit from the \texttt{AWView} class (variables and methods) and declare its constructor and the \texttt{drawInRegion} function.
+~\\ This \texttt{drawInRegion} function determine the region which match the rectangle given in the constructor and build a clip rectangle (the half bottom of the region here) which is used to reduce the drawing region with the function \texttt{drawingRegion -= clipRectangle ;}.
+~\\ Then a circle is drawn in the drawing region. The result will be a half circle !
+
+~\\ The custom View is created in the \texttt{setup}  and displayed by the \texttt{handleTouchAndDisplay} function in the \texttt{loop}:
 \begin{lstlisting}[language=Arduinonl]
 //--- create the clipping view (half-circle
   crossView = new ClippingView(AWRect (300, 100, 250, 250)) ;
   addView (crossView) ;
 \end{lstlisting}
 
-~\\ A Region is defined by a rectangle which extends from the bottom left corner (300, 100) with size (250, 250). The circle is centered in this rectangle.
-~\\ Then a clipRectangle is defined as a the bottom half of the Region's rectangle.
-~\\ Then this bottom half is removed from the region.
-~\\ Then the circle is drawn but only the top half is visible !
+~\\ The region is defined by a rectangle which extends from the bottom left corner (300, 100) with size (250, 250). The circle is centered in this rectangle.
 
 \begin{figure}[htbp]
    \centering
@@ -1425,32 +1404,70 @@ ClippingView * crossView ;
    \label{fig:8 }
 \end{figure}
 
-\begin{itemize}
-\item 
-\end{itemize}
-
 ~\\ There is various operations on regions, which are defined in the methods of the class AWRegion, for example :
 
-\begin{itemize}
-\item Release a region, becomes empty.
-\item Do operations such as addition or subtraction of a rectangle to/from the region.
-\item Intersection with a rectangle.
-\item Intersection of regions.
-\item Enclosing rectangle.
-\item Testing if a point is inside a region.
-\item Handle a copy.
-\end{itemize}
+\begin{enumerate}
+\item Release a region which become empty.
+\begin{lstlisting}[language=Arduinonl]
+//--- release region, becomes empty
+  void release (void) ;
+\end{lstlisting}
 
-~\\ 
+\item Get characteristics of the region.
+\begin{lstlisting}[language=Arduinonl]
+  inline bool isEmpty (void) const { return NULL == mPtr ; }
+  AWInt rectCount (void) const ;
+  AWRect rectAtIndex (const AWInt inIndex) const ;
+\end{lstlisting}
+
+\item Do operations such as addition or subtraction of a rectangle to/from the region.
+\begin{lstlisting}[language=Arduinonl]
+//--- Difference from a rectangle
+  void operator -= (const AWRect & inRect) ;
+
+//--- Adding a rectangle
+  void operator += (const AWRect & inRect) ;
+\end{lstlisting}
+
+\item Intersection with a rectangle.
+\begin{lstlisting}[language=Arduinonl]
+  AWRegion operator & (const AWRect & inRect) const ;
+  bool intersects (const AWRect & inOtherRect) const ;
+\end{lstlisting}
+
+\item Intersection of regions.
+\begin{lstlisting}[language=Arduinonl]
+  AWRegion operator & (const AWRegion & inRect) const ;
+\end{lstlisting}
+
+\item Enclosing rectangle.
+\begin{lstlisting}[language=Arduinonl]
+  AWRect enclosingRect (void) const ;
+\end{lstlisting}
+
+\item Testing if a point is inside a region.
+\begin{lstlisting}[language=Arduinonl]
+  bool containsPoint (const AWPoint & inPoint) const ;
+  bool containsPoint (const AWInt inX, const AWInt inY) const ;
+\end{lstlisting}
+
+\item Handle a copy.
+\begin{lstlisting}[language=Arduinonl]
+  AWRegion (const AWRegion & inRegion) ;
+  AWRegion & operator = (const AWRegion & inRegion) ;
+\end{lstlisting}
+
+\end{enumerate}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \subsection{Colors}
 
+~\\ The AWColor class is not derived from an AWView class.
+
 ~\\ A color is defined by 3 bytes (uint\_8) and a boolean. The 3 bytes define respectively the red, green and blue component and the boolean "IsOpaque" define if the color is opaque or transparent.
-~\\ A set of 17 colors is predefined to simplify your programming.
-~\\ You can set colors, test colors or get colors.
-~\\ A color is not a View. The class AWColor is :
 
 \begin{lstlisting}[language=Arduinonl]
 class AWColor {
@@ -1466,8 +1483,11 @@ class AWColor {
   mBlue (inBlue),
   mIsOpaque (true) {
   }
+\end{lstlisting}
 
-//--- Colors
+~\\ A set of 17 colors is predefined to simplify your programming.
+
+\begin{lstlisting}[language=Arduinonl]
   inline static AWColor black (void) {
     return AWColor (0, 0, 0) ;
   }
@@ -1519,14 +1539,15 @@ class AWColor {
   inline static AWColor lightSkyBlue (void) {
     return AWColor (0x87, 0xCE, 0xFA) ;
   }
+\end{lstlisting}
 
-//--- Equatable
+~\\ You can set colors, test colors or get colors.
+
+\begin{lstlisting}[language=Arduinonl]
   bool operator == (const AWColor & inOtherColor) const ;
   inline bool operator != (const AWColor & inOtherColor) const {
     return !(*this == inOtherColor) ;
   }
-
-//--- Accessors
   inline uint8_t redComponent (void) const { return mRed ; }
   inline uint8_t greenComponent (void) const { return mGreen ; }
   inline uint8_t blueComponent (void) const { return mBlue ; }
@@ -1535,14 +1556,23 @@ class AWColor {
 \end{lstlisting}
 
 
-~\\ 
+~\\ In the previous example, the red color of the half circle is set by the instruction line :
+
+\begin{lstlisting}[language=Arduinonl]
+  AWContext::setColor (AWColor::red ());
+\end{lstlisting}
+
+~\\ And generally, you will find a function to set the color in every classes of the \emph{ArduinoWidgets} library.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \subsection{Fonts}
 
+~\\ The AWFont class is not derived from an AWView class.
+~\\ A font is not a View.
+
 ~\\ The class AWFont contain font description and fonctions.
-~\\ A font is not a View. The class AWFont is :
 
 \begin{lstlisting}[language=Arduinonl]
 class AWFont {
@@ -1582,7 +1612,7 @@ class AWFont {
 } ;
 \end{lstlisting}
 
-~\\ The definition of type AWFontInternalDefinition refer to one of these fonts which are already implemented in the \texttt{ArduinoWidget} library :
+~\\ The definition of type AWFontInternalDefinition refer to one of these fonts which are already implemented in the \emph{ArduinoWidgets} library :
 
 \begin{lstlisting}[language=Arduinonl]
 AWFont-ChicagoDigit-36.h
@@ -1618,28 +1648,28 @@ extern const AWFontInternalDefinition Lucida_Grande24 ;
    \label{fig:91 }
 \end{figure}
 
-~\\ 
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\section{The Views of \texttt{ArduinoWidgets}}
+\section{The existing Views of \emph{ArduinoWidgets}}
 
-~\\ This section describe the View subclasses which are already present in the \texttt{ArduinoWidgets} library, that you can use very simply.
-~\\ For each View, the class declaration, which is in the .h file of the library, is reproduced without the private properties and methode.
+~\\ This section describe the View subclasses which are already present in the \emph{ArduinoWidgets} library, that you can use very simply.
+~\\ For each View, the class declaration, which is in the .h file of the library, is reproduced without the private properties and methods.
 ~\\ As explained before, the \texttt{drawInRegion} method is "virtual" and must be defined in the instance of the view in your program.
 
 %%%%%%%%%%%%%%%%
 \subsection{Lines}
 
-~\\ The class AWLine is :
+~\\ A \texttt{AWLine} class inherit from a \texttt{AWView} class. Its constructor is :
 
 \begin{lstlisting}[language=Arduinonl]
-class AWLine : public AWView {
-//--- Constructor
   AWLine (const AWPoint & inRelativePoint1,
                    const AWPoint & inRelativePoint2) ;
+\end{lstlisting}
 
+~\\ The \texttt{AWLine} class contain the following methods which can be used in your program :
+
+\begin{lstlisting}[language=Arduinonl]
 //--- Draw
   virtual void drawInRegion (const AWRegion & inDrawRegion) const ;
 
@@ -1673,7 +1703,7 @@ AWLine * myLine;
    \label{fig:4 }
 \end{figure}
 
-  ~\\ This example display a line from AWPoint lineOrigin(50,50) to AWPoint lineEnd(400,400
+  ~\\ This example display a line from AWPoint lineOrigin(50,50) to AWPoint lineEnd(400,400).
 
 \begin{lstlisting}[language=Arduinonl]
 //--- create a black line
@@ -1700,14 +1730,14 @@ AWLine * myLine;
    \label{fig:5 }
 \end{figure}
 
-~\\ Figure 5 explain why the dimensions of a line is one pixel more than the width or height used in the drawing method.
+~\\ Figure 9 show that the dimensions of a line is one pixel more than the width or height used in the drawing method, as it is explained in subsection 5.6.
 
 %%%%%%%%%%%%%%
 \newpage
 \subsection{Label and AutoLabel}
 
-~\\ A Label is a string of text, "Title", that can be displayed anywhere on the screen (Context) or on a View or subView, or Region
-~\\ You can choose a Point and a width to define where the Label is displayed (if the size of the Label is greater than the size, the Label will be clipped. You can choose the alignment of the text with this enum :
+~\\ A \texttt{Label} is a string of text, "Title", that can be displayed anywhere on the screen (Context) or on a View or subView, or Region
+~\\ You can choose a Point and a width to define where the \texttt{Label} is displayed (if the size of the \texttt{Label} is greater than the size, the \texttt{Label} will be clipped. You can choose the alignment of the text with this enum :
 
 \begin{lstlisting}[language=Arduinonl]
 typedef enum {
@@ -1730,30 +1760,11 @@ typedef enum {
 \item LucidaGrande24
 \end{itemize}
 
-~\\ You can choose the color from this list :
-
-\begin{itemize}
-\item black
-\item gray
-\item darkGray
-\item lightGray
-\item veryLightGray
-\item red
-\item green
-\item blue
-\item white
-\item yellow
-\item orange
-\item brown
-\item cyan
-\item magenta
-\item purple
-\item deepSkyBlue
-\item lightSkyBlue
-\end{itemize}
+~\\ You can choose the color from this list : \texttt{black}, \texttt{gray}, \texttt{darkGray}, \texttt{lightGray}, \texttt{veryLightGray}, \texttt{red}, \texttt{green}, \texttt{blue}, \texttt{white}, \texttt{yellow}, \texttt{orange}, \texttt{brown}, \texttt{cyan}, \texttt{magenta}, \texttt{purple}, \texttt{deepSkyBlue}, \texttt{lightSkyBlue}.
 
 ~\\ or any other color according to the "Color" section 6.
-~\\ Figure 9 show how it is simple to display a Label with these 2 lines of code in the setup():
+
+~\\ Figure 10 show how it is simple to display a Label with these 2 lines of code in the setup():
 
 \begin{lstlisting}[language=Arduinonl]
   addView (new AWLabel(AWPoint ( 300, 250), AWInt (250), AWAlignment (kAWAlignmentCenter), String ("ChicagoFLF24"), AWFont (ChicagoFLF24))) ;
@@ -1762,21 +1773,23 @@ typedef enum {
 ~\\ or :
 
 \begin{lstlisting}[language=Arduinonl]
-  label = new AWLabel(AWPoint ( 300, 340), AWInt (150), AWAlignment (kAWAlignmentCenter), String ("Myabel : "), AWFont (Lucida_Grande24)) ;
+  label = new AWLabel(AWPoint ( 300, 340), AWInt (150), AWAlignment (kAWAlignmentCenter), String ("My Label : "), AWFont (Lucida_Grande24)) ;
   addView (label) ;
 \end{lstlisting}
 
-~\\ The constructor and methods of AWLabel are :
+~\\ The constructor of \texttt{AWLabel} is :
 
 \begin{lstlisting}[language=Arduinonl]
-class AWLabel : public AWView {
-//---------- Constructor
   AWLabel (const AWPoint & inRelativeOrigin,
                     const AWInt inWidth,
                     const AWAlignment inAlignment,
                     const String & inTitle,
                     const AWFont & inFont = awkDefaultFont) ;
+\end{lstlisting}
 
+~\\ The AWLabel class contain the following methods which can be used in your program :
+
+\begin{lstlisting}[language=Arduinonl]
 //----------- Draw
   virtual void drawInRegion (const AWRegion & inDrawRegion) const ;
 
@@ -1793,7 +1806,6 @@ class AWLabel : public AWView {
 //------------ Alignment
   inline AWAlignment alignment (void) const { return mAlignment ; }
   void setAlignment (const AWAlignment inAlignment) ;
-  };
 \end{lstlisting}
 
 \begin{figure}[htbp]
@@ -1804,7 +1816,7 @@ class AWLabel : public AWView {
 \end{figure}
 
 
-~\\ An AutoLabel is a simplified version of Label, without alignment and Width, which are calculated to match automatically the string :
+~\\ An \texttt{AutoLabel} is a simplified version of \texttt{Label}, without alignment and width, which are calculated to match automatically the string's size :
 
 \begin{lstlisting}[language=Arduinonl]
 class AWAutoLabel : public AWView {
@@ -1827,7 +1839,7 @@ class AWAutoLabel : public AWView {
 } ;
 \end{lstlisting}
 
-~\\ The code in the setup() for the Figure 9 is :
+~\\ The code in the setup() for the Figure 10 is :
 
 \begin{lstlisting}[language=Arduinonl]
   addView (new AWLabel(AWPoint ( 300, 50), AWInt (250), AWAlignment (kAWAlignmentCenter), String ("Lucida_Grande24"), AWFont (Lucida_Grande24))) ;
@@ -1838,7 +1850,6 @@ class AWAutoLabel : public AWView {
   addView (new AWLabel(AWPoint ( 300, 300), AWInt (250), AWAlignment (kAWAlignmentCenter), String ("ChicagoFLF12"), AWFont (ChicagoFLF12))) ;
   addView (new AWLabel(AWPoint ( 300, 350), AWInt (300), AWAlignment (kAWAlignmentCenter), String ("0123456789"), AWFont (ChicagoDigit36))) ;
   addView (new AWLabel(AWPoint ( 300, 400), AWInt (250), AWAlignment (kAWAlignmentCenter), String ("Geneva9"), AWFont (Geneva9))) ;
-
   addView (new AWAutoLabel(AWPoint ( 50, 200), String ("AutoLabel"), AWFont (ChicagoFLF24))) ;
 \end{lstlisting}
 
@@ -1847,10 +1858,25 @@ class AWAutoLabel : public AWView {
 \newpage
 \subsection{PushButton}
 
-~\\ A PushButton is a View with an Action. The View is a roundRectangle with a Title inside.
-~\\ We the user click inside the Button, an action is sent to a receiver.
+~\\ A \texttt{PushButton} class inherit from a \texttt{AWView} class with an Action. The View is a roundRectangle with a title inside.
+~\\ When the user click inside the Button, an action is sent to a receiver.
+
+~\\ The PushButton class contain the following constructors :
+
+\begin{lstlisting}[language=Arduinonl]
+  AWPushButton (const AWPoint & inRelativeBaselineOrigin,
+                         const AWInt inWidth,
+                         const String & inTitle,
+                         const AWFont & inFont = awkDefaultFont) ;
+  
+  AWPushButton (const AWRect & inFrame,
+                         const String & inTitle,
+                         const AWFont & inFont = awkDefaultFont) ;
+\end{lstlisting}
+
 ~\\ The example below show a unique PushButton centered in the screen with a number inside. Each time you click in the button, the number inside the button is incremented.
-~\\ The code for this example include a declaration before the setup() :
+
+~\\ The code of this example include a declaration before the setup() :
 
 \begin{lstlisting}[language=Arduinonl]
 //--- Current button value
@@ -1866,6 +1892,7 @@ void bigButtonAction (AWView * inSender)
 \end{lstlisting}
 
 ~\\ and an initialization of the button in the setup() :
+
 \begin{lstlisting}[language=Arduinonl]
  // create a big button centered on screen
   AWPushButton * bigButton = new AWPushButton(AWRect (0, 0, 300, 100), String (buttonValue), AWFont (ChicagoDigit36)) ;
@@ -1880,49 +1907,32 @@ void bigButtonAction (AWView * inSender)
    \label{fig: 10}
 \end{figure}
 
-~\\ The receiver of the PushButton is the Title of the button, but, in general, it can be any receiver inside any other object View.
-~\\ The bigButtonAction function is activated each time there is a click in this button. It execute what you want to do.
+~\\ The receiver of the PushButton is the Title of the button itself, but, in general, it can be any receiver inside any other object View.
 
-~\\ The PushButton class contain the following constructor and methods
+~\\ The bigButtonAction function is activated each time there is a click in this button. It execute what you want to do.
+  
+~\\ The PushButton class contain the following methods which can be used in your program :
 
 \begin{lstlisting}[language=Arduinonl]
-class AWPushButton : public AWView {
-  AWPushButton (const AWPoint & inRelativeBaselineOrigin,
-                         const AWInt inWidth,
-                         const String & inTitle,
-                         const AWFont & inFont = awkDefaultFont) ;
-  
-  AWPushButton (const AWRect & inFrame,
-                         const String & inTitle,
-                         const AWFont & inFont = awkDefaultFont) ;
-  
 //------------ Title
   protected : String mTitle ;
   void setTitle (const String & inTitle) ;
-
 //---------------- Font
   inline AWFont font (void) const { return mFont ; }
-
 //--- Draw
   virtual void drawInRegion (const AWRegion & inDrawRegion) const ;
-
 //--- Properties
   inline AWColor textColor (void) const { return mTextColor ; }
-  void setTextColor (const AWColor inTextColor) { mTextColor = inTextColor ; }
-  
+  void setTextColor (const AWColor inTextColor) { mTextColor = inTextColor ; }  
   protected : AWInt mStringDisplayLength ;
   inline AWInt verticalMargin (void) const { return mVerticalMargin ; }
-
 //--- Enabled state
   inline bool isEnabled (void) const { return mIsEnabled ; }
   void setEnabled (const bool inState) ;
-
-//---------------- Hilite state
+//--- Hilite state
   inline bool isHilited (void) const { return mHiliteState ; }
-
 //--- Tell the view is opaque or not
   virtual bool isOpaque (void) const ;
-
 //--- Touch
   virtual void touchDown (const AWPoint & inPoint) ;
   virtual void touchMove (const AWPoint & inPoint) ;
@@ -1936,7 +1946,7 @@ class AWPushButton : public AWView {
 \newpage
 \subsection{SegmentedControl}
 
-~\\ A SegmentedControl is 
+~\\ A \texttt{SegmentedControl} class inherit from a \texttt{AWView} class, with an Action.
 ~\\
 ~\\
 
@@ -1949,17 +1959,17 @@ class AWPushButton : public AWView {
 
 ~\\
 
-~\\ The SegmentedControl class contain the following constructor and methods
+~\\ The SegmentedControl class contain the following constructor :
 
 \begin{lstlisting}[language=Arduinonl]
-typedef void (* AWSegmentedControlAction) (AWSegmentedControl * inSender, const AWInt inHilitedTabIndex) ;
-
-class AWSegmentedControl : public AWView {
-//--- Constructor
   AWSegmentedControl (const AWPoint & inRelativeBaselineOrigin,
                                const AWInt inWidth,
                                const AWFont & inFont = awkDefaultFont) ;
+\end{lstlisting}
 
+~\\ The SegmentedControl class contain the following methods which can be used in your program :
+
+\begin{lstlisting}[language=Arduinonl]
 //--- Draw
   virtual void drawInRegion (const AWRegion & inDrawRegion) const ;
 
@@ -1977,6 +1987,8 @@ class AWSegmentedControl : public AWView {
   void selectTabAtIndex (const AWInt inIndex) ;
 
 //---------------- Segmented control action
+typedef void (* AWSegmentedControlAction) (AWSegmentedControl * inSender, const AWInt inHilitedTabIndex) ;
+
 // If segmented control action is NULL (by default), touch up changes selection and send action (defined in AWView)
 // If not NULL, touch up does not change selection, and sends segmented control action
   inline AWSegmentedControlAction segmentedControlAction (void) const { return mSegmentedControlAction ; }
@@ -2000,8 +2012,22 @@ class AWSegmentedControl : public AWView {
 \newpage
 \subsection{Slider}
 
-~\\ A Slider is a complex View class which can control any entity by simply moving a cursor along a linear potentiometer
-~\\ When the slider is moved (translated) an action is sent to a receiver with the value of the slider 
+~\\ A \texttt{Slider} class inherit from a \texttt{AWView} class with an Action.
+~\\ A Slider is a complex View class which can control any entity by simply moving a cursor along a linear potentiometer.
+~\\ When the slider is moved (translated) an action is sent to a receiver with the value of the slider.
+
+~\\ The Slider class contain the following constructor :
+
+\begin{lstlisting}[language=Arduinonl]
+const bool kHorizontal = false;
+const bool kVertical = true;
+
+  AWSlider (const AWPoint & inOrigin,
+                     const AWInt inSize,
+                     const bool inOrientation,
+                     const bool inHasRuler = true) ;
+\end{lstlisting}
+
 ~\\ In this example, one slider control the brightness of the backlight of the screen, and the 3 other sliders control the color of a colorView (a simple rectangle).
 
 \begin{figure}[htbp]
@@ -2082,18 +2108,10 @@ void sliderAction (AWView * inSender)
   addView (label2) ;
 \end{lstlisting}
 
-~\\ The Slider class contain the following constructor and methods
+
+~\\ The Slider class contain the following methods which can be used in your program :
 
 \begin{lstlisting}[language=Arduinonl]
-const bool kHorizontal = false;
-const bool kVertical = true;
-
-class AWSlider : public AWView {
-  AWSlider (const AWPoint & inOrigin,
-                     const AWInt inSize,
-                     const bool inOrientation,
-                     const bool inHasRuler = true) ;
-
   //--- Draw
   virtual void drawInRegion ( const AWRegion & inDrawRegion ) const ;
    
@@ -2128,8 +2146,6 @@ class AWSlider : public AWView {
   virtual void touchDown (const AWPoint & inPoint) ;
   virtual void touchMove (const AWPoint & inPoint) ;
   virtual void touchUp (const AWPoint & inPoint) ;
-  
-} ;
 \end{lstlisting}
 
 
@@ -2137,6 +2153,7 @@ class AWSlider : public AWView {
 \newpage
 \subsection{DynamicSlider}
 
+~\\ A \texttt{DynamicSlider} class inherit from a \texttt{AWView} class
 ~\\ A DynamicSlider is 
 ~\\
 ~\\
@@ -2174,6 +2191,7 @@ class AWDynamicSlider : public AWSlider
 \newpage
 \subsection{TabView}
 
+~\\ A \texttt{TabView} class inherit from a \texttt{AWView} class
 ~\\ A TabView is 
 ~\\
 ~\\
@@ -2235,6 +2253,7 @@ class AWTabView : public AWView {
 \newpage
 \subsection{Switch}
 
+~\\ A \texttt{Switch} class inherit from a \texttt{AWView} class
 ~\\ A Switch is 
 ~\\
 ~\\
@@ -2291,6 +2310,7 @@ class AWSwitch : public AWView {
 \newpage
 \subsection{ArrowPushButton}
 
+~\\ A \texttt{ArrowPushButton} class inherit from a \texttt{AWView} class
 ~\\ An ArrowPushButton is 
 ~\\
 ~\\
@@ -2349,9 +2369,10 @@ class AWArrowPushButton : public AWView
 
 %%%%%%%%%%%%%%
 \newpage
-\subsection{KeyButton}
+\subsection{AWKeyButton}
 
-~\\ A KeyButton is 
+~\\ A \texttt{AWKeyButton} class inherit from a \texttt{AWView} class
+~\\ A AWKeyButton is a button which is a part of a keyboard. The AWKeyboard class is described hereafter.
 ~\\
 ~\\
 
@@ -2364,7 +2385,7 @@ class AWArrowPushButton : public AWView
 
 ~\\
 
-~\\ The KeyButton class contain the following constructor and methods
+~\\ The AWKeyButton class contain the following constructor and methods
 
 \begin{lstlisting}[language=Arduinonl]
 class AWKeyButton : public AWView
@@ -2387,7 +2408,13 @@ class AWKeyButton : public AWView
   virtual void touchMove (const AWPoint & inPoint) ;
   virtual void touchUp (const AWPoint & inPoint) ;
 };
+\end{lstlisting}
 
+~\\ The AWKeyButton class have the following derived classes which differ to build a complete set of keybuttons of a full keyboard.
+
+~\\ The AWNormalKeyButton class contain the following constructor and methods
+
+\begin{lstlisting}[language=Arduinonl]
 class AWNormalKeyButton : public AWKeyButton
 {
   AWNormalKeyButton (const AWRect & inFrame,
@@ -2402,7 +2429,11 @@ class AWNormalKeyButton : public AWKeyButton
   //--- Draw
   virtual void drawInRegion (const AWRegion & inDrawRegion) const ;
 };
+\end{lstlisting}
 
+~\\ The AWReturnKeyButton class contain the following constructor and methods
+
+\begin{lstlisting}[language=Arduinonl]
 class AWReturnKeyButton : public AWKeyButton
 {
   AWReturnKeyButton (const AWRect & inFrame) ;
@@ -2410,7 +2441,11 @@ class AWReturnKeyButton : public AWKeyButton
   //--- Draw
   virtual void drawInRegion (const AWRegion & inDrawRegion) const ;
 };
+\end{lstlisting}
 
+~\\ The AWBackspaceKeyButton class contain the following constructor and methods
+
+\begin{lstlisting}[language=Arduinonl]
 class AWBackspaceKeyButton : public AWKeyButton
 {
   AWBackspaceKeyButton (const AWRect & inFrame) ;
@@ -2418,7 +2453,11 @@ class AWBackspaceKeyButton : public AWKeyButton
   //--- Draw
   virtual void drawInRegion (const AWRegion & inDrawRegion) const ;
 };
+\end{lstlisting}
 
+~\\ The AWShiftKeyButton class contain the following constructor and methods
+
+\begin{lstlisting}[language=Arduinonl]
 class AWShiftKeyButton : public AWKeyButton
 {
   AWShiftKeyButton (const AWRect & inFrame, const bool inRightAlign) ;
@@ -2430,7 +2469,11 @@ class AWShiftKeyButton : public AWKeyButton
   //--- Draw
   virtual void drawInRegion (const AWRegion & inDrawRegion) const ;
 };
+\end{lstlisting}
 
+~\\ The AWLeftArrowKeyButton class contain the following constructor and methods
+
+\begin{lstlisting}[language=Arduinonl]
 class AWLeftArrowKeyButton : public AWKeyButton
 {
   AWLeftArrowKeyButton (const AWRect & inFrame) ;
@@ -2438,7 +2481,11 @@ class AWLeftArrowKeyButton : public AWKeyButton
   //--- Draw
   virtual void drawInRegion (const AWRegion & inDrawRegion) const ;
 };
+\end{lstlisting}
 
+~\\ The AWRightArrowKeyButton class contain the following constructor and methods
+
+\begin{lstlisting}[language=Arduinonl]
 class AWRightArrowKeyButton : public AWKeyButton
 {
   AWRightArrowKeyButton (const AWRect & inFrame) ;
@@ -2453,7 +2500,7 @@ class AWRightArrowKeyButton : public AWKeyButton
 \newpage
 \subsection{Keyboard}
 
-~\\ A Keyboard is 
+~\\ A \texttt{Keyboard} class inherit from a \texttt{AWView} class
 ~\\
 ~\\
 
@@ -2482,6 +2529,7 @@ void launchKeyboard (const String &inText,
 \newpage
 \section{Custom View Examples}
 
+~\\ A \texttt{Slider} class inherit from a \texttt{AWView} class
 ~\\
 
 %%%%%%%%%%%%%%
@@ -2525,7 +2573,7 @@ void launchKeyboard (const String &inText,
 
 %%%%%%%%%%%%%%
 \newpage
-\section{The next steps of \texttt{ArduinoWidgets}}
+\section{The next steps of \emph{ArduinoWidgets}}
 
 ~\\
 
