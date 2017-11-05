@@ -1,4 +1,4 @@
-#Cocoa Simulator
+# Cocoa Simulator
 
 The CocoaSimulator is an OS X application that emulates screen and touch hardware. You can easily debug your project. Arduino projects and their simulation on OS X share many code, only some files are specific to Arduino or OS X.
 
@@ -14,7 +14,8 @@ For creating a new Simulator application:
 	* <font color="marroon">CocoaSimulatorView.h</font>, <font color="marroon">CocoaSimulatorView.m</font>
 	* <font color="marroon">WString.h</font>, <font color="marroon">WString.cpp</font> (Arduino String class)
 - all files from graphic-test-teensy directory, but:
-	* <font color="marroon">convertTouchPointToScreenPoint.h</font> and 	* <font color="marroon">convertTouchPointToScreenPoint.cpp</font> (only for Arduino)
+	* <font color="marroon">convertTouchPointToScreenPoint.h</font> and
+	* <font color="marroon">convertTouchPointToScreenPoint.cpp</font> (only for Arduino)
 	* <font color="marroon">graphic-test-teensy.ino</font>(only for Arduino, of course)
 	* <font color="marroon">AWContext.cpp</font> (this is an implementation for Arduino, for a Cocoa Simulator implementation is provided in <font color="marroon">AppDelegate.mm</font>) 
 	* <font color="marroon">touch-callbacks.h</font> (no call back in Cocoa Simulator)
