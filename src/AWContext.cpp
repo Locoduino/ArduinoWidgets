@@ -42,8 +42,11 @@ static bool gHorizontalFlip ;
 static bool gVerticalFlip ;
 static AWView * gScreenView ;
 static AWColor gTouchDebugColor ; // By default, transparent color --> no debug
+
+#ifndef __APPLE__
 static AWNoTouchCallback gNoTouchCallback = NULL;
 static AWCallbackTouchOn gCallbackTouchOn = NULL;
+#endif
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //   TOUCH CALIBRATION PARAMETERS
@@ -70,8 +73,10 @@ void AWContext::begin (const tOrientation inOrientation,
                        const bool inHorizontalFlip,
                        const bool inVerticalFlip)
 {
-	myGLCD.InitLCD (inOrientation == kOrientationLandscape ? LANDSCAPE : PORTRAIT) ;
-	myGLCD.clrScr () ;
+#ifndef __APPLE__
+  myGLCD.InitLCD (inOrientation == kOrientationLandscape ? LANDSCAPE : PORTRAIT) ;
+  myGLCD.clrScr () ;
+#endif
   gOrientation = inOrientation;
   gScreenWidth = inScreenWidth ;
   gScreenHeight = inScreenHeight ;
