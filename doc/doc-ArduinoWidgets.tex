@@ -887,6 +887,8 @@ void addCenteredView (class AWView * inView) ;
   inline AWView * superView (void) { return mSuperView ; } // Returns NULL if has no super view
 \end{lstlisting}
 
+~\\ An example of a View containing subViews will be given in subsection "PushButton".
+
 ~\\\emph{View Tags}
 
 ~\\The View class defines methods that allow you to tag individual view objects with integer tags.
@@ -1774,8 +1776,19 @@ typedef enum {
 ~\\ or :
 
 \begin{lstlisting}[language=Arduinonl]
-  label = new AWLabel(AWPoint ( 300, 340), AWInt (150), AWAlignment (kAWAlignmentCenter), String ("My Label : "), AWFont (Lucida_Grande24)) ;
-  addView (label) ;
+  myLabel = new AWLabel(AWPoint ( 300, 340), AWInt (150), AWAlignment (kAWAlignmentCenter), String ("My Label : "), AWFont (Lucida_Grande24)) ;
+  addView (myLabel) ;
+\end{lstlisting}
+
+~\\ or :
+
+\begin{lstlisting}[language=Arduinonl]
+ static AWLabel *gLabel1;
+ //--- then in setuo()
+  gLabel1 = new AWLabel(AWPoint ( 300, 340), AWInt (150), AWAlignment (kAWAlignmentCenter), String ("My Label : "), AWFont (Lucida_Grande24)) ;
+  gLabel1->setBackColor (AWColor::gray() ):
+  gLabel1->setTextColor (AWColor::red() ):
+  addView (gLabel1) ;
 \end{lstlisting}
 
 ~\\ The constructor of \texttt{AWLabel} is :
@@ -1853,6 +1866,21 @@ class AWAutoLabel : public AWView {
   addView (new AWLabel(AWPoint ( 300, 400), AWInt (250), AWAlignment (kAWAlignmentCenter), String ("Geneva9"), AWFont (Geneva9))) ;
   addView (new AWAutoLabel(AWPoint ( 50, 200), String ("AutoLabel"), AWFont (ChicagoFLF24))) ;
 \end{lstlisting}
+
+~\\ A Label or AutoLabel can be a stand alone view as explained above, or it can be a subview of another view.
+
+~\\ You can change the Title of a Label or AutoLabel as in this exemple to display the freeRam in myLabel :
+
+\begin{lstlisting}[language=Arduinonl]
+const size_t gFreeRam = freeRAM () ;
+  myLabel->setTitle ("Free Ram: " + String (gFreeRam)) ;
+ \end{lstlisting}
+
+~\\ You can display or hide a Label or AutoLabel by changing its visibility :
+
+\begin{lstlisting}[language=Arduinonl]
+  myLabel->setVisibility (true) ; // or false
+ \end{lstlisting}
 
 
 %%%%%%%%%%%%%%
@@ -1941,6 +1969,55 @@ void bigButtonAction (AWView * inSender)
 } ;
 \end{lstlisting}
 
+~\\ This example show a View with 4 PushButtons as subVievs. It implements also the actions which are done when clicking in a button.
+
+~\\ In the declaration part, we create a base View which will contain the PushButtons and the actions on this View :
+\begin{lstlisting}[language=Arduinonl]
+static AWView * gBaseView ;
+// This base View will move 20 pixels when clicking in a button
+// We declare the respective actions which will apply : a translation
+static void leftButtonAction (AWView * inSender) {
+  gBaseView->translateBy (-20, 0) ;
+}
+static void rightButtonAction (AWView * inSender) {
+  gBaseView->translateBy (20, 0) ;
+}
+static void upButtonAction (AWView * inSender) {
+  gBaseView->translateBy (0, 20) ;
+}
+static void downButtonAction (AWView * inSender) {
+  gBaseView->translateBy (0, -20) ;
+}\end{lstlisting}
+
+~\\ In the setup(), we put everything in place :
+\begin{lstlisting}[language=Arduinonl]
+  gBaseView = new AWView (AWRect (550, 150, 140, 95), awkBackColor) ;
+  addView (gBaseView) ;
+  view = new AWPushButton (AWPoint (5, 40), 60, "Left") ;
+  view->setAction (leftButtonAction) ;
+  gBaseView->addSubView (view) ;
+  view = new AWPushButton (AWPoint (75, 40), 60, "Right") ;
+  view->setAction (rightButtonAction) ;
+  gBaseView->addSubView (view) ;
+  view = new AWPushButton (AWPoint (40, 15), 60, "Down") ;
+  view->setAction (downButtonAction) ;
+  gBaseView->addSubView (view) ;
+  view = new AWPushButton (AWPoint (40, 70), 60, "Up") ;
+  view->setAction (upButtonAction) ;
+  gBaseView->addSubView (view) ;
+\end{lstlisting}
+
+~\\ Everything is done by \texttt{AWContext::handleTouchAndDisplay ()} in the \texttt{loop}.
+~\\ This figure show the 4 PushButtons. Left, the base View is not visible (awkBackColor) and right, the base View is visible (gray).
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[scale=0.7]{AWFig101.png} 
+   \caption{A view with 4 PushButton subviews}
+   \label{fig:101}
+\end{figure}
+
+
 ~\\There will be further examples of PushButton together with examples of other views.
 
 %%%%%%%%%%%%%%
@@ -1948,13 +2025,13 @@ void bigButtonAction (AWView * inSender)
 \subsection{SegmentedControl}
 
 ~\\ A \texttt{SegmentedControl} class inherit from a \texttt{AWView} class, with an Action.
-~\\
+~\\ For example, this series of 3 tabs which divide a SegmentedControl view in 3 actions
 ~\\
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[scale=0.55]{AWFig.png} 
-   \caption{Aie !! missing figure !}
+   \includegraphics[scale=0.7]{AWFig11.png} 
+   \caption{SegmentedControl}
    \label{fig:11}
 \end{figure}
 
@@ -2007,6 +2084,32 @@ typedef void (* AWSegmentedControlAction) (AWSegmentedControl * inSender, const 
   void setEnabled (const bool inState) ;
 } ;
 \end{lstlisting}
+
+~\\ The exemple of Figure 13 have, in the declaration part :
+
+\begin{lstlisting}[language=Arduinonl]
+  static AWSegmentedControl * gSegmentedControl ;
+  
+  static void segmentedControlAction (AWSegmentedControl * inSender, const AWInt inHilitedTabIndex) {
+    beep () ;
+    digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
+}
+\end{lstlisting}
+
+~\\ Then in the setup part :
+
+\begin{lstlisting}[language=Arduinonl]
+  gSegmentedControl = new AWSegmentedControl (AWPoint (440, 100), 300) ;
+  gSegmentedControl->addTab ("Premier") ;
+  gSegmentedControl->addTab ("Deuxieme") ;
+  gSegmentedControl->addTab ("Troisieme") ;
+  //  gSegmentedControl->setEnabled (false) ;
+  gSegmentedControl->setSegmentedControlAction (segmentedControlAction) ;
+  addView (gSegmentedControl) ;
+\end{lstlisting}
+
+~\\ This example sound a beep and turn the built-in led on or off when clicking in any of the tabs.
+
 
 
 %%%%%%%%%%%%%%
@@ -2149,20 +2252,76 @@ void sliderAction (AWView * inSender)
   virtual void touchUp (const AWPoint & inPoint) ;
 \end{lstlisting}
 
+~\\ This example show one horizontal slider and one vertical slider, both having division scales. Both sliders are combined with a respective AutoLabel to display their position.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[scale=0.7]{AWFig121.png} 
+   \caption{Sliders with scales lines}
+   \label{fig:121 }
+\end{figure}
+
+~\\ The declarations are :
+
+\begin{lstlisting}[language=Arduinonl]
+static AWSlider * gSliderH;
+static AWSlider * gSliderV;
+static AWAutoLabel * gSliderHLabel;
+static AWAutoLabel * gSliderVLabel;
+\end{lstlisting}
+
+~\\ The actions are :
+
+\begin{lstlisting}[language=Arduinonl]
+static void updateHSliderLabelAction (AWView * inSender)
+{
+  AWSlider * sendingSlider = (AWSlider *) inSender ;
+  AWInt pos = sendingSlider->knobPosition ();
+  if (sendingSlider == gSliderH) {
+    gSliderHLabel->setTitle(pos);
+  }
+}
+static void updateVSliderLabelAction (AWView * inSender)
+{
+  gSliderVLabel->setTitle(String(((AWSlider *)inSender)->knobPosition()));
+}
+\end{lstlisting}
+
+~\\ The setup, with \texttt{setHowManyScales} and combined labels is :
+
+\begin{lstlisting}[language=Arduinonl]
+  gSliderH = new AWSlider(AWPoint(300,200),200,kHorizontal) ;
+  gSliderH->setHowManyScales( 20 ) ;
+  gSliderH->setMaxKnobPosition (255);
+  gSliderH->setKnobPosition (200);
+  addView(gSliderH) ;
+  gSliderHLabel = new AWAutoLabel ( AWPoint( 310, 235), "200" ) ;
+  gSliderH->setAction(updateHSliderLabelAction) ;
+  addView(gSliderHLabel);
+  
+  gSliderV = new AWSlider(AWPoint(725,140),200,kVertical) ;
+  addView(gSliderV) ;
+  gSliderVLabel = new AWAutoLabel ( AWPoint( 725, 345 ), "50" ) ;
+  gSliderV->setAction(updateVSliderLabelAction) ;
+  addView(gSliderVLabel) ;
+\end{lstlisting}
+
+
 
 %%%%%%%%%%%%%%
 \newpage
 \subsection{DynamicSlider}
 
-~\\ A \texttt{DynamicSlider} class inherit from a \texttt{AWView} class
-~\\ A DynamicSlider is 
-~\\
+~\\ A \texttt{DynamicSlider} class inherit from a \texttt{AWView} class.
+
+~\\ A \texttt{DynamicSlider} is a Slider with 2 knobs. One elliptic \emph{main} knob exactly the same as in a Slider, and one smaller and circular \emph{target} knob which can be hidden when its position is the same as the main knob's position.
+~\\ The main knob is movable with the touch control as usual and the dynamic knob can follow the main knob but slowly and smoothly. Both knobs have respective positions, so the dynamic knob can be used to create a smooth evolution os a parameter, such as the sound level in a mixing table or a smooth acceleration of a locomotive.
 ~\\
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[scale=0.55]{AWFig.png} 
-   \caption{Aie !! missing figure !}
+   \includegraphics[scale=0.7]{AWFig13.png} 
+   \caption{A dynamic Slider on the right}
    \label{fig:13}
 \end{figure}
 
@@ -2186,6 +2345,38 @@ class AWDynamicSlider : public AWSlider
   void setDynamicKnobPosition ( AWInt inKnobPosition ) ;
 };
 \end{lstlisting}
+
+~\\ The example of figure 16 show a vertical dynamic slider, combined with two AutoLabel to display the respective positions of the main and target knobs (right slider only).
+~\\
+
+~\\ The declarations are :
+
+\begin{lstlisting}[language=Arduinonl]
+static AWDynamicSlider * gDynSliderV;
+\end{lstlisting}
+
+~\\ The actions are :
+
+\begin{lstlisting}[language=Arduinonl]
+static void updateDynamicVSliderLabelAction (AWView * inSender)
+{
+  gDynamicSliderVLabelTarget->setTitle(String(((AWDynamicSlider *)inSender)->knobPosition()));
+  gDynamicSliderVLabelCurrent->setTitle(String(((AWDynamicSlider *)inSender)->dynamicKnobPosition()));
+}
+\end{lstlisting}
+
+~\\ The setup, with combined main and target labels is :
+
+\begin{lstlisting}[language=Arduinonl]
+  gDynSliderV = new AWDynamicSlider(AWPoint(765,140),200,kVertical) ;
+  addView(gDynSliderV) ;
+  gDynamicSliderVLabelCurrent = new AWAutoLabel ( AWPoint( 765, 345), "50") ;
+  gDynamicSliderVLabelTarget = new AWAutoLabel ( AWPoint( 765, 365), "50") ;
+  gDynSliderV->setAction(updateDynamicVSliderLabelAction) ;
+  addView(gDynamicSliderVLabelCurrent) ;
+  addView(gDynamicSliderVLabelTarget) ;
+\end{lstlisting}
+
 
 
 %%%%%%%%%%%%%%
