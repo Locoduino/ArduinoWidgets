@@ -2377,6 +2377,21 @@ static void updateDynamicVSliderLabelAction (AWView * inSender)
   addView(gDynamicSliderVLabelTarget) ;
 \end{lstlisting}
 
+~\\ Finally, in order to move automatically the target knob  in order to join slowly the main knob, the following code is added in the loop, with a global \texttt{static unsigned gDynamicDeadLine} which store the system time :
+
+\begin{lstlisting}[language=Arduinonl]
+  if (gDynamicDeadLine <= millis()) {
+    gDynamicDeadLine += 100;
+    AWInt targetPos = gDynSliderV->knobPosition();
+    AWInt currentPos = gDynSliderV->dynamicKnobPosition();
+    if (currentPos < targetPos) {
+      gDynSliderV->setDynamicKnobPosition(currentPos + 1);
+    }
+    else if (currentPos > targetPos) {
+      gDynSliderV->setDynamicKnobPosition(currentPos - 1);
+    }
+  }
+\end{lstlisting}
 
 
 %%%%%%%%%%%%%%
@@ -2384,14 +2399,14 @@ static void updateDynamicVSliderLabelAction (AWView * inSender)
 \subsection{TabView}
 
 ~\\ A \texttt{TabView} class inherit from a \texttt{AWView} class
-~\\ A TabView is 
-~\\
-~\\
+~\\ A TabView is a navigation interface. It is a view looking like a tab bar controller to organize your app into one or more distinct modes of operation. The view hierarchy of a tab bar controller is self contained. It is composed of views that the tab bar controller manages directly and views that are managed by content views  you provide. Each content view manages a distinct view hierarchy, and the TabView coordinates the navigation between the view hierarchies.
+~\\The key component of a TabView interface is the presence of a tab bar view along the bottom of the screen (for example). This view is used to initiate the navigation between your app’s different modes and can also convey information about the state of each mode.
+~\\The TabView creates and manages its own view and also manages the views that provide the content view for each mode.
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[scale=0.55]{AWFig.png} 
-   \caption{Aie !! missing figure !}
+   \includegraphics[scale=0.7]{AWFig14.png} 
+   \caption{a TavView controlling views}
    \label{fig:14 }
 \end{figure}
 
@@ -2440,20 +2455,53 @@ class AWTabView : public AWView {
 } ;
 \end{lstlisting}
 
+~\\ An example of TabView is given in the following code :
+~\\ First declare a AWTabView : gTabView
+
+\begin{lstlisting}[language=Arduinonl]
+static AWTabView * gTabView ;
+\end{lstlisting}
+
+~\\ Then, in the setup, create the gTabView and 4 views which are here simple rectangles. Each view is associated with a teb by addTab which define the label in the tab and the associated view. Doing that 4 times create a 4 tab TabView
+
+\begin{lstlisting}[language=Arduinonl]
+  gTabView = new AWTabView (AWRect (10, 10, 550, 500)) ;
+  AWView * view ;
+  view = new AWView (AWRect (0, 0, 250, 300), AWColor::brown ()) ;
+  gTabView->addTab ("First", view) ;
+  view = new AWView (AWRect (100, 0, 250, 300), AWColor::yellow ()) ;
+  gTabView->addTab ("Second", view) ;
+  view = new AWView (AWRect (200, 0, 250, 300), AWColor::cyan ()) ;
+  gTabView->addTab ("Third", view) ;
+  view = new AWView (AWRect (300, 0, 250, 300), AWColor::purple ()) ;
+  gTabView->addTab ("Fourth", view) ;
+  addView (gTabView) ;
+\end{lstlisting}
+
+
+~\\ And its all !
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[scale=0.4]{AWFig141.png} 
+   \caption{A 4 tabs TabView controlling 4 views}
+   \label{fig:14 }
+\end{figure}
+
 
 %%%%%%%%%%%%%%
 \newpage
 \subsection{Switch}
 
 ~\\ A \texttt{Switch} class inherit from a \texttt{AWView} class
-~\\ A Switch is 
-~\\
+~\\ A Switch is like a checkbox which can be toggled between true or false when clicking on it. Switches are commonly used to indicate whether a feature is enabled or disabled. You set the initial value of the switch in your program, but you can modify that value at runtime using the methods of this class.
+~\\ A Switch is defined by a Point and a string Title (and a Font if you except the default font).
 ~\\
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[scale=0.55]{AWFig.png} 
-   \caption{Aie !! missing figure !}
+   \includegraphics[scale=0.55]{AWFig15.png} 
+   \caption{Some Switches}
    \label{fig:15 }
 \end{figure}
 
@@ -2473,7 +2521,6 @@ class AWSwitch : public AWView {
 
 //---
   void setTitle (const String & inTitle) ;
-
   AWRect boxRect (void) const ;
 
 //---------------- Font
@@ -2497,26 +2544,51 @@ class AWSwitch : public AWView {
 } ;
 \end{lstlisting}
 
+~\\ To create the example of the above figure, you declare a gSwitch :
+
+\begin{lstlisting}[language=Arduinonl]
+static AWSwitch * gSwitch ;
+\end{lstlisting}
+
+~\\ And an action depending of the state of the gSwitch : In this example the action is to change the visibility of a label.
+
+\begin{lstlisting}[language=Arduinonl]
+static void switchAction (AWView * inSender) {
+  gLabel2->setVisibility (gSwitch->checked ()) ;
+}
+\end{lstlisting}
+
+~\\ Then, in the setup, create the gSwitch view with the title "Visible" and its associated action. Each time you click in the gSwitch the action will be executed.
+
+\begin{lstlisting}[language=Arduinonl]
+  gSwitch = new AWSwitch (AWPoint (102, 95), "Visible") ;
+  gSwitch->setBackColor (AWColor::green ()) ;
+  gSwitch->setAction (switchAction) ;
+  addView (gSwitch) ;
+  gSwitch->sendAction () ;
+\end{lstlisting}
+  
+~\\
 
 %%%%%%%%%%%%%%
 \newpage
 \subsection{ArrowPushButton}
 
 ~\\ A \texttt{ArrowPushButton} class inherit from a \texttt{AWView} class
-~\\ An ArrowPushButton is 
-~\\
+~\\ An \texttt{ArrowPushButton} is a \texttt{PushButton} with an arrow picture inside and no title.
+~\\ It is used exactly as a \texttt{PushButton}, but you can choose the direction and color of the arrow.
 ~\\
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[scale=0.55]{AWFig.png} 
-   \caption{Aie !! missing figure !}
+   \includegraphics[scale=0.55]{AWFig16.png} 
+   \caption{An ArrowPushButton}
    \label{fig:16 }
 \end{figure}
 
 ~\\
 
-~\\ The ArrowPushButton class contain the following constructor and methods
+~\\ The \texttt{ArrowPushButton} class contain the following constructor and methods
 
 \begin{lstlisting}[language=Arduinonl]
 enum { kUpArrow, kDownArrow, kRightArrow, kLeftArrow } ;
@@ -2558,20 +2630,29 @@ class AWArrowPushButton : public AWView
 };
 \end{lstlisting}
 
+~\\ The following code show how to use an \texttt{ArrowPushButton} in the \texttt{setup}. First, button is created with arguments for its coordinates, its direction its color.
+
+\begin{lstlisting}[language=Arduinonl]
+AWArrowPushButton * button = new AWArrowPushButton( AWRect(750,0,50,80), kUpArrow, AWColor::blue() ) ;
+  button->setAction (showKeyboard) ;
+  addView (button) ;
+\end{lstlisting}
+
+~\\ Then we set the attached action which is showing a keyboard as described in the next sections. Then there is the traditional \texttt{addview}.
 
 %%%%%%%%%%%%%%
 \newpage
 \subsection{AWKeyButton}
 
 ~\\ A \texttt{AWKeyButton} class inherit from a \texttt{AWView} class
-~\\ A AWKeyButton is a button which is a part of a keyboard. The AWKeyboard class is described hereafter.
+~\\ A AWKeyButton is a unique key button which is a part of a keyboard. The AWKeyboard class is described hereafter.
 ~\\
 ~\\
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[scale=0.55]{AWFig.png} 
-   \caption{Aie !! missing figure !}
+   \includegraphics[scale=0.6]{AWFig17.png} 
+   \caption{A series of AWKeyButtons}
    \label{fig:17}
 \end{figure}
 
@@ -2687,13 +2768,14 @@ class AWRightArrowKeyButton : public AWKeyButton
 };
 \end{lstlisting}
 
+~\\All these KeyButtons are combined to create a Keyboard which is described hereafter. the combination of keys can, of course, be adapted to the applications (language, specific keys, etc..).
 
 %%%%%%%%%%%%%%
 \newpage
 \subsection{Keyboard}
 
 ~\\ A \texttt{Keyboard} class inherit from a \texttt{AWView} class
-~\\
+~\\ The Keyboard show in this section is a french keyboard.
 ~\\
 
 \begin{figure}[htbp]
@@ -2715,6 +2797,44 @@ void launchKeyboard (const String &inText,
                      AWKeyboardCallback inCallback,
                      const int inTag = -1) ;
 \end{lstlisting}
+
+~\\ This example show how to use this keyboard. We need a Label to display the string which will be the result of the use of the keyboard. Then we need an Action which will display this result in the Label when the "return" key of the keyboard will be down. Then we need an Action to displau the keyboard when the user click on a PushButton.
+
+\begin{lstlisting}[language=Arduinonl]
+AWLabel *keyboardResult ;
+
+// Action to validate a keyboard entry
+void keyboardValidateEntryAction(const String &inText, const int tag)
+{
+  keyboardResult->setTitle (inText) ;
+}
+
+// Action to display the keyboard
+void displayKeyboardAction(AWView *sender)
+{
+  launchKeyboard (keyboardResult->title (), 40, keyboardValidateEntryAction, 0) ;
+}
+
+\end{lstlisting}
+
+~\\ Then, in the setup, we create the Label for the result and the PushButton to display the keyboard
+
+\begin{lstlisting}[language=Arduinonl]
+  keyboardResult = new AWLabel (AWPoint (0, 0), 500, kAWAlignmentCenter, "") ;
+  addCenteredView (keyboardResult) ;
+  
+  // Push button to display the Keyboard
+  AWPushButton *launchKeyboardButton = new AWPushButton (AWRect (20, 20, 150, 40), "Show keyboard");
+  launchKeyboardButton->setAction (displayKeyboardAction) ;
+  addView (launchKeyboardButton) ;
+\end{lstlisting}
+
+~\\ As usual, everything is handled by the loop function :
+
+\begin{lstlisting}[language=Arduinonl]
+AWContext::handleTouchAndDisplay () ;
+\end{lstlisting}
+
 
 
 %%%%%%%%%%%%%%
@@ -2750,14 +2870,14 @@ void launchKeyboard (const String &inText,
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[scale=0.7]{AWFig21.png} 
+   \includegraphics[scale=0.55]{AWFig21.png} 
    \caption{Keyboard and List}
    \label{fig:21 }
 \end{figure}
 
 \begin{figure}[htbp]
    \centering
-   \includegraphics[scale=0.7]{AWFig22.png} 
+   \includegraphics[scale=0.55]{AWFig22.png} 
    \caption{The List}
    \label{fig:22 }
 \end{figure}
