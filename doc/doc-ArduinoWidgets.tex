@@ -2321,7 +2321,7 @@ static void updateVSliderLabelAction (AWView * inSender)
 \begin{figure}[htbp]
    \centering
    \includegraphics[scale=0.7]{AWFig13.png} 
-   \caption{A dynamic Slider on the right}
+   \caption{A Slider (left) and a dynamic Slider (right)}
    \label{fig:13}
 \end{figure}
 
@@ -2841,37 +2841,223 @@ AWContext::handleTouchAndDisplay () ;
 \newpage
 \section{Custom View Examples}
 
-~\\ A \texttt{Slider} class inherit from a \texttt{AWView} class
+~\\ There is plently of new Arduino Widgets classes  that can be built from the \texttt{AWView} class and from the above existing classes.
+
+~\\ This section describe a few examples which will give you more details on the above existing views and their interactions via the action mecanisms.
+
+~\\ You will find :
+\begin{itemize}
+\item An Ellipse View
+\item A Target View with an arrow
+\item A List View that you can fill with the Keyboard View
+\item A List View with Badge
+\end{itemize}
+
+
+%%%%%%%%%%%%%%
+\newpage
+\subsection{The Ellipse custom view}
+
+~\\ This custom view is composed of an Oval which is drawn in a Rectangle. It is defined by a rectangle, a background color and an ellipse color.
 ~\\
+~\\
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[scale=0.7]{AWFig20.png} 
+   \caption{"An Ellipse" custom view}
+   \label{fig:20 }
+\end{figure}
+
+~\\ The declaration of the EllipseView class is :
+
+\begin{lstlisting}[language=Arduinonl]
+class EllipseView : public AWView {
+//--- Constructor
+  public : EllipseView (const AWRect & inRelativeFrame,
+                        const AWColor & inBackColor,
+                        const AWColor & inEllipseColor) :
+  AWView (inRelativeFrame, inBackColor), 
+    mEllipseColor (inEllipseColor) {
+  }
+
+//--- Draw
+  public : virtual void drawInRegion (const AWRegion & inDrawRegion) const {
+  //--- Draw background
+    super::drawInRegion (inDrawRegion) ;
+  //--- Draw ellipse
+    AWRect r = absoluteFrame () ;
+    r.inset (1, 1) ;
+    AWContext::setColor (mEllipseColor) ;
+    r.fillOvalInRegion (inDrawRegion) ;
+  }
+
+//--- Private member
+  private : AWColor mEllipseColor ;
+
+//--- For calling super class instance methods
+   private : typedef AWView super ;
+} ;
+\end{lstlisting}
+
+~\\ Note that the ellipse is drawn 1 pixel far from the sides of the rectangle.
+
+~\\ In the setup, we create one orange ellipse with no backcolor (we use the argument awkBackColor), and one cyan ellipse with a gray backcolor.
+
+\begin{lstlisting}[language=Arduinonl]
+  view = new EllipseView (AWRect (1, 1, 75, 53), awkBackColor , AWColor::orange ()) ;
+  addView (view) ;
+  view = new EllipseView (AWRect (100, 10, 70, 50), AWColor::gray (), AWColor::cyan ()) ;
+  addView (view) ;
+\end{lstlisting}
 
 %%%%%%%%%%%%%%
 \newpage
 \subsection{The Target custom view}
 
-~\\ This custom view is composed of :
+~\\ This example is composed of :
+\begin{itemize}
+\item 3 concentric circles with different colors
+\item An arrow which have reached the center of this target
+\item A PushButton to rotate the colors of the target
+\end{itemize}
+
 ~\\
 ~\\
 
 \begin{figure}[htbp]
    \centering
    \includegraphics[scale=0.7]{AWFig19.png} 
-   \caption{"Target" custom view}
+   \caption{"A Target" custom view}
    \label{fig:19 }
 \end{figure}
+
+~\\ First declare the new CustomView class and its functions
+~\\
+
+\begin{lstlisting}[language=Arduinonl]
+// the CustomView class
+class CustomView : public AWView
+{
+  public : CustomView (const AWRect & inViewFrame);
+  public : virtual void drawInRegion (const AWRegion & inRegion) const;
+  public : void rotateColors ();
+
+  private : AWColor centerColor;
+  private : AWColor mediumColor;
+  private : AWColor externalColor;
+};
+
+// The CustomView constructor
+CustomView::CustomView (const AWRect & inViewFrame) :
+AWView(inViewFrame, AWColor::darkGray ()),
+centerColor (AWColor::red ()),
+mediumColor (AWColor::white ()),
+externalColor (AWColor::blue ())
+{
+}
+
+// The arrow
+void drawLines (const AWRegion & inRegion, const AWPoint & inOrigin)
+{
+  AWPoint p = inOrigin ;
+  p.translateBy ( 10, 0 ) ;
+  inOrigin.strokeLineInRegion (p, inRegion) ;
+  p.translateBy ( -4, 8 ) ;
+  inOrigin.strokeLineInRegion (p, inRegion) ;
+}
+
+// The drawing of the CustomView class
+void CustomView::drawInRegion (const AWRegion & inRegion) const
+{
+  AWRect viewFrame = absoluteFrame () ;
+  AWContext::setColor (externalColor) ;
+  viewFrame.fillOvalInRegion (inRegion) ;
+  AWInt insetX = viewFrame.size.width / 6 ;
+  AWInt insetY = viewFrame.size.height / 6 ;
+  AWContext::setColor (mediumColor) ;
+  viewFrame.inset (insetX, insetY) ;
+  viewFrame.fillOvalInRegion (inRegion) ;  
+  AWContext::setColor (centerColor) ;
+  viewFrame.inset (insetX, insetY) ;
+  viewFrame.fillOvalInRegion (inRegion) ; 
+
+  viewFrame = absoluteFrame () ;
+  AWPoint center ;
+  center.x = viewFrame.origin.x + viewFrame.size.width / 2 ;
+  center.y = viewFrame.origin.y + viewFrame.size.height / 2 ;
+  AWPoint tail ;
+  tail.x = center.x + viewFrame.size.width / 2 ;
+  tail.y = center.y + viewFrame.size.height / 4 ;
+  AWContext::setColor (AWColor::black ()) ;
+  center.strokeLineInRegion (tail, inRegion) ;
+  drawLines (inRegion, center) ;
+  center.translateBy (viewFrame.size.width / 2 - 20, viewFrame.size.width / 4 - 10) ; 
+  for (int i = 0 ; i < 4 ; i++) {
+    drawLines (inRegion, center) ;
+    center.translateBy (4, 2) ;
+  }
+}
+
+// the color rotation function of the CustomView class
+void CustomView::rotateColors ()
+{
+  AWColor centerSave = centerColor ;
+  centerColor = mediumColor ;
+  mediumColor = externalColor ;
+  externalColor = centerSave ;
+  setNeedsDisplay () ;
+}
+
+// The targetView object pointer
+CustomView * targetView ;
+
+// The color rotation function of the targetView object
+void rotate (AWView * sender)
+{
+  targetView->rotateColors () ;
+}
+\end{lstlisting}
+
+
+~\\ Then create the elements in the \texttt{setup}
+~\\
+
+\begin{lstlisting}[language=Arduinonl]
+  // create the target view centered on screen
+  targetView = new CustomView(AWRect (0, 0, 300, 300)) ;
+  addCenteredView (targetView) ;
+
+  // create the button to rotate colors
+  AWPushButton * pushToRotate = new AWPushButton (AWRect (20, 20, 100, 50), "Rotate", AWFont (Lucida_Grande24)) ;
+  pushToRotate->setAction (rotate) ;
+  addView (pushToRotate) ;
+\end{lstlisting}
 
 
 %%%%%%%%%%%%%%
 \newpage
-\subsection{The Keyboard and List}
+\subsection{The Keyboard and List example}
 
-~\\ This custom view is composed of :
-~\\
-~\\
+~\\ This example is composed of :
+\begin{itemize}
+\item An AWList View
+\item An AWPushButton to add an element
+\item An AWPushButton to delete an element
+\item An AWKeyboard to compose and enter an element
+\end{itemize}
+
+~\\ The following figures show the list :
+\begin{itemize}
+\item With the keyboard to enter an element
+\item With the buttons to add or remove an element
+\end{itemize}
+
 
 \begin{figure}[htbp]
    \centering
    \includegraphics[scale=0.55]{AWFig21.png} 
-   \caption{Keyboard and List}
+   \caption{Keyboard and List views}
    \label{fig:21 }
 \end{figure}
 
@@ -2882,14 +3068,177 @@ AWContext::handleTouchAndDisplay () ;
    \label{fig:22 }
 \end{figure}
 
+~\\ To program this example, you declare the objects and actions :
+~\\
+
+\begin{lstlisting}[language=Arduinonl]
+//--- List View
+AWListView * listView ;
+
+// delete item button, enabled only if listView is not empty
+AWPushButton * delButton ;
+
+// Action to validate a keyboard entry
+void keyboardValidateEntryAction(const String &inText, const int tag)
+{
+  listView->append (inText) ;
+  delButton->setEnabled (true) ;
+}
+
+//--- button to add an item to the list action
+void addItemAction (AWView * inSender)
+{
+  launchKeyboard ("", 40, keyboardValidateEntryAction, 0) ;
+}
+
+//--- button to remove the selected item from the list action
+void delItemAction (AWView * inSender)
+{
+  listView->removeItemAtIndex (listView->selectedItemIndex ()) ;
+  if (listView->count () == 0) {
+    delButton->setEnabled (false) ;
+  }
+}
+\end{lstlisting}
+
+~\\ Then you create the objects in the \texttt{setup}.
+~\\
+
+\begin{lstlisting}[language=Arduinonl]
+  // Create the listView
+  listView = new AWListView ( AWRect (0, 0, 300, 480), "Items in the list") ;
+  addView (listView) ;
+  // Create the "Add item" PushButton
+  AWPushButton * addButton = new AWPushButton(AWRect (400, 20, 300, 80), "Add item") ;
+  addButton->setAction (addItemAction) ;
+  addView (addButton) ;
+  // Create the "Delete selected item" PushButton
+  delButton = new AWPushButton(AWRect (400, 120, 300, 80), "Delete selected item") ;
+  delButton->setEnabled (false) ;
+  delButton->setAction (delItemAction) ;
+  addView (delButton) ;
+\end{lstlisting}
+
+%%%%%%%%%%%%%%
+\newpage
+\section{A List View with Badge}
+
+~\\ This example is composed of :
+\begin{itemize}
+\item An AWListView named "My List"
+\item An AWSwitch "Has Badge"
+\item An AWPushButton "Remove"
+\item An Alert dialog
+\end{itemize}
+
+~\\ This figure show 4 states of this exemple, from left to right :
+\begin{itemize}
+\item The initial list with first element selected
+\item The 3rd element selected with a click on it
+\item After removing the "alien" element
+\item After selecting and clicking the switch "Has Badge" of 3 elements
+\end{itemize}
+
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[scale=0.6]{AWFig30.png} 
+   \caption{Managing a list with badge}
+   \label{fig:30 }
+\end{figure}
+
+~\\ And this figure show the Alert dialog when clicking the "Remove" PushButton
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[scale=0.60]{AWFig31.png} 
+   \caption{Alert when removing an element of the list}
+   \label{fig:22 }
+\end{figure}
+
+~\\ Before the setup, we declare the following objects :
+
+\begin{lstlisting}[language=Arduinonl]
+static AWListView * gListView ;
+static AWPushButton * gRemoveItemLabel ;
+static AWSwitch * gHasBadgeSwitch ;
+\end{lstlisting}
+
+
+~\\ Then we declare the following functions
+
+\begin{lstlisting}[language=Arduinonl]
+// The action when selecting an element in the list
+static void listSelectionAction (AWView * inSender) {
+    const AWInt selectedItemIndex = gListView->selectedItemIndex () ;
+    gRemoveItemLabel->setEnabled (selectedItemIndex >= 0) ;
+    gHasBadgeSwitch->setEnabled (selectedItemIndex >= 0) ;
+    gHasBadgeSwitch->setChecked (gListView->hasBadgeAtIndex (selectedItemIndex)) ;
+}
+// The action when removing an element
+static void listRemoveAction (AWView * inSender) {
+    gListView->removeItemAtIndex (gListView->selectedItemIndex ()) ;
+}
+// The action when clicking in the "Remove" button
+static void removeButtonAction (AWView * inSender) {
+    presentAlert ("Are you sure to delete this element ?", NULL, listRemoveAction, -1) ;
+}
+// The action when clicking in the "Has Badge" switch
+static void hasBadgeSwitchAction (AWView * inSender) {
+    const AWInt selectedItemIndex = gListView->selectedItemIndex () ;
+    if (selectedItemIndex >= 0) {
+        gListView->setBadgeAtIndex (selectedItemIndex, gHasBadgeSwitch->checked ()) ;
+    }
+}
+\end{lstlisting}
+
+~\\ Then we create the objects in the setup :
+
+\begin{lstlisting}[language=Arduinonl]
+  // The "Remove" PushButton
+  gRemoveItemLabel = new AWPushButton (AWPoint (40, 25), 100, "Remove") ;
+  gRemoveItemLabel->setAction (removeButtonAction) ;
+  addView (gRemoveItemLabel) ;
+  // The empty list of elements in a rectangle that can limit the display of the list
+  gListView = new AWListView (AWRect (5, 90, 160, 383), "My list") ;
+  addView (gListView) ;
+  // The elements which are appended to the liste
+  gListView->append ("one") ;
+  gListView->append ("two") ;
+  gListView->append ("alien") ;
+  gListView->append ("three") ;
+  gListView->append ("friend") ;
+  gListView->append ("four") ;
+  gListView->append ("five") ;
+  gListView->append ("six") ;
+  gListView->append ("seven") ;
+  gListView->append ("eight") ;
+  gListView->append ("nine") ;
+  gListView->append ("ten") ;
+  gListView->append ("eleven") ;
+  gListView->append ("12") ;
+  gListView->append ("13") ;
+  gListView->append ("14") ;
+  // The "Has Badge" Switch
+  gHasBadgeSwitch = new AWSwitch (AWPoint (45, 65), "Has Badge") ;
+  gHasBadgeSwitch->setAction (hasBadgeSwitchAction) ;
+  addView (gHasBadgeSwitch) ;
+  // Start the action when selecting an element in the list
+  gListView->setAction (listSelectionAction) ;
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=Arduinonl]
+
+\end{lstlisting}
 
 %%%%%%%%%%%%%%
 \newpage
 \section{The next steps of \emph{ArduinoWidgets}}
 
-~\\
+~\\ With this AroduinoWidgets toolbox, you can create custom views for your project and we will be pleased to add some of them in this library if that make sens.
 
-~\\
+~\\ 
 
 ~\\
 
@@ -2898,9 +3247,39 @@ AWContext::handleTouchAndDisplay () ;
 \newpage
 \section{The calibration of the Touch screen} 
 
-~\\
+~\\ There is a function which can be used to calibrate a new screen. It must be used only once preferably by a stand alone program, in the \texttt{setup}.
 
-~\\
+\begin{lstlisting}[language=Arduinonl]
+//---------------------- Calibrate touch
+//  AWContext::calibrateTouch () ;
+\end{lstlisting}
+
+~\\ This program is a help to determine the following constants :
+
+\begin{lstlisting}[language=Arduinonl]
+const float xA =  310.0 ; // 571.0 ;
+const float yA =  116.0 ; // 963.0 ;
+
+const float xB = 3811.0 ; // 488.0 ;
+const float yB =  113.0 ; // 3001.0 ;
+
+const float xC = 3814.0 ; // 3526.0 ;
+const float yC = 3936.0 ; // 3349.0 ;
+
+const float xD =  362.0 ; // 3519.0 ;
+const float yD = 3938.0 ; // 698.0 ;
+\end{lstlisting}
+
+~\\ Another help for debugging is to add the folliowing lines in your \texttt{setup} :
+
+\begin{lstlisting}[language=Arduinonl]
+//---------------------- Debug touch
+// For enabling touch debug, uncomment the following line
+//  AWContext::debugTouch (AWColor::red ()) ;
+// if this line is uncommented, when a touch occurs, event is not sent to widgets, but a small square of the given
+// color is drawn at touch location. This enables you to adjust the convertTouchPointToScreenPoint function
+// (see convertTouchPointToScreenPoint.cpp) that converts touch location to actual screen location.
+\end{lstlisting}
 
 ~\\
 
