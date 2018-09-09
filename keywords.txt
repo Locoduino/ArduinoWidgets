@@ -6,284 +6,284 @@
 # Datatypes (KEYWORD1)
 #######################################
 
-AWAutoLabel					KEYWORD1
-AWColor						KEYWORD1
-AWContext					KEYWORD1
-AWContext					KEYWORD1
-AWDynamicSlider				KEYWORD1
-AWFont						KEYWORD1
-AWInvisiblePushButton		KEYWORD1
-AWLabel						KEYWORD1
-AWLine						KEYWORD1
-AWListView					KEYWORD1
-AWPoint						KEYWORD1
-AWPushButton				KEYWORD1
-AWRect						KEYWORD1
-AWRegion					KEYWORD1
-AWSegmentedControl			KEYWORD1
-AWSize						KEYWORD1
-AWSlider					KEYWORD1
-AWSwitch					KEYWORD1
-AWTabView					KEYWORD1
-AWTouch						KEYWORD1
-AWUniqueArray				KEYWORD1
-AWView						KEYWORD1
+AWAutoLabel	KEYWORD1
+AWColor	KEYWORD1
+AWContext	KEYWORD1
+AWContext	KEYWORD1
+AWDynamicSlider	KEYWORD1
+AWFont	KEYWORD1
+AWInvisiblePushButton	KEYWORD1
+AWLabel	KEYWORD1
+AWLine	KEYWORD1
+AWListView	KEYWORD1
+AWPoint	KEYWORD1
+AWPushButton	KEYWORD1
+AWRect	KEYWORD1
+AWRegion	KEYWORD1
+AWSegmentedControl	KEYWORD1
+AWSize	KEYWORD1
+AWSlider	KEYWORD1
+AWSwitch	KEYWORD1
+AWTabView	KEYWORD1
+AWTouch	KEYWORD1
+AWUniqueArray	KEYWORD1
+AWView	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
 
-presentAlert				KEYWORD2
+presentAlert	KEYWORD2
 
 #--------------------------------------
 # AWAutoLabel
 
-setTitle					KEYWORD2
-setTextColor				KEYWORD2
-font						KEYWORD2
+setTitle	KEYWORD2
+setTextColor	KEYWORD2
+font	KEYWORD2
 
 #--------------------------------------
 # AWColor
 
-black						KEYWORD2
-gray						KEYWORD2
-darkGray					KEYWORD2
-lightGray					KEYWORD2
-veryLightGray				KEYWORD2
-red							KEYWORD2
-green						KEYWORD2
-blue						KEYWORD2
-white						KEYWORD2
-yellow						KEYWORD2
-orange						KEYWORD2
-brown						KEYWORD2
-cyan						KEYWORD2
-magenta						KEYWORD2
-purple						KEYWORD2
-deepSkyBlue					KEYWORD2
-lightSkyBlue				KEYWORD2
-redComponent				KEYWORD2
-greenComponent				KEYWORD2
-blueComponent				KEYWORD2
-isOpaque					KEYWORD2
+black	KEYWORD2
+gray	KEYWORD2
+darkGray	KEYWORD2
+lightGray	KEYWORD2
+veryLightGray	KEYWORD2
+red	KEYWORD2
+green	KEYWORD2
+blue	KEYWORD2
+white	KEYWORD2
+yellow	KEYWORD2
+orange	KEYWORD2
+brown	KEYWORD2
+cyan	KEYWORD2
+magenta	KEYWORD2
+purple	KEYWORD2
+deepSkyBlue	KEYWORD2
+lightSkyBlue	KEYWORD2
+redComponent	KEYWORD2
+greenComponent	KEYWORD2
+blueComponent	KEYWORD2
+isOpaque	KEYWORD2
 
 #--------------------------------------
 # AWContext
 
-beep						KEYWORD2
-addView						KEYWORD2
+beep	KEYWORD2
+addView	KEYWORD2
 addCenteredView	KEYWORD2
-begin						KEYWORD2
-screenRect					KEYWORD2
-setColor					KEYWORD2
-color						KEYWORD2
-colorIsOpaque				KEYWORD2
-handleTouchAndDisplay		KEYWORD2
-flashUpdate					KEYWORD2
-calibrateTouch				KEYWORD2
-rawTouchPoint				KEYWORD2
-debugTouch					KEYWORD2
-handleTouch					KEYWORD2
-drawHLine					KEYWORD2
-drawVLine					KEYWORD2
+begin	KEYWORD2
+screenRect	KEYWORD2
+setColor	KEYWORD2
+color	KEYWORD2
+colorIsOpaque	KEYWORD2
+handleTouchAndDisplay	KEYWORD2
+flashUpdate	KEYWORD2
+calibrateTouch	KEYWORD2
+rawTouchPoint	KEYWORD2
+debugTouch	KEYWORD2
+handleTouch	KEYWORD2
+drawHLine	KEYWORD2
+drawVLine	KEYWORD2
 
 #--------------------------------------
 # AWDynamicSlider
 
-dynamicKnobPosition			KEYWORD2
-setDynamicKnobPosition		KEYWORD2
+dynamicKnobPosition	KEYWORD2
+setDynamicKnobPosition	KEYWORD2
 
 #--------------------------------------
 # AWFont
 
-drawStringInRegion			KEYWORD2
-ascent						KEYWORD2
-descent						KEYWORD2
-lineHeight					KEYWORD2
-advancement					KEYWORD2
-stringRect					KEYWORD2
-stringLength				KEYWORD2
+drawStringInRegion	KEYWORD2
+ascent	KEYWORD2
+descent	KEYWORD2
+lineHeight	KEYWORD2
+advancement	KEYWORD2
+stringRect	KEYWORD2
+stringLength	KEYWORD2
 
 #--------------------------------------
 # AWLabel
 
-alignment					KEYWORD2
-setAlignment				KEYWORD2
+alignment	KEYWORD2
+setAlignment	KEYWORD2
 
 #--------------------------------------
 # AWListView
 
-count						KEYWORD2
-append						KEYWORD2
-removeItemAtIndex			KEYWORD2
-insertItemAtIndex			KEYWORD2
-removeAllItems				KEYWORD2
-setNameAtIndex				KEYWORD2
-itemAtIndex					KEYWORD2
-itemAtPoint					KEYWORD2
-itemRect					KEYWORD2
-titleRect					KEYWORD2
-listRect					KEYWORD2
-selectedItemIndex			KEYWORD2
-selectItemAtIndex			KEYWORD2
-selectItemForTag			KEYWORD2
-setBadgeAtIndex				KEYWORD2
-hasBadgeAtIndex				KEYWORD2
-hasBadge					KEYWORD2
-badgeRect					KEYWORD2
-setTagAtIndex				KEYWORD2
-tagAtIndex					KEYWORD2
-selectedTag					KEYWORD2
-itemIndexForTag				KEYWORD2
-maxScroll					KEYWORD2
+count	KEYWORD2
+append	KEYWORD2
+removeItemAtIndex	KEYWORD2
+insertItemAtIndex	KEYWORD2
+removeAllItems	KEYWORD2
+setNameAtIndex	KEYWORD2
+itemAtIndex	KEYWORD2
+itemAtPoint	KEYWORD2
+itemRect	KEYWORD2
+titleRect	KEYWORD2
+listRect	KEYWORD2
+selectedItemIndex	KEYWORD2
+selectItemAtIndex	KEYWORD2
+selectItemForTag	KEYWORD2
+setBadgeAtIndex	KEYWORD2
+hasBadgeAtIndex	KEYWORD2
+hasBadge	KEYWORD2
+badgeRect	KEYWORD2
+setTagAtIndex	KEYWORD2
+tagAtIndex	KEYWORD2
+selectedTag	KEYWORD2
+itemIndexForTag	KEYWORD2
+maxScroll	KEYWORD2
 
 #--------------------------------------
 # AWPoint
 
-translateBy					KEYWORD2
-strokeLineInRegion			KEYWORD2
-drawPointInRegion			KEYWORD2
-frameCircleInRegion			KEYWORD2
-fillCircleInRegion			KEYWORD2
+translateBy	KEYWORD2
+strokeLineInRegion	KEYWORD2
+drawPointInRegion	KEYWORD2
+frameCircleInRegion	KEYWORD2
+fillCircleInRegion	KEYWORD2
 
 #--------------------------------------
 # AWPushButton
 
-isEnabled					KEYWORD2
-setEnabled					KEYWORD2
+isEnabled	KEYWORD2
+setEnabled	KEYWORD2
 
 #--------------------------------------
 # AWRect
 
-isEmpty						KEYWORD2
-containsPoint				KEYWORD2
-topRight					KEYWORD2
-bottomRight					KEYWORD2
-topLeft						KEYWORD2
-bottomLeft					KEYWORD2
-minX						KEYWORD2
-maxX						KEYWORD2
-minY						KEYWORD2
-maxY						KEYWORD2
-intersects					KEYWORD2
-includesRect				KEYWORD2
-differenceFrom				KEYWORD2
-inset						KEYWORD2
-fillRectInRegion			KEYWORD2
-frameRectInRegion			KEYWORD2
-fillRoundRectInRegion		KEYWORD2
-frameRoundRectInRegion		KEYWORD2
-fillOvalInRegion			KEYWORD2
-frameOvalInRegion			KEYWORD2
+isEmpty	KEYWORD2
+containsPoint	KEYWORD2
+topRight	KEYWORD2
+bottomRight	KEYWORD2
+topLeft	KEYWORD2
+bottomLeft	KEYWORD2
+minX	KEYWORD2
+maxX	KEYWORD2
+minY	KEYWORD2
+maxY	KEYWORD2
+intersects	KEYWORD2
+includesRect	KEYWORD2
+differenceFrom	KEYWORD2
+inset	KEYWORD2
+fillRectInRegion	KEYWORD2
+frameRectInRegion	KEYWORD2
+fillRoundRectInRegion	KEYWORD2
+frameRoundRectInRegion	KEYWORD2
+fillOvalInRegion	KEYWORD2
+frameOvalInRegion	KEYWORD2
 
 #--------------------------------------
 # AWRegion
 
-release						KEYWORD2
-rectCount					KEYWORD2
-rectAtIndex					KEYWORD2
-enclosingRect				KEYWORD2
+release	KEYWORD2
+rectCount	KEYWORD2
+rectAtIndex	KEYWORD2
+enclosingRect	KEYWORD2
 
 #--------------------------------------
 # AWSegmentedControl
 
-addTab						KEYWORD2
-tabTitleRectForIndex		KEYWORD2
-selectedTabIndex			KEYWORD2
-selectTabAtIndex			KEYWORD2
-segmentedControlAction		KEYWORD2
+addTab	KEYWORD2
+tabTitleRectForIndex	KEYWORD2
+selectedTabIndex	KEYWORD2
+selectTabAtIndex	KEYWORD2
+segmentedControlAction	KEYWORD2
 setSegmentedControlAction	KEYWORD2
 
 #--------------------------------------
 # AWSlider
 
-orientation					KEYWORD2
-hasRuler					KEYWORD2
-setHowManyScales			KEYWORD2
-knobPosition				KEYWORD2
-setKnobPosition				KEYWORD2
-maxKnobPosition				KEYWORD2
-setMaxKnobPosition			KEYWORD2
+orientation	KEYWORD2
+hasRuler	KEYWORD2
+setHowManyScales	KEYWORD2
+knobPosition	KEYWORD2
+setKnobPosition	KEYWORD2
+maxKnobPosition	KEYWORD2
+setMaxKnobPosition	KEYWORD2
 
 #--------------------------------------
 # AWSwitch
 
-boxRect						KEYWORD2
-checked						KEYWORD2
-setChecked					KEYWORD2
+boxRect	KEYWORD2
+checked	KEYWORD2
+setChecked	KEYWORD2
 
 #--------------------------------------
 # AWTabView
 
-horizontalSeparator			KEYWORD2
-contentRectFromFrame		KEYWORD2
+horizontalSeparator	KEYWORD2
+contentRectFromFrame	KEYWORD2
 
 #--------------------------------------
 # AWTouch
 
-dataAvailable				KEYWORD2
-read						KEYWORD2
+dataAvailable	KEYWORD2
+read	KEYWORD2
 
 #--------------------------------------
 # AWUniqueArray
 
-setCountToZero				KEYWORD2
-capacity					KEYWORD2
-setCapacity					KEYWORD2
-setCapacityUsingSwap		KEYWORD2
-unsecureBufferPointer		KEYWORD2
-free						KEYWORD2
-appendObjectUsingSwap		KEYWORD2
-remove						KEYWORD2
-removeAtIndex				KEYWORD2
-insertAtIndex				KEYWORD2
-insertObjectUsingSwap		KEYWORD2
-lastObject					KEYWORD2
-setAtIndex					KEYWORD2
-unsafeArrayPointer			KEYWORD2
+setCountToZero	KEYWORD2
+capacity	KEYWORD2
+setCapacity	KEYWORD2
+setCapacityUsingSwap	KEYWORD2
+unsecureBufferPointer	KEYWORD2
+free	KEYWORD2
+appendObjectUsingSwap	KEYWORD2
+remove	KEYWORD2
+removeAtIndex	KEYWORD2
+insertAtIndex	KEYWORD2
+insertObjectUsingSwap	KEYWORD2
+lastObject	KEYWORD2
+setAtIndex	KEYWORD2
+unsafeArrayPointer	KEYWORD2
 
 #--------------------------------------
 # AWView
 
-absoluteFrame				KEYWORD2
-setSize						KEYWORD2
-backColor					KEYWORD2
-setBackColor				KEYWORD2
-addSubView					KEYWORD2
-removeFromSuperView			KEYWORD2
-superView					KEYWORD2
-setTag						KEYWORD2
-tag							KEYWORD2
-sendAction					KEYWORD2
-action						KEYWORD2
-setAction					KEYWORD2
-touchDown					KEYWORD2
-touchMove					KEYWORD2
-touchUp						KEYWORD2
-setNeedsDisplay				KEYWORD2
-setNeedsDisplayInRect		KEYWORD2
-drawInRegion				KEYWORD2
-isVisible					KEYWORD2
-setVisibility				KEYWORD2
-setOnScreen					KEYWORD2
-isOnScreen					KEYWORD2
+absoluteFrame	KEYWORD2
+setSize	KEYWORD2
+backColor	KEYWORD2
+setBackColor	KEYWORD2
+addSubView	KEYWORD2
+removeFromSuperView	KEYWORD2
+superView	KEYWORD2
+setTag	KEYWORD2
+tag	KEYWORD2
+sendAction	KEYWORD2
+action	KEYWORD2
+setAction	KEYWORD2
+touchDown	KEYWORD2
+touchMove	KEYWORD2
+touchUp	KEYWORD2
+setNeedsDisplay	KEYWORD2
+setNeedsDisplayInRect	KEYWORD2
+drawInRegion	KEYWORD2
+isVisible	KEYWORD2
+setVisibility	KEYWORD2
+setOnScreen	KEYWORD2
+isOnScreen	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
 #######################################
 
-awkDefaultFont					LITERAL1
-awkLabelBackColor				LITERAL1
-awkBackColor					LITERAL1
-awkResponderBackColor			LITERAL1
-awkHiliteBackColor				LITERAL1
-awkSelectedBackColor			LITERAL1
+awkDefaultFont	LITERAL1
+awkLabelBackColor	LITERAL1
+awkBackColor	LITERAL1
+awkResponderBackColor	LITERAL1
+awkHiliteBackColor	LITERAL1
+awkSelectedBackColor	LITERAL1
 awkSelectedDisabledBackColor	LITERAL1
-awkTextColor					LITERAL1
-awkDisabledTextColor			LITERAL1
-awkSelectedTextColor			LITERAL1
-awkHiliteTextColor				LITERAL1
-awkBadgeColor					LITERAL1
-awkBadgeSize					LITERAL1
-awkButtonVerticalMargin			LITERAL1
-awkPushButtonRoundRadius		LITERAL1
+awkTextColor	LITERAL1
+awkDisabledTextColor	LITERAL1
+awkSelectedTextColor	LITERAL1
+awkHiliteTextColor	LITERAL1
+awkBadgeColor	LITERAL1
+awkBadgeSize	LITERAL1
+awkButtonVerticalMargin	LITERAL1
+awkPushButtonRoundRadius	LITERAL1
